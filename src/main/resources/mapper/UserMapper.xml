@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.majorbank.mapper.UserMapper">
+
+    <resultMap id="userRstMap"
+        type="com.majorbank.model.User">
+        <result column="ID" property="id" />
+        <result column="USERNAME" property="username" />
+        <result column="PASSWORD" property="password" />
+    </resultMap>
+
+<!--
+    User getUserById(long userId);
+    void updateUser(long userId);
+    void deleteUser(long userId);
+    List<QuestBank> getAllBankByUserId(long userId);
+    QuestBank getBankByIds(long userId,long bankId);
+    -->
+    <select id="getAllUsers" parameterType="com.majorbank.model.User"
+            resultType="com.majorbank.model.User">
+
+        <include refid="selectUser" />
+        <include refid="userFilterWhereClause" />
+    </select>
+    <sql id="selectUser">
+    SELECT
+    ID,
+    USERNAME,
+    PASSWORD
+    FROM USER
+    </sql>
+    <sql id="userFilterWhereClause">
+        <where>
+            <if test="_parameter !=null ">
+              1=1
+                <if test="id != 0">
+                    and ID = #{id}
+                </if>
+
+                <if test="username != null">
+                    and USERNAME = #{username}
+                </if>
+
+                <if test="password != null">
+                    and PASSWORD = #{password}
+                </if>
+            </if>
+        </where>
+    </sql>
+
+
+
+    <select id="getUserById" resultMap="userRstMap">
+        SELECT
+        ID,
+        USERNAME,
+        PASSWORD
+        FROM USER
+    </select>
+
+    <insert id="createUser" parameterType="com.majorbank.model.User">
+        <selectKey resultType="Long" order="BEFORE" keyProperty="id">
+            SELECT USER_ID_SEQ.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO USER(
+        ID,
+        USERNAME,
+        PASSWORD
+        )
+        VALUES(
+        #{id,jdbcType=NUMERIC},
+        #{username,jdbcType=VARCHAR},
+        #{password,jdbcType=VARCHAR}
+        )
+    </insert>
+
+</mapper>

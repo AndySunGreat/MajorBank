@@ -24,24 +24,26 @@ public class UserServiceImpl implements UserService {
         return userMapper.getAllUsers(user);
     }
 
-    public void createUser(User user){
-        userMapper.createUser(user);
+    public void insertUser(User user){
+        userMapper.insertUser(user);
     }
 
     public User getUserById(long userId){
         return userMapper.getUserById(userId);
     }
 
-    public void updateUser(long userId){
-        userMapper.updateUser(userId);
+    public void updateUser(User user){
+        userMapper.updateUser(user);
     }
 
     public void deleteUser(long userId){
         userMapper.deleteUser(userId);
     }
+
     public List<QuestBank> getAllBankByUserId(long userId){
         return userMapper.getAllBankByUserId(userId);
     }
+
     public QuestBank getBankByIds(long userId,long bankId){
         return userMapper.getBankByIds(userId,bankId);
     }

@@ -15,9 +15,9 @@ import java.util.List;
 @Repository
 public interface UserMapper {
     List<User> getAllUsers(User user);
-    void createUser(User user);
+    void insertUser(User user);
     User getUserById(long userId);
-    void updateUser(long userId);
+    void updateUser(User user);
     void deleteUser(long userId);
     List<QuestBank> getAllBankByUserId(long userId);
     QuestBank getBankByIds(long userId,long bankId);

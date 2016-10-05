@@ -12,29 +12,21 @@
     </resultMap>
 
 <!--
-    User getUserById(long userId);
-    void updateUser(long userId);
-    void deleteUser(long userId);
     List<QuestBank> getAllBankByUserId(long userId);
     QuestBank getBankByIds(long userId,long bankId);
     -->
-    <select id="getAllUsers" parameterType="com.majorbank.model.User"
-            resultType="com.majorbank.model.User">
-
-        <include refid="selectUser" />
-        <include refid="userFilterWhereClause" />
-    </select>
+    <!-- get all users record -->
     <sql id="selectUser">
-    SELECT
-    ID,
-    USERNAME,
-    PASSWORD
-    FROM USER
+        SELECT
+        ID,
+        USERNAME,
+        PASSWORD
+        FROM USER
     </sql>
     <sql id="userFilterWhereClause">
         <where>
             <if test="_parameter !=null ">
-              1=1
+                1=1
                 <if test="id != 0">
                     and ID = #{id}
                 </if>
@@ -49,20 +41,25 @@
             </if>
         </where>
     </sql>
+    <select id="getAllUsers" parameterType="com.majorbank.model.User"
+            resultType="com.majorbank.model.User">
+        <include refid="selectUser" />
+        <include refid="userFilterWhereClause" />
+    </select>
 
-
-
-    <select id="getUserById" resultMap="userRstMap">
+    <!-- find user by id -->
+    <select id="getUserById" resultMap="userRstMap" parameterType="long">
         SELECT
         ID,
         USERNAME,
         PASSWORD
         FROM USER
+        WHERE id=#{userId}
     </select>
 
-    <insert id="createUser" parameterType="com.majorbank.model.User">
+    <insert id="insertUser" parameterType="com.majorbank.model.User">
         <selectKey resultType="Long" order="BEFORE" keyProperty="id">
-            SELECT USER_ID_SEQ.NEXTVAL FROM DUAL
+            SELECT _nextval('userid') FROM DUAL
         </selectKey>
         INSERT INTO USER(
         ID,
@@ -75,5 +72,25 @@
         #{password,jdbcType=VARCHAR}
         )
     </insert>
+
+    <update id="updateUser" parameterType="com.majorbank.model.User">
+        UPDATE
+        USER
+        SET
+        changed=NOW()
+        <if test="username !=null">
+        ,username = #{username,jdbcType=VARCHAR}
+        </if>
+        <if test="password !=null">
+        ,password = #{password,jdbcType=VARCHAR}
+        </if>
+        WHERE id= #{id,jdbcType=NUMERIC}
+    </update>
+
+    <delete id="deleteUser">
+        DELETE
+        FROM USER
+        WHERE id = #{id,jdbcType=NUMERIC}
+    </delete>
 
 </mapper>

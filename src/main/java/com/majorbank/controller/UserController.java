@@ -40,12 +40,13 @@ public class UserController {
 
     /**
      * create one user
+     * ps: Content-Type要用application/json,Body选raw写入json才可以
      * @return
      */
     @ResponseBody
     @RequestMapping(value={"/user"},method = {RequestMethod.POST})
-    public void createUser(@RequestBody User user){
-        userService.createUser(user);
+    public void insertUser(@RequestBody User user){
+        userService.insertUser(user);
     }
 
     /**
@@ -85,8 +86,13 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping(value={"/user/{userId}"},method = {RequestMethod.PUT})
-    public void updateUser(@PathVariable long userId){
-        userService.updateUser(userId);
+    public void updateUser(@PathVariable long userId,
+                           @RequestBody User user){
+        if(user.getId()==0L){
+            user.setId(userId);
+        }
+        LOG.debug("user.getId():"+user.getId());
+        userService.updateUser(user);
     }
 
     /***

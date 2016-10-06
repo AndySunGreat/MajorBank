@@ -1,9 +1,8 @@
 package com.majorbank.service;
 
+import com.majorbank.model.Order;
 import com.majorbank.model.QuestBank;
 import com.majorbank.model.User;
-import com.majorbank.model.UserFilter;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -17,6 +16,6 @@ public interface UserService {
     User getUserById(long userId);
     void updateUser(User user);
     void deleteUser(long userId);
-    List<QuestBank> getAllBankByUserId(long userId);
-    QuestBank getBankByIds(long userId,long bankId);
+    List<Order> getAllOrderByUserId(long userId,String orderType);
+    Order getOrderByIds(long userId, long orderId);
 }

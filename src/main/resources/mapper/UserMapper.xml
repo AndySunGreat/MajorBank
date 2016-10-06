@@ -11,10 +11,24 @@
         <result column="PASSWORD" property="password" />
     </resultMap>
 
-<!--
-    List<QuestBank> getAllBankByUserId(long userId);
-    QuestBank getBankByIds(long userId,long bankId);
-    -->
+    <resultMap id="orderRstMap"
+        type="com.majorbank.model.Order">
+        <result column="ORDER_ID" property="orderId" />
+        <result column="USER_ID" property="userId" />
+        <result column="ORDER_TYPE" property="orderType" />
+        <result column="ORDER_STATUS" property="orderStatus" />
+        <result column="ORDER_DATE" property="orderDate" />
+        <result column="BANK_ID" property="bankId" />
+        <result column="ANSWER_ID" property="answerId"/>
+    </resultMap>
+
+    <parameterMap id="userBankMap"
+        type="com.majorbank.model.Order">
+        <parameter  property="orderId" jdbcType="NUMERIC" />
+        <parameter  property="userId" jdbcType="NUMERIC" />
+    </parameterMap>
+
+
     <!-- get all users record -->
     <sql id="selectUser">
         SELECT
@@ -87,10 +101,45 @@
         WHERE id= #{id,jdbcType=NUMERIC}
     </update>
 
-    <delete id="deleteUser">
+    <delete id="deleteUser"  parameterType="long">
         DELETE
         FROM USER
         WHERE id = #{id,jdbcType=NUMERIC}
     </delete>
 
+    <!-- /user/{userId}/questbank
+       List<QuestBank> getAllBankByUserId(long userId);
+       获得某个用户的所有题库
+     -->
+    <select id="getAllOrderByUserId"  parameterType="com.majorbank.model.Order">
+      SELECT
+      order_id,
+      user_id,
+      order_type,
+      order_status,
+      change_date,
+      bank_id,
+      answer_id
+      FROM ORDER
+      WHERE user_id = #{userId}
+      AND order_type = #{orderType}
+    </select>
+
+    <!--
+    获得某个用户的某个题库
+   QuestBank getBankByIds(long userId,long bankId);
+   -->
+    <select id="getOrderByIds" parameterMap="userBankMap" >
+      SELECT
+      order_id,
+      user_id,
+      order_type,
+      order_status,
+      change_date,
+      bank_id,
+      answer_id
+      FROM ORDER
+      WHERE user_id = #{userId,jdbcType=NUMERIC}
+      and order_id = #{orderId,jdbcType=NUMERIC}
+    </select>
 </mapper>

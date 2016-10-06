@@ -1,12 +1,17 @@
 package com.majorbank.model;
 
+import java.io.Serializable;
+
 /**
  * Created by AndySun on 2016/10/2.
  */
-public class User {
+public class User implements Serializable {
     private long id;
     private String username;
     private String password;
+    private String jobId;
+    private String jobName;
+
 
 
 

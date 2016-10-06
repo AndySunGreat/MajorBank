@@ -1,21 +1,17 @@
 package com.majorbank.controller;
 
+import com.majorbank.model.Order;
 import com.majorbank.model.QuestBank;
 import com.majorbank.model.User;
-import com.majorbank.model.UserFilter;
 import com.majorbank.service.UserService;
-import com.majorbank.service.impl.UserServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -110,19 +106,20 @@ public class UserController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value={"/user/{userId}/questbank"},method = {RequestMethod.GET})
-    public List<QuestBank> getAllBankByUserId(@PathVariable long userId){
-        List<QuestBank> questBankList = userService.getAllBankByUserId(userId);
-        return questBankList;
+    @RequestMapping(value={"/user/{userId}/order/{orderType}"},method = {RequestMethod.GET})
+    public List<Order> getAllOrderByUserId(@PathVariable long userId,
+                                           @PathVariable String orderType){
+        List<Order> orderBankList = userService.getAllOrderByUserId(userId,orderType);
+        return orderBankList;
     }
     /**
-     * 获得某个用户的某个题库
+     * 获得某个用户的某个订单
      * @return
      */
     @ResponseBody
-    @RequestMapping(value={"/user/{userId}/questbank/{bankId}"},method = {RequestMethod.GET})
-    public QuestBank getBankByIds(@PathVariable long userId,@PathVariable long bankId){
-        QuestBank questBank = userService.getBankByIds(userId,bankId);
-        return questBank;
+    @RequestMapping(value={"/user/{userId}/order/{orderId}"},method = {RequestMethod.GET})
+    public Order getOrderByIds(@PathVariable long userId, @PathVariable long orderId){
+        Order order = userService.getOrderByIds(userId,orderId);
+        return order;
     }
 }

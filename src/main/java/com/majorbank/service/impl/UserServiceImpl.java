@@ -1,9 +1,9 @@
 package com.majorbank.service.impl;
 
 import com.majorbank.mapper.UserMapper;
+import com.majorbank.model.Order;
 import com.majorbank.model.QuestBank;
 import com.majorbank.model.User;
-import com.majorbank.model.UserFilter;
 import com.majorbank.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,12 +40,15 @@ public class UserServiceImpl implements UserService {
         userMapper.deleteUser(userId);
     }
 
-    public List<QuestBank> getAllBankByUserId(long userId){
-        return userMapper.getAllBankByUserId(userId);
+    public List<Order> getAllOrderByUserId(long userId,String orderType){
+        Order order = new Order();
+        order.setUserId(userId);
+        order.setOrderType(orderType);
+        return userMapper.getAllOrderByUserId(order);
     }
 
-    public QuestBank getBankByIds(long userId,long bankId){
-        return userMapper.getBankByIds(userId,bankId);
+    public Order getOrderByIds(long userId, long orderId){
+        return userMapper.getOrderByIds(userId,orderId);
     }
 
 }

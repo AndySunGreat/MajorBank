@@ -4,4 +4,6 @@
 
     <!-- 用户管理的service -->
     <bean id="userService" class="com.majorbank.service.impl.UserServiceImpl"/>
+
+    <bean id="packageService" class="com.majorbank.service.impl.PackageServiceImpl"/>
 </beans>

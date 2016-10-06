@@ -3,6 +3,7 @@ package com.majorbank.controller;
 import com.majorbank.model.Order;
 import com.majorbank.model.Package;
 import com.majorbank.model.Package;
+import com.majorbank.model.QuestBank;
 import com.majorbank.service.PackageService;
 import com.majorbank.service.PackageService;
 import org.slf4j.Logger;
@@ -45,6 +46,7 @@ public class PackageController {
     @ResponseBody
     @RequestMapping(value={"/package"},method = {RequestMethod.POST})
     public void insertPackage(@RequestBody Package package1){
+
         packageService.insertPackage(package1);
     }
 
@@ -55,8 +57,8 @@ public class PackageController {
     @ResponseBody
     @RequestMapping(value={"/package/{packageId}"},method = {RequestMethod.GET})
     public Package getPackageById(@PathVariable long packageId){
-        Package Package = packageService.getPackageById(packageId);
-        return Package;
+        Package package1 = packageService.getPackageById(packageId);
+        return package1;
     }
 
     /***
@@ -79,8 +81,43 @@ public class PackageController {
      * @param packageId
      */
     @ResponseBody
-    @RequestMapping(value={"/Package/{packageId}"},method = {RequestMethod.DELETE})
+    @RequestMapping(value={"/package/{packageId}"},method = {RequestMethod.DELETE})
     public void deletePackage(@PathVariable long packageId){
+
         packageService.deletePackage(packageId);
     }
+
+    /**
+     * 根据jobId读取与职业相映射的自动推荐的套餐
+     * @param jobId
+     */
+    @ResponseBody
+    @RequestMapping(value={"/package/{jobId}/auto"},method = {RequestMethod.GET})
+    public List<Package> getAutoPackageByJobId(@PathVariable long jobId){
+        //packageService.getAutoPackageByJobId(packageId);
+        return null;
+    }
+
+    /**
+     * TODO: [Register] Get available banks based on userId and userGrade to generate customize package
+     * @param userId
+     */
+    @ResponseBody
+    @RequestMapping(value={"/package/{userId}/banks"},method = {RequestMethod.GET})
+    public List<QuestBank> getAvailableBanks(@PathVariable long userId){
+        //packageService.getAvailableBanks(packageId);
+        return null;
+    }
+
+    /**
+     *TODO:[Register] Create customize package based on user customization
+     * @param jobId
+     */
+    @ResponseBody
+    @RequestMapping(value={"/package/{jobId}/custom"},method = {RequestMethod.GET})
+    public void insertCustomPkgByUserId(@PathVariable long jobId,
+                                        @RequestBody Package package1){
+        //packageService.insertCustomPkgByUserId(packageId);
+    }
+
 }

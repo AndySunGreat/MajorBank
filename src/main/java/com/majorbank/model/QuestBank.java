@@ -1,6 +1,7 @@
 package com.majorbank.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 /**
  * Created by AndySun on 2016/10/4.
@@ -13,19 +14,32 @@ public class QuestBank implements Serializable {
     private String industryType; // IT
     private String qbType; // JAVA,PHP,C#,C++,.NET,Python,Perl
     private String version;
+    private Date changeDate;
 
     public QuestBank() {
     }
 
 
 
-    public QuestBank(long bankId, String bankName, String qbCategory, String industryType, String qbType, String version) {
+    public QuestBank(long bankId, String bankName,
+                     String qbCategory, String industryType,
+                     String qbType, String version,
+                     Date changeDate) {
         this.bankId = bankId;
         this.bankName = bankName;
         this.qbCategory = qbCategory;
         this.industryType = industryType;
         this.qbType = qbType;
         this.version = version;
+        this.changeDate = changeDate;
+    }
+
+    public Date getChangeDate() {
+        return changeDate;
+    }
+
+    public void setChangeDate(Date changeDate) {
+        this.changeDate = changeDate;
     }
 
     public long getBankId() {

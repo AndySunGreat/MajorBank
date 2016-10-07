@@ -5,113 +5,146 @@
 <mapper namespace="com.majorbank.mapper.PackageMapper">
 
 
-    <!-- private long packageId; // 套餐ID
-    private String packageName; // 套餐名称
-    private long jobId; // 岗位的ID
-    private String bankIdsJson;// 存放该套餐配置的一组bankID
-    private Date createDate; // 创建时间
-    private Date changeDate; // 套餐修改时间
+    <!--
+    private long orderId;
+    private long userId;
+    private String orderType; // 1:bank(订购面试题库)
+    private String orderStatus; // 当前order状态
+    private Date changeDate;
+    private String bankId; // 以分号;分隔的多个bankId,或是其它ids.一次用户可以定购多个题库
+    private String answerId; // 用户记录用户学习题库的答案,一个answerId对应一个bankId
+    private String packageId; // 套餐ID
     -->
-    <resultMap id="packageRstMap"
-        type="com.majorbank.model.Package">
-        <result column="PACKAGE_ID" property="packageId" />
-        <result column="PACKAGE_NAME" property="packageName" />
-        <result column="JOB_ID" property="jobId" />
-        <result column="BANK_IDS_JSON" property="bankIdsJson" />
-        <result column="CREATE_DATE" property="createDate" />
+    <resultMap id="orderRstMap"
+        type="com.majorbank.model.Order">
+        <result column="ORDER_ID" property="orderId" />
+        <result column="USER_ID" property="userId" />
+        <result column="ORDER_TYPE" property="orderType" />
+        <result column="ORDER_STATUS" property="orderStatus" />
         <result column="CHANGE_DATE" property="changeDate" />
+        <result column="BANK_ID" property="bankId" />
+        <result column="ANSWER_ID" property="answerId" />
+        <result column="PACKAGE_ID" property="packageId" />
     </resultMap>
 
     <!-- get all users record -->
-    <sql id="selectPackage">
+    <sql id="selectOrder">
         SELECT
-        PACKAGE_ID,
-        PACKAGE_NAME,
-        JOB_ID,
-        BANK_IDS_JSON,
-        CREATE_DATE,
-        CHANGE_DATE
-        FROM PACKAGE
+        ORDER_ID,
+        USER_ID,
+        ORDER_TYPE,
+        ORDER_STATUS,
+        CHANGE_DATE,
+        BANK_ID,
+        ANSWER_ID,
+        PACKAGE_ID
+        FROM ORDER
     </sql>
-    <sql id="packageFilterWhereClause">
+    <sql id="orderFilterWhereClause">
         <where>
             <if test="_parameter !=null ">
                 1=1
+                <if test="ORDER_ID != 0">
+                    and ORDER_ID = #{orderId}
+                </if>
+                <if test="USER_ID != 0">
+                    and USER_ID = #{userId}
+                </if>
+                <if test="ORDER_TYPE != null">
+                    and ORDER_TYPE = #{orderType}
+                </if>
+                <if test="ORDER_STATUS != null">
+                    and ORDER_STATUS = #{orderStatus}
+                </if>
+                <if test="BANK_ID != 0">
+                    and BANK_ID = #{bankId}
+                </if>
+                <if test="ANSWER_ID != 0">
+                    and ANSWER_ID = #{answerId}
+                </if>
                 <if test="PACKAGE_ID != 0">
                     and PACKAGE_ID = #{packageId}
-                </if>
-
-                <if test="PACKAGE_NAME != null">
-                    and PACKAGE_NAME = #{packageName}
-                </if>
-                <if test="JOB_ID != 0">
-                    and JOB_ID = #{jobId}
                 </if>
             </if>
         </where>
     </sql>
-    <select id="getAllPackages" parameterType="com.majorbank.model.Package"
-            resultType="com.majorbank.model.Package">
-        <include refid="selectPackage" />
-        <include refid="packageFilterWhereClause" />
+    <select id="getAllOrders" parameterType="com.majorbank.model.Order"
+            resultType="com.majorbank.model.Order">
+        <include refid="selectOrder" />
+        <include refid="orderFilterWhereClause" />
     </select>
 
     <!-- find user by id -->
-    <select id="getPackageById" resultMap="packageRstMap" parameterType="long">
+    <select id="getOrderById" resultMap="orderRstMap" parameterType="long">
         SELECT
-        PACKAGE_ID,
-        PACKAGE_NAME,
-        JOB_ID,
-        BANK_IDS_JSON,
-        CREATE_DATE,
-        CHANGE_DATE
-        FROM PACKAGE
-        WHERE PACKAGE_ID=#{packageId}
+        ORDER_ID,
+        USER_ID,
+        ORDER_TYPE,
+        ORDER_STATUS,
+        CHANGE_DATE,
+        BANK_ID,
+        ANSWER_ID,
+        PACKAGE_ID
+        FROM ORDER
+        WHERE ORDER_ID=#{orderId}
     </select>
 
-    <insert id="insertPackage" parameterType="com.majorbank.model.Package">
-        <selectKey resultType="Long" order="BEFORE" keyProperty="id">
-            SELECT _nextval('packageid') FROM DUAL
+    <insert id="insertOrder" parameterType="com.majorbank.model.Order">
+        <selectKey resultType="Long" order="BEFORE" keyProperty="orderId">
+            SELECT _nextval('orderid') FROM DUAL
         </selectKey>
-        INSERT INTO PACKAGE(
-        PACKAGE_ID,
-        PACKAGE_NAME,
-        JOB_ID,
-        BANK_IDS_JSON,
-        CREATE_DATE,
-        CHANGE_DATE
+        INSERT INTO ORDER(
+        ORDER_ID,
+        USER_ID,
+        ORDER_TYPE,
+        ORDER_STATUS,
+        CHANGE_DATE,
+        BANK_ID,
+        ANSWER_ID,
+        PACKAGE_ID
         )
         VALUES(
-        #{packageId,jdbcType=NUMERIC},
-        #{packageName,jdbcType=VARCHAR},
-        #{jobId,jdbcType=NUMERIC},
-        #{bankIdsJson,jdbcType=VARCHAR},
+        #{orderId,jdbcType=NUMERIC},
+        #{userId,jdbcType=NUMERIC},
+        #{orderType,jdbcType=VARCHAR},
+        #{orderStatus,jdbcType=VARCHAR},
         NOW(),
-        NOW()
+        #{bankId,jdbcType=NUMERIC},
+        #{answerId,jdbcType=NUMERIC},
+        #{packageId,jdbcType=NUMERIC}
         )
     </insert>
 
-    <update id="updatePackage" parameterType="com.majorbank.model.Package">
+    <update id="updateOrder" parameterType="com.majorbank.model.Order">
         UPDATE
-        PACKAGE
+        ORDER
         SET
         CHANGE_DATE=NOW()
-        <if test="PACKAGE_NAME !=null">
-        ,PACKAGE_NAME = #{packageName,jdbcType=VARCHAR}
+        <if test="USER_ID !=0">
+        ,USER_ID = #{userId,jdbcType=NUMERIC}
         </if>
-        <if test="JOB_ID !=null">
-        ,JOB_ID = #{jobId,jdbcType=NUMERIC}
+        <if test="ORDER_TYPE !=null">
+        ,ORDER_TYPE = #{orderType,jdbcType=VARCHAR}
         </if>
-        <if test="BANK_IDS_JSON !=null">
-        ,BANK_IDS_JSON = #{bankIdsJson,jdbcType=VARCHAR}
+        <if test="ORDER_STATUS !=null">
+        ,ORDER_STATUS = #{orderStatus,jdbcType=VARCHAR}
         </if>
-        WHERE PACKAGE_ID= #{packageId,jdbcType=NUMERIC}
+        <if test="BANK_ID !=0">
+        ,BANK_ID = #{orderStatus,jdbcType=NUMERIC}
+        </if>
+        <if test="ANSWER_ID !=0">
+        ,ANSWER_ID = #{answerId,jdbcType=NUMERIC}
+        </if>
+        <if test="PACKAGE_ID !=0">
+        ,PACKAGE_ID = #{packageId,jdbcType=NUMERIC}
+        </if>
+        WHERE ORDER_ID=#{orderId}
     </update>
 
-    <delete id="deletePackage"  parameterType="long">
+    <delete id="deleteOrder"  parameterType="long">
         DELETE
         FROM PACKAGE
-        WHERE PACKAGE_ID=#{packageId,jdbcType=NUMERIC}
+        WHERE ORDER_ID=#{orderId,jdbcType=NUMERIC}
     </delete>
 
 

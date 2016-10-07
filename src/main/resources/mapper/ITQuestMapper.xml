@@ -2,116 +2,130 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.majorbank.mapper.PackageMapper">
+<mapper namespace="com.majorbank.mapper.ITQuestMapper">
 
 
-    <!-- private long packageId; // 套餐ID
-    private String packageName; // 套餐名称
-    private long jobId; // 岗位的ID
-    private String bankIdsJson;// 存放该套餐配置的一组bankID
-    private Date createDate; // 创建时间
-    private Date changeDate; // 套餐修改时间
-    -->
-    <resultMap id="packageRstMap"
-        type="com.majorbank.model.Package">
-        <result column="PACKAGE_ID" property="packageId" />
-        <result column="PACKAGE_NAME" property="packageName" />
-        <result column="JOB_ID" property="jobId" />
-        <result column="BANK_IDS_JSON" property="bankIdsJson" />
-        <result column="CREATE_DATE" property="createDate" />
+
+    <resultMap id="itQuestRstMap"
+        type="com.majorbank.model.ITQuestion">
+        <result column="QUESTION_ID" property="questionId" />
+        <result column="BANK_ID" property="bankId" />
+        <result column="QUEST_CONTENT" property="questContent" />
+        <result column="QUEST_TYPE" property="questType" />
+        <result column="QUEST_OPTIONS_JSON" property="questOptionsJson" />
+        <result column="CORRECT_ANSWER" property="correctAnswer" />
         <result column="CHANGE_DATE" property="changeDate" />
     </resultMap>
 
     <!-- get all users record -->
-    <sql id="selectPackage">
+    <sql id="selectITQuestion">
         SELECT
-        PACKAGE_ID,
-        PACKAGE_NAME,
-        JOB_ID,
-        BANK_IDS_JSON,
-        CREATE_DATE,
+        QUESTION_ID,
+        BANK_ID,
+        QUEST_CONTENT,
+        QUEST_TYPE,
+        QUEST_OPTIONS_JSON,
+        CORRECT_ANSWER,
         CHANGE_DATE
-        FROM PACKAGE
+        FROM IT_QUESTION
     </sql>
-    <sql id="packageFilterWhereClause">
+    <sql id="questionFilterWhereClause">
         <where>
             <if test="_parameter !=null ">
                 1=1
-                <if test="PACKAGE_ID != 0">
-                    and PACKAGE_ID = #{packageId}
+                <if test="QUESTION_ID != 0">
+                    and QUESTION_ID = #{questionId}
                 </if>
 
-                <if test="PACKAGE_NAME != null">
-                    and PACKAGE_NAME = #{packageName}
+                <if test="BANK_ID != 0">
+                    and BANK_ID = #{bankId}
                 </if>
-                <if test="JOB_ID != 0">
-                    and JOB_ID = #{jobId}
+                <if test="QUEST_TYPE != null">
+                    and QUEST_TYPE = #{questType}
                 </if>
             </if>
         </where>
     </sql>
-    <select id="getAllPackages" parameterType="com.majorbank.model.Package"
-            resultType="com.majorbank.model.Package">
-        <include refid="selectPackage" />
-        <include refid="packageFilterWhereClause" />
+    <select id="getAllITQuestions" parameterType="com.majorbank.model.ITQuestion"
+            resultType="com.majorbank.model.ITQuestion">
+        <include refid="selectITQuestion" />
+        <include refid="questionFilterWhereClause" />
     </select>
 
     <!-- find user by id -->
-    <select id="getPackageById" resultMap="packageRstMap" parameterType="long">
+    <select id="getITQuestionById" resultMap="itQuestRstMap" parameterType="long">
         SELECT
-        PACKAGE_ID,
-        PACKAGE_NAME,
-        JOB_ID,
-        BANK_IDS_JSON,
-        CREATE_DATE,
+        QUESTION_ID,
+        BANK_ID,
+        QUEST_CONTENT,
+        QUEST_TYPE,
+        QUEST_OPTIONS_JSON,
+        CORRECT_ANSWER,
         CHANGE_DATE
-        FROM PACKAGE
-        WHERE PACKAGE_ID=#{packageId}
+        FROM IT_QUESTION
+        WHERE QUESTION_ID=#{questionId}
     </select>
+    <!--
+     private long questionId;
+     private long bankId;
+     private String questContent; // 问题内容
+     private String questType; // 问题类型 1-单选  2-多选  3-判断  4-问答(暂不支持)
+     private String questOptionsJson; // 问题选项JSON
+     private List<Options> questOptions; // 问题选项
+     private String correctAnswer; // 正确答案
+     -->
 
-    <insert id="insertPackage" parameterType="com.majorbank.model.Package">
+    <insert id="insertITQuestion" parameterType="com.majorbank.model.ITQuestion">
         <selectKey resultType="Long" order="BEFORE" keyProperty="id">
-            SELECT _nextval('packageid') FROM DUAL
+            SELECT _nextval('itquestionid') FROM DUAL
         </selectKey>
-        INSERT INTO PACKAGE(
-        PACKAGE_ID,
-        PACKAGE_NAME,
-        JOB_ID,
-        BANK_IDS_JSON,
-        CREATE_DATE,
+        INSERT INTO IT_QUESTION(
+        QUESTION_ID,
+        BANK_ID,
+        QUEST_CONTENT,
+        QUEST_TYPE,
+        QUEST_OPTIONS_JSON,
+        CORRECT_ANSWER,
         CHANGE_DATE
         )
         VALUES(
-        #{packageId,jdbcType=NUMERIC},
-        #{packageName,jdbcType=VARCHAR},
-        #{jobId,jdbcType=NUMERIC},
-        #{bankIdsJson,jdbcType=VARCHAR},
-        NOW(),
-        NOW()
+        #{questionId,jdbcType=NUMERIC},
+        #{bankId,jdbcType=NUMERIC},
+        #{questContent,jdbcType=VARCHAR},
+        #{questType,jdbcType=VARCHAR},
+        #{questOptionsJson,jdbcType=VARCHAR},
+        #{correctAnswer,jdbcType=VARCHAR},
+        now()
         )
     </insert>
 
-    <update id="updatePackage" parameterType="com.majorbank.model.Package">
+    <update id="updateITQuestion" parameterType="com.majorbank.model.Package">
         UPDATE
-        PACKAGE
+        IT_QUESTION
         SET
         CHANGE_DATE=NOW()
-        <if test="PACKAGE_NAME !=null">
-        ,PACKAGE_NAME = #{packageName,jdbcType=VARCHAR}
+        <if test="BANK_ID !=0">
+        ,BANK_ID = #{bankId,jdbcType=NUMERIC}
         </if>
-        <if test="JOB_ID !=null">
-        ,JOB_ID = #{jobId,jdbcType=NUMERIC}
+        <if test="QUEST_CONTENT !=null">
+        ,QUEST_CONTENT = #{questContent,jdbcType=VARCHAR}
         </if>
-        <if test="BANK_IDS_JSON !=null">
-        ,BANK_IDS_JSON = #{bankIdsJson,jdbcType=VARCHAR}
+        <if test="QUEST_TYPE !=null">
+        ,QUEST_TYPE = #{questType,jdbcType=VARCHAR}
         </if>
-        WHERE PACKAGE_ID= #{packageId,jdbcType=NUMERIC}
+        <if test="QUEST_OPTIONS_JSON !=null">
+        ,QUEST_OPTIONS_JSON = #{questOptionsJson,jdbcType=VARCHAR}
+        </if>
+        <if test="CORRECT_ANSWER !=null">
+        ,CORRECT_ANSWER = #{correctAnswer,jdbcType=VARCHAR}
+        </if>
+        WHERE QUESTION_ID=#{questionId,jdbcType=NUMERIC}
     </update>
 
-    <delete id="deletePackage"  parameterType="long">
+    <delete id="deleteITQuestion"  parameterType="long">
         DELETE
-        FROM PACKAGE
-        WHERE PACKAGE_ID=#{packageId,jdbcType=NUMERIC}
+        FROM IT_QUESTION
+        WHERE QUESTION_ID=#{questionId,jdbcType=NUMERIC}
     </delete>
 
 

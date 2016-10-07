@@ -1,6 +1,7 @@
 package com.majorbank.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -15,14 +16,14 @@ public class ITQuestion implements Serializable {
     private String questOptionsJson; // 问题选项JSON
     private List<Options> questOptions; // 问题选项
     private String correctAnswer; // 正确答案
-    
+    private Date changeDate;
 
     public ITQuestion() {
     }
 
     public ITQuestion(long questionId, long bankId, String questContent,
                       String questType,String questOptionsJson, List<Options> questOptions,
-                      String correctAnswer) {
+                      String correctAnswer,Date changeDate) {
         this.questionId = questionId;
         this.bankId = bankId;
         this.questContent = questContent;
@@ -30,6 +31,15 @@ public class ITQuestion implements Serializable {
         this.questOptionsJson = questOptionsJson;
         this.questOptions = questOptions;
         this.correctAnswer = correctAnswer;
+        this.changeDate = changeDate;
+    }
+
+    public Date getChangeDate() {
+        return changeDate;
+    }
+
+    public void setChangeDate(Date changeDate) {
+        this.changeDate = changeDate;
     }
 
     public String getQuestOptionsJson() {

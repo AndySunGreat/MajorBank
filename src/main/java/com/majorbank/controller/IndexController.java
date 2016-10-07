@@ -15,6 +15,5 @@ public class IndexController {
         model.addAttribute("name", "helloworld");
         //returns the view name
         return "index";
-
     }
 }

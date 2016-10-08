@@ -9,6 +9,8 @@
         <result column="ID" property="id" />
         <result column="USERNAME" property="username" />
         <result column="PASSWORD" property="password" />
+        <result column="JOB_NAME" property="jobName" />
+        <result column="CHANGE_DATE" property="changeDate" />
     </resultMap>
 
     <resultMap id="orderRstMap"
@@ -34,7 +36,9 @@
         SELECT
         ID,
         USERNAME,
-        PASSWORD
+        PASSWORD,
+        JOB_NAME,
+        CHANGE_DATE
         FROM USER
     </sql>
     <sql id="userFilterWhereClause">
@@ -66,7 +70,9 @@
         SELECT
         ID,
         USERNAME,
-        PASSWORD
+        PASSWORD,
+        JOB_NAME,
+        CHANGE_DATE
         FROM USER
         WHERE id=#{userId}
     </select>
@@ -78,12 +84,16 @@
         INSERT INTO USER(
         ID,
         USERNAME,
-        PASSWORD
+        PASSWORD,
+        JOB_NAME,
+        CHANGE_DATE
         )
         VALUES(
         #{id,jdbcType=NUMERIC},
         #{username,jdbcType=VARCHAR},
-        #{password,jdbcType=VARCHAR}
+        #{password,jdbcType=VARCHAR},
+        #{jobName,jdbcType=VARCHAR},
+        NOW()
         )
     </insert>
 
@@ -91,7 +101,7 @@
         UPDATE
         USER
         SET
-        changed=NOW()
+        change_date=NOW()
         <if test="username !=null">
         ,username = #{username,jdbcType=VARCHAR}
         </if>

@@ -1,6 +1,7 @@
 package com.majorbank.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 /**
  * Created by AndySun on 2016/10/2.
@@ -9,11 +10,27 @@ public class User implements Serializable {
     private long id;
     private String username;
     private String password;
-    private String jobId;
     private String jobName;
+    private Date changeDate;
 
+    public User() {
+    }
 
+    public User(long id, String username, String password, String jobName, Date changeDate) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.jobName = jobName;
+        this.changeDate = changeDate;
+    }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -31,25 +48,19 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public User(String username, String password, int id) {
-        this.username = username;
-        this.password = password;
-        this.id = id;
+    public String getJobName() {
+        return jobName;
     }
 
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
+    public void setJobName(String jobName) {
+        this.jobName = jobName;
     }
 
-    public long getId() {
-        return id;
+    public Date getChangeDate() {
+        return changeDate;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public User() {
+    public void setChangeDate(Date changeDate) {
+        this.changeDate = changeDate;
     }
 }

@@ -64,7 +64,7 @@ public class UserController {
         user.setUsername(strAcctNumber);
         user.setPassword(strPWD);
         List<User> userList = userService.getAllUsers(user);
-        if (userList == null) {
+        if (userList == null|| userList.size()==0) {
             return new ResponseEntity("200B - No UserNew found for AccountNumber " + strAcctNumber, HttpStatus.NOT_FOUND);
         }else{
             if(userList.size()>0) {

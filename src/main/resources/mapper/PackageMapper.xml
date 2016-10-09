@@ -51,7 +51,7 @@
         </where>
     </sql>
     <select id="getAllPackages" parameterType="com.majorbank.model.Package"
-            resultType="com.majorbank.model.Package">
+            resultMap="packageRstMap">
         <include refid="selectPackage" />
         <include refid="packageFilterWhereClause" />
     </select>
@@ -69,8 +69,20 @@
         WHERE PACKAGE_ID=#{packageId}
     </select>
 
+    <select id="getAutoPackageByJobId" resultMap="packageRstMap" parameterType="long">
+        SELECT
+        PACKAGE_ID,
+        PACKAGE_NAME,
+        JOB_ID,
+        BANK_IDS_JSON,
+        CREATE_DATE,
+        CHANGE_DATE
+        FROM PACKAGE
+        WHERE JOB_ID=#{jobId,jdbcType=NUMERIC}
+    </select>
+
     <insert id="insertPackage" parameterType="com.majorbank.model.Package">
-        <selectKey resultType="Long" order="BEFORE" keyProperty="id">
+        <selectKey resultType="Long" order="BEFORE" keyProperty="packageId">
             SELECT _nextval('packageid') FROM DUAL
         </selectKey>
         INSERT INTO PACKAGE(
@@ -96,13 +108,13 @@
         PACKAGE
         SET
         CHANGE_DATE=NOW()
-        <if test="PACKAGE_NAME !=null">
+        <if test="packageName !=null">
         ,PACKAGE_NAME = #{packageName,jdbcType=VARCHAR}
         </if>
-        <if test="JOB_ID !=null">
+        <if test="jobId !=null">
         ,JOB_ID = #{jobId,jdbcType=NUMERIC}
         </if>
-        <if test="BANK_IDS_JSON !=null">
+        <if test="bankIdsJson !=null">
         ,BANK_IDS_JSON = #{bankIdsJson,jdbcType=VARCHAR}
         </if>
         WHERE PACKAGE_ID= #{packageId,jdbcType=NUMERIC}
@@ -113,6 +125,7 @@
         FROM PACKAGE
         WHERE PACKAGE_ID=#{packageId,jdbcType=NUMERIC}
     </delete>
+
 
 
 </mapper>

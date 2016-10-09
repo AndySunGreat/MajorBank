@@ -14,4 +14,5 @@ public interface PackageService {
     Package getPackageById(long packageId);
     void updatePackage(Package package1);
     void deletePackage(long packageId);
+    List<Package> getAutoPackageByJobId(long jobId);
 }

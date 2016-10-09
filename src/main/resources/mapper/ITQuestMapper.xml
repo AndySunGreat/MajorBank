@@ -33,14 +33,14 @@
         <where>
             <if test="_parameter !=null ">
                 1=1
-                <if test="QUESTION_ID != 0">
+                <if test="questionId != 0">
                     and QUESTION_ID = #{questionId}
                 </if>
 
-                <if test="BANK_ID != 0">
+                <if test="bankId != 0">
                     and BANK_ID = #{bankId}
                 </if>
-                <if test="QUEST_TYPE != null">
+                <if test="questType != null">
                     and QUEST_TYPE = #{questType}
                 </if>
             </if>
@@ -76,7 +76,7 @@
      -->
 
     <insert id="insertITQuestion" parameterType="com.majorbank.model.ITQuestion">
-        <selectKey resultType="Long" order="BEFORE" keyProperty="id">
+        <selectKey resultType="Long" order="BEFORE" keyProperty="questionId">
             SELECT _nextval('itquestionid') FROM DUAL
         </selectKey>
         INSERT INTO IT_QUESTION(
@@ -104,19 +104,19 @@
         IT_QUESTION
         SET
         CHANGE_DATE=NOW()
-        <if test="BANK_ID !=0">
+        <if test="bankId !=0">
         ,BANK_ID = #{bankId,jdbcType=NUMERIC}
         </if>
-        <if test="QUEST_CONTENT !=null">
+        <if test="questContent !=null">
         ,QUEST_CONTENT = #{questContent,jdbcType=VARCHAR}
         </if>
-        <if test="QUEST_TYPE !=null">
+        <if test="questType !=null">
         ,QUEST_TYPE = #{questType,jdbcType=VARCHAR}
         </if>
-        <if test="QUEST_OPTIONS_JSON !=null">
+        <if test="questOptionsJson !=null">
         ,QUEST_OPTIONS_JSON = #{questOptionsJson,jdbcType=VARCHAR}
         </if>
-        <if test="CORRECT_ANSWER !=null">
+        <if test="correctAnswer !=null">
         ,CORRECT_ANSWER = #{correctAnswer,jdbcType=VARCHAR}
         </if>
         WHERE QUESTION_ID=#{questionId,jdbcType=NUMERIC}

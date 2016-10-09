@@ -28,18 +28,18 @@ public class PackageController {
     private PackageService packageService;
 
     /**
-     * list all Package
+     * list all Package[tested]
      * @return
      */
     @ResponseBody
     @RequestMapping(value={"/package"},method = {RequestMethod.GET})
     public List<Package> getAllPackages(){
-        List<Package> packageList = packageService.getAllPackages(null);
-        return packageList;
+        List<Package> packageList2 = packageService.getAllPackages(null);
+        return packageList2;
     }
 
     /**
-     * create one Package
+     * create one Package[tested]
      * ps: Content-Type要用application/json,Body选raw写入json才可以
      * @return
      */
@@ -51,7 +51,7 @@ public class PackageController {
     }
 
     /**
-     * get one  Package
+     * get one  Package[tested]
      * @return
      */
     @ResponseBody
@@ -62,7 +62,7 @@ public class PackageController {
     }
 
     /***
-     * update Package info
+     * update Package info[tested]
      * @param packageId
      */
     @ResponseBody
@@ -77,7 +77,7 @@ public class PackageController {
     }
 
     /***
-     * delete Package info
+     * delete Package info[tested]
      * @param packageId
      */
     @ResponseBody
@@ -88,14 +88,14 @@ public class PackageController {
     }
 
     /**
-     * 根据jobId读取与职业相映射的自动推荐的套餐
+     * 根据jobId读取与职业相映射的自动推荐的套餐[tested]
      * @param jobId
      */
     @ResponseBody
     @RequestMapping(value={"/package/{jobId}/auto"},method = {RequestMethod.GET})
     public List<Package> getAutoPackageByJobId(@PathVariable long jobId){
-        //packageService.getAutoPackageByJobId(packageId);
-        return null;
+        List<Package> packageList1 = packageService.getAutoPackageByJobId(jobId);
+        return packageList1;
     }
 
     /**

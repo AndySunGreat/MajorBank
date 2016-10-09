@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.majorbank.mapper.PackageMapper">
+<mapper namespace="com.majorbank.mapper.QuestBankMapper">
 
 
     <!--
@@ -40,14 +40,14 @@
         <where>
             <if test="_parameter !=null ">
                 1=1
-                <if test="PACKAGE_ID != 0">
+                <if test="packageId != 0">
                     and PACKAGE_ID = #{packageId}
                 </if>
 
-                <if test="PACKAGE_NAME != null">
+                <if test="packageName != null">
                     and PACKAGE_NAME = #{packageName}
                 </if>
-                <if test="JOB_ID != 0">
+                <if test="jobId != 0">
                     and JOB_ID = #{jobId}
                 </if>
             </if>
@@ -77,7 +77,7 @@
 
     <insert id="insertQuestBank" parameterType="com.majorbank.model.QuestBank">
         <selectKey resultType="Long" order="BEFORE" keyProperty="bankId">
-            SELECT _nextval('packageid') FROM DUAL
+            SELECT _nextval('bankid') FROM DUAL
         </selectKey>
         INSERT INTO QUEST_BANK(
         BANK_ID,
@@ -104,19 +104,19 @@
         QUEST_BANK
         SET
         CHANGE_DATE=NOW()
-        <if test="BANK_NAME !=null">
+        <if test="bankName !=null">
         ,BANK_NAME = #{bankName,jdbcType=VARCHAR}
         </if>
-        <if test="QB_CATEGORY !=null">
+        <if test="qbCategory !=null">
         ,QB_CATEGORY = #{qbCategory,jdbcType=NUMERIC}
         </if>
-        <if test="INDUSTRY_TYPE !=null">
+        <if test="industryType !=null">
         ,INDUSTRY_TYPE = #{industryType,jdbcType=VARCHAR}
         </if>
-        <if test="QB_TYPE !=null">
+        <if test="qbType !=null">
         ,QB_TYPE = #{qbType,jdbcType=VARCHAR}
         </if>
-        <if test="VERSION !=null">
+        <if test="version !=null">
         ,VERSION = #{version,jdbcType=VARCHAR}
         </if>
         WHERE BANK_ID=#{bankId,jdbcType=NUMERIC}

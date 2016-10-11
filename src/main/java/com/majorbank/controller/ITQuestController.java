@@ -27,9 +27,18 @@ public class ITQuestController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value={"/itquest"},method = {RequestMethod.GET})
+    @RequestMapping(value={"/itquestions/all"},method = {RequestMethod.GET})
     public List<ITQuestion> getAllITQuests(){
         List<ITQuestion> itquestList = itQuestService.getAllITQuestions(null);
+        return itquestList;
+    }
+
+    @ResponseBody
+    @RequestMapping(value={"/itquest/bankid/{bankId}"},method = {RequestMethod.GET})
+    public List<ITQuestion> getITQuestsByBankId(@PathVariable long bankId){
+        ITQuestion itquest = new ITQuestion();
+        itquest.setBankId(bankId);
+        List<ITQuestion> itquestList = itQuestService.getAllITQuestions(itquest);
         return itquestList;
     }
 
@@ -49,7 +58,7 @@ public class ITQuestController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value={"/itquest/{questionId}"},method = {RequestMethod.GET})
+    @RequestMapping(value={"/itquest/questionid/{questionId}"},method = {RequestMethod.GET})
     public ITQuestion getITQuestById(@PathVariable long questionId){
         ITQuestion itQuest = itQuestService.getITQuestionById(questionId);
         return itQuest;

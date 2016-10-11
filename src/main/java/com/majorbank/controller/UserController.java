@@ -1,6 +1,6 @@
 package com.majorbank.controller;
 
-import com.majorbank.model.Order;
+import com.majorbank.model.Orders;
 import com.majorbank.model.QuestBank;
 import com.majorbank.model.User;
 import com.majorbank.service.UserService;
@@ -107,9 +107,9 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping(value={"/user/{userId}/order/{orderType}"},method = {RequestMethod.GET})
-    public List<Order> getAllOrderByUserId(@PathVariable long userId,
-                                           @PathVariable String orderType){
-        List<Order> orderBankList = userService.getAllOrderByUserId(userId,orderType);
+    public List<Orders> getAllOrderByUserId(@PathVariable long userId,
+                                            @PathVariable String orderType){
+        List<Orders> orderBankList = userService.getAllOrderByUserId(userId,orderType);
         return orderBankList;
     }
     /**
@@ -118,8 +118,8 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping(value={"/user/{userId}/order/{orderId}"},method = {RequestMethod.GET})
-    public Order getOrderByIds(@PathVariable long userId, @PathVariable long orderId){
-        Order order = userService.getOrderByIds(userId,orderId);
+    public Orders getOrderByIds(@PathVariable long userId, @PathVariable long orderId){
+        Orders order = userService.getOrderByIds(userId,orderId);
         return order;
     }
 }

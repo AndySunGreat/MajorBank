@@ -1,6 +1,6 @@
 package com.majorbank.service;
 
-import com.majorbank.model.Order;
+import com.majorbank.model.Orders;
 
 import java.util.List;
 
@@ -8,9 +8,9 @@ import java.util.List;
  * Created by AndySun on 2016/10/6.
  */
 public interface OrderService {
-    List<Order> getAllOrders(Order orderObj);
-    void insertOrder(Order orderObj);
-    Order getOrderById(long orderId);
-    void updateOrder(Order orderObj);
+    List<Orders> getAllOrders(Orders orderObj);
+    void insertOrder(Orders orderObj);
+    Orders getOrderById(long orderId);
+    void updateOrder(Orders orderObj);
     void deleteOrder(long orderId);
 }

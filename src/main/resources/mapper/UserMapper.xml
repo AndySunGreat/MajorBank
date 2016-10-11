@@ -14,7 +14,7 @@
     </resultMap>
 
     <resultMap id="orderRstMap"
-        type="com.majorbank.model.Order">
+        type="com.majorbank.model.Orders">
         <result column="ORDER_ID" property="orderId" />
         <result column="USER_ID" property="userId" />
         <result column="ORDER_TYPE" property="orderType" />
@@ -25,7 +25,7 @@
     </resultMap>
 
     <parameterMap id="userBankMap"
-        type="com.majorbank.model.Order">
+        type="com.majorbank.model.Orders">
         <parameter  property="orderId" jdbcType="NUMERIC" />
         <parameter  property="userId" jdbcType="NUMERIC" />
     </parameterMap>
@@ -121,7 +121,7 @@
        List<QuestBank> getAllBankByUserId(long userId);
        获得某个用户的所有题库
      -->
-    <select id="getAllOrderByUserId"  parameterType="com.majorbank.model.Order">
+    <select id="getAllOrderByUserId"  parameterType="com.majorbank.model.Orders">
       SELECT
       order_id,
       user_id,

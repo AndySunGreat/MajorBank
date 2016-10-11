@@ -1,7 +1,7 @@
 package com.majorbank.service.impl;
 
 import com.majorbank.mapper.UserMapper;
-import com.majorbank.model.Order;
+import com.majorbank.model.Orders;
 import com.majorbank.model.QuestBank;
 import com.majorbank.model.User;
 import com.majorbank.service.UserService;
@@ -40,14 +40,14 @@ public class UserServiceImpl implements UserService {
         userMapper.deleteUser(userId);
     }
 
-    public List<Order> getAllOrderByUserId(long userId,String orderType){
-        Order order = new Order();
+    public List<Orders> getAllOrderByUserId(long userId,String orderType){
+        Orders order = new Orders();
         order.setUserId(userId);
         order.setOrderType(orderType);
         return userMapper.getAllOrderByUserId(order);
     }
 
-    public Order getOrderByIds(long userId, long orderId){
+    public Orders getOrderByIds(long userId, long orderId){
         return userMapper.getOrderByIds(userId,orderId);
     }
 

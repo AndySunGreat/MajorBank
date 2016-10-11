@@ -1,6 +1,6 @@
 package com.majorbank.mapper;
 
-import com.majorbank.model.Order;
+import com.majorbank.model.Orders;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.List;
  */
 @Repository
 public interface OrderMapper {
-    List<Order> getAllOrders(Order order);
-    void insertOrder(Order order);
-    Order getOrderById(long orderId);
-    void updateOrder(Order order);
+    List<Orders> getAllOrders(Orders order);
+    void insertOrder(Orders order);
+    Orders getOrderById(long orderId);
+    void updateOrder(Orders order);
     void deleteOrder(long orderId);
 }

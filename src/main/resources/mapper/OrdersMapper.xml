@@ -16,7 +16,7 @@
     private String packageId; // 套餐ID
     -->
     <resultMap id="orderRstMap"
-        type="com.majorbank.model.Order">
+        type="com.majorbank.model.Orders">
         <result column="ORDER_ID" property="orderId" />
         <result column="USER_ID" property="userId" />
         <result column="ORDER_TYPE" property="orderType" />
@@ -38,7 +38,7 @@
         BANK_ID,
         ANSWER_ID,
         PACKAGE_ID
-        FROM ORDER
+        FROM ORDERS
     </sql>
     <sql id="orderFilterWhereClause">
         <where>
@@ -68,8 +68,8 @@
             </if>
         </where>
     </sql>
-    <select id="getAllOrders" parameterType="com.majorbank.model.Order"
-            resultType="com.majorbank.model.Order">
+    <select id="getAllOrders" parameterType="com.majorbank.model.Orders"
+            resultMap="orderRstMap">
         <include refid="selectOrder" />
         <include refid="orderFilterWhereClause" />
     </select>
@@ -85,15 +85,15 @@
         BANK_ID,
         ANSWER_ID,
         PACKAGE_ID
-        FROM ORDER
+        FROM ORDERS
         WHERE ORDER_ID=#{orderId}
     </select>
 
-    <insert id="insertOrder" parameterType="com.majorbank.model.Order">
+    <insert id="insertOrder" parameterType="com.majorbank.model.Orders">
         <selectKey resultType="Long" order="BEFORE" keyProperty="orderId">
             SELECT _nextval('orderid') FROM DUAL
         </selectKey>
-        INSERT INTO ORDER(
+        INSERT INTO ORDERS(
         ORDER_ID,
         USER_ID,
         ORDER_TYPE,
@@ -115,9 +115,9 @@
         )
     </insert>
 
-    <update id="updateOrder" parameterType="com.majorbank.model.Order">
+    <update id="updateOrder" parameterType="com.majorbank.model.Orders">
         UPDATE
-        ORDER
+        ORDERS
         SET
         CHANGE_DATE=NOW()
         <if test="userId !=0">
@@ -143,7 +143,7 @@
 
     <delete id="deleteOrder"  parameterType="long">
         DELETE
-        FROM PACKAGE
+        FROM ORDERS
         WHERE ORDER_ID=#{orderId,jdbcType=NUMERIC}
     </delete>
 

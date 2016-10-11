@@ -1,7 +1,6 @@
 package com.majorbank.controller;
 
-import com.majorbank.model.Order;
-import com.majorbank.model.QuestBank;
+import com.majorbank.model.Orders;
 import com.majorbank.service.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,8 +15,8 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/api/me")
-public class OrderController {
-    private static final Logger LOG = LoggerFactory.getLogger(OrderController.class);
+public class OrdersController {
+    private static final Logger LOG = LoggerFactory.getLogger(OrdersController.class);
 
     @Autowired
     private OrderService orderService;
@@ -27,9 +26,9 @@ public class OrderController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value={"/order"},method = {RequestMethod.GET})
-    public List<Order> getAllOrders(){
-        List<Order> orderList = orderService.getAllOrders(null);
+    @RequestMapping(value={"/orders"},method = {RequestMethod.GET})
+    public List<Orders> getAllOrders(){
+        List<Orders> orderList = orderService.getAllOrders(null);
         return orderList;
     }
 
@@ -39,8 +38,8 @@ public class OrderController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value={"/order"},method = {RequestMethod.POST})
-    public void insertOrder(@RequestBody Order order){
+    @RequestMapping(value={"/orders"},method = {RequestMethod.POST})
+    public void insertOrder(@RequestBody Orders order){
 
         orderService.insertOrder(order);
     }
@@ -50,9 +49,9 @@ public class OrderController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value={"/order/{orderId}"},method = {RequestMethod.GET})
-    public Order getOrderById(@PathVariable long orderId){
-        Order Order = orderService.getOrderById(orderId);
+    @RequestMapping(value={"/orders/{orderId}"},method = {RequestMethod.GET})
+    public Orders getOrderById(@PathVariable long orderId){
+        Orders Order = orderService.getOrderById(orderId);
         return Order;
     }
 
@@ -61,9 +60,9 @@ public class OrderController {
      * @param orderId
      */
     @ResponseBody
-    @RequestMapping(value={"/order/{orderId}"},method = {RequestMethod.PUT})
+    @RequestMapping(value={"/orders/{orderId}"},method = {RequestMethod.PUT})
     public void updateOrder(@PathVariable long orderId,
-                           @RequestBody Order order){
+                           @RequestBody Orders order){
         if(order.getOrderId()==0L){
             order.setOrderId(orderId);
         }
@@ -76,7 +75,7 @@ public class OrderController {
      * @param orderId
      */
     @ResponseBody
-    @RequestMapping(value={"/order/{orderId}"},method = {RequestMethod.DELETE})
+    @RequestMapping(value={"/orders/{orderId}"},method = {RequestMethod.DELETE})
     public void deleteOrder(@PathVariable long orderId){
         orderService.deleteOrder(orderId);
     }

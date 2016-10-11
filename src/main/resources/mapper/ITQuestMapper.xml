@@ -46,8 +46,8 @@
             </if>
         </where>
     </sql>
-    <select id="getAllITQuestions" parameterType="com.majorbank.model.ITQuestion"
-            resultType="com.majorbank.model.ITQuestion">
+    <select id="getAllITQuestions" resultMap="itQuestRstMap"
+            parameterType="com.majorbank.model.ITQuestion">
         <include refid="selectITQuestion" />
         <include refid="questionFilterWhereClause" />
     </select>

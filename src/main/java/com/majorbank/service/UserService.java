@@ -1,6 +1,6 @@
 package com.majorbank.service;
 
-import com.majorbank.model.Order;
+import com.majorbank.model.Orders;
 import com.majorbank.model.QuestBank;
 import com.majorbank.model.User;
 
@@ -16,6 +16,6 @@ public interface UserService {
     User getUserById(long userId);
     void updateUser(User user);
     void deleteUser(long userId);
-    List<Order> getAllOrderByUserId(long userId,String orderType);
-    Order getOrderByIds(long userId, long orderId);
+    List<Orders> getAllOrderByUserId(long userId,String orderType);
+    Orders getOrderByIds(long userId, long orderId);
 }

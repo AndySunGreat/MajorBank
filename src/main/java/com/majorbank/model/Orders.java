@@ -7,7 +7,7 @@ import java.sql.Date;
  * Created by AndySun on 2016/10/5.
  * 用户订单表
  */
-public class Order implements Serializable {
+public class Orders implements Serializable {
     private long orderId;
     private long userId;
     private String orderType; // 1:bank(订购面试题库)
@@ -17,10 +17,10 @@ public class Order implements Serializable {
     private String answerId; // 用户记录用户学习题库的答案,一个answerId对应一个bankId
     private String packageId; // 套餐ID
 
-    public Order() {
+    public Orders() {
     }
 
-    public Order(long orderId, long userId, String orderType, String orderStatus,
+    public Orders(long orderId, long userId, String orderType, String orderStatus,
                  Date changeDate, String bankId, String answerId,String packageId) {
         this.orderId = orderId;
         this.userId = userId;

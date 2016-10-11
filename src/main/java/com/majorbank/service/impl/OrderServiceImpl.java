@@ -2,7 +2,7 @@ package com.majorbank.service.impl;
 
 import com.majorbank.mapper.OrderMapper;
 import com.majorbank.mapper.OrderMapper;
-import com.majorbank.model.Order;
+import com.majorbank.model.Orders;
 import com.majorbank.service.OrderService;
 import com.majorbank.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,18 +20,18 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderMapper orderMapper;
 
-    public List<Order> getAllOrders(Order order){
+    public List<Orders> getAllOrders(Orders order){
         return orderMapper.getAllOrders(order);
     }
-    public void insertOrder(Order order){
+    public void insertOrder(Orders order){
         orderMapper.insertOrder(order);
     }
 
-    public Order getOrderById(long orderId){
+    public Orders getOrderById(long orderId){
         return orderMapper.getOrderById(orderId);
     }
 
-    public void updateOrder(Order order){
+    public void updateOrder(Orders order){
         orderMapper.updateOrder(order);
     }
 

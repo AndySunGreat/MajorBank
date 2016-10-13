@@ -6,50 +6,31 @@ import java.io.Serializable;
  * Created by AndySun on 2016/10/5.
  */
 public class Options implements Serializable {
-    private String optionSeq; // A,B
-    private String optionContent;
-    private String comments;
-    private Boolean ifCorrect;
+    private String optSeq; // A,B
+    private String optContent;
 
     public Options() {
     }
 
-    public Options(String optionSeq, String optionContent, String comments, Boolean ifCorrect) {
-        this.optionSeq = optionSeq;
-        this.optionContent = optionContent;
-        this.comments = comments;
-        this.ifCorrect = ifCorrect;
+    public Options(String optSeq, String optContent) {
+        this.optSeq = optSeq;
+        this.optContent = optContent;
     }
 
-    public String getOptionSeq() {
-        return optionSeq;
+
+    public String getOptSeq() {
+        return optSeq;
     }
 
-    public void setOptionSeq(String optionSeq) {
-        this.optionSeq = optionSeq;
+    public void setOptSeq(String optSeq) {
+        this.optSeq = optSeq;
     }
 
-    public String getOptionContent() {
-        return optionContent;
+    public String getOptContent() {
+        return optContent;
     }
 
-    public void setOptionContent(String optionContent) {
-        this.optionContent = optionContent;
-    }
-
-    public String getComments() {
-        return comments;
-    }
-
-    public void setComments(String comments) {
-        this.comments = comments;
-    }
-
-    public Boolean getIfCorrect() {
-        return ifCorrect;
-    }
-
-    public void setIfCorrect(Boolean ifCorrect) {
-        this.ifCorrect = ifCorrect;
+    public void setOptContent(String optContent) {
+        this.optContent = optContent;
     }
 }

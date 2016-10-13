@@ -1,6 +1,5 @@
 package com.majorbank.service;
 
-import com.majorbank.model.Order;
 import com.majorbank.model.Package;
 
 import java.util.List;

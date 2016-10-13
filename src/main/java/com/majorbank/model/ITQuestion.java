@@ -1,14 +1,17 @@
 package com.majorbank.model;
 
+import net.sf.json.JSONObject;
+
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by AndySun on 2016/10/5.
  * Industry Type: IT行业; 每个行业会对应有一张题库表
  */
-public class ITQuestion implements Serializable {
+public class    ITQuestion implements Serializable {
     private long questionId;
     private long bankId;
     private String questContent; // 问题内容
@@ -17,6 +20,7 @@ public class ITQuestion implements Serializable {
     private List<Options> questOptions; // 问题选项
     private String correctAnswer; // 正确答案
     private Date changeDate;
+    private String correctIndexes; // 正确答案序列号
 
     public ITQuestion() {
     }
@@ -32,6 +36,28 @@ public class ITQuestion implements Serializable {
         this.questOptions = questOptions;
         this.correctAnswer = correctAnswer;
         this.changeDate = changeDate;
+    }
+
+    public ITQuestion(long questionId, long bankId, String questContent, String questType,
+                      String questOptionsJson, List<Options> questOptions,
+                      String correctAnswer, Date changeDate, String correctIndexes) {
+        this.questionId = questionId;
+        this.bankId = bankId;
+        this.questContent = questContent;
+        this.questType = questType;
+        this.questOptionsJson = questOptionsJson;
+        this.questOptions = questOptions;
+        this.correctAnswer = correctAnswer;
+        this.changeDate = changeDate;
+        this.correctIndexes = correctIndexes;
+    }
+
+    public String getCorrectIndexes() {
+        return correctIndexes;
+    }
+
+    public void setCorrectIndexes(String correctIndexes) {
+        this.correctIndexes = correctIndexes;
     }
 
     public Date getChangeDate() {
@@ -83,6 +109,7 @@ public class ITQuestion implements Serializable {
     }
 
     public List<Options> getQuestOptions() {
+
         return questOptions;
     }
 

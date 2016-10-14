@@ -39,9 +39,9 @@ public class OrdersController {
      */
     @ResponseBody
     @RequestMapping(value={"/orders"},method = {RequestMethod.POST})
-    public void insertOrder(@RequestBody Orders order){
+    public Orders insertOrder(@RequestBody Orders order){
 
-        orderService.insertOrder(order);
+        return orderService.insertOrder(order);
     }
 
     /**
@@ -57,17 +57,16 @@ public class OrdersController {
 
     /***
      * update Order info
-     * @param orderId
      */
     @ResponseBody
     @RequestMapping(value={"/orders/{orderId}"},method = {RequestMethod.PUT})
     public void updateOrder(@PathVariable long orderId,
-                           @RequestBody Orders order){
-        if(order.getOrderId()==0L){
-            order.setOrderId(orderId);
+                            @RequestBody Orders order1){
+        if(order1.getOrderId()==0L){
+            order1.setOrderId(orderId);
         }
-        LOG.debug("package.getOrderId():"+order.getOrderId());
-        orderService.updateOrder(order);
+        LOG.debug("package.getOrderId():"+order1.getOrderId());
+        orderService.updateOrder(order1);
     }
 
     /***

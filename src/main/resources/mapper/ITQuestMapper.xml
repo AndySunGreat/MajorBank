@@ -3,7 +3,23 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.majorbank.mapper.ITQuestMapper">
-
+    <!--
+    public class BankAnswers {
+    private long answerId;
+    private long bankId;
+    private long score;
+    private long userId;
+    private String wrongQuestIds;
+    private Date createDate;
+    -->
+    <resultMap id="bankAnswers"
+               type="com.majorbank.model.BankAnswers">
+        <result column="ANSWER_ID" property="answerId"/>
+        <result column="ORDER_ID" property="orderId"/>
+        <result column="SCORE" property="score"/>
+        <result column="WRONG_QUEST_IDS" property="wrongQuestIds"/>
+        <result column="CREATE_DATE" property="createDate"/>
+    </resultMap>
 
 
     <resultMap id="itQuestRstMap"
@@ -65,16 +81,38 @@
         FROM IT_QUESTION
         WHERE QUESTION_ID=#{questionId}
     </select>
-    <!--
-     private long questionId;
-     private long bankId;
-     private String questContent; // 问题内容
-     private String questType; // 问题类型 1-单选  2-多选  3-判断  4-问答(暂不支持)
-     private String questOptionsJson; // 问题选项JSON
-     private List<Options> questOptions; // 问题选项
-     private String correctAnswer; // 正确答案
-     -->
 
+    <!--
+    <resultMap id="bankAnswers"
+               type="com.majorbank.model.BankAnswers">
+        <result column="ANSWER_ID" property="answerId"/>
+        <result column="BANK_ID" property="bankId"/>
+        <result column="SCORE" property="score"/>
+        <result column="UER_ID" property="userId"/>
+        <result column="WRONG_QUEST_IDS" property="wrongQuestIds"/>
+        <result column="CREATE_DATE" property="createDate"/>
+    </resultMap>
+    -->
+
+
+    <insert id="insertBankAnswersAndGetId"
+            useGeneratedKeys="true" keyProperty="answerId" keyColumn="ANSWER_ID"
+            parameterType="com.majorbank.model.BankAnswers">
+        insert into bank_answers(ORDER_ID,SCORE,WRONG_QUEST_IDS,CREATE_DATE)
+        values(#{orderId},#{score},#{wrongQuestIds},now())
+        <selectKey keyProperty="answerId" keyColumn="ANSWER_ID" resultType="long" order="AFTER">
+            SELECT LAST_INSERT_ID() ;
+        </selectKey>
+    </insert>
+    <!--
+ private long questionId;
+ private long bankId;
+ private String questContent; // 问题内容
+ private String questType; // 问题类型 1-单选  2-多选  3-判断  4-问答(暂不支持)
+ private String questOptionsJson; // 问题选项JSON
+ private List<Options> questOptions; // 问题选项
+ private String correctAnswer; // 正确答案
+ -->
     <insert id="insertITQuestion" parameterType="com.majorbank.model.ITQuestion">
         <selectKey resultType="Long" order="BEFORE" keyProperty="questionId">
             SELECT _nextval('itquestionid') FROM DUAL
@@ -104,7 +142,7 @@
         IT_QUESTION
         SET
         CHANGE_DATE=NOW()
-        <if test="bankId !=0">
+        <if test="bankId !=0 and bankId !=null">
         ,BANK_ID = #{bankId,jdbcType=NUMERIC}
         </if>
         <if test="questContent !=null">

@@ -44,10 +44,10 @@
         <where>
             <if test="_parameter !=null ">
                 1=1
-                <if test="orderId != 0">
+                <if test="orderId != 0 and orderId !=null">
                     and ORDER_ID = #{orderId}
                 </if>
-                <if test="userId != 0">
+                <if test="userId != 0  and userId !=null">
                     and USER_ID = #{userId}
                 </if>
                 <if test="orderType != null">
@@ -56,13 +56,13 @@
                 <if test="orderStatus != null">
                     and ORDER_STATUS = #{orderStatus}
                 </if>
-                <if test="bankId != 0">
+                <if test="bankId != 0  and bankId !=null">
                     and BANK_ID = #{bankId}
                 </if>
-                <if test="answerId != 0">
+                <if test="answerId != 0  and answerId !=null">
                     and ANSWER_ID = #{answerId}
                 </if>
-                <if test="packageId != 0">
+                <if test="packageId != 0  and packageId !=null">
                     and PACKAGE_ID = #{packageId}
                 </if>
             </if>
@@ -89,10 +89,9 @@
         WHERE ORDER_ID=#{orderId}
     </select>
 
-    <insert id="insertOrder" parameterType="com.majorbank.model.Orders">
-        <selectKey resultType="Long" order="BEFORE" keyProperty="orderId">
-            SELECT _nextval('orderid') FROM DUAL
-        </selectKey>
+    <insert id="insertOrder"
+            useGeneratedKeys="true" keyProperty="orderId" keyColumn="ORDER_ID"
+            parameterType="com.majorbank.model.Orders">
         INSERT INTO ORDERS(
         ORDER_ID,
         USER_ID,
@@ -113,6 +112,9 @@
         #{answerId,jdbcType=NUMERIC},
         #{packageId,jdbcType=NUMERIC}
         )
+        <selectKey keyProperty="orderId" keyColumn="ORDER_ID" resultType="long" order="AFTER">
+            SELECT LAST_INSERT_ID() ;
+        </selectKey>
     </insert>
 
     <update id="updateOrder" parameterType="com.majorbank.model.Orders">
@@ -120,7 +122,7 @@
         ORDERS
         SET
         CHANGE_DATE=NOW()
-        <if test="userId !=0">
+        <if test="userId !=0 and userId !=null">
         ,USER_ID = #{userId,jdbcType=NUMERIC}
         </if>
         <if test="orderType !=null">
@@ -129,13 +131,13 @@
         <if test="orderStatus !=null">
         ,ORDER_STATUS = #{orderStatus,jdbcType=VARCHAR}
         </if>
-        <if test="bankId !=0">
+        <if test="bankId !=0 and bankId !=null">
         ,BANK_ID = #{bankId,jdbcType=NUMERIC}
         </if>
-        <if test="answerId !=0">
+        <if test="answerId !=0 and answerId !=null">
         ,ANSWER_ID = #{answerId,jdbcType=NUMERIC}
         </if>
-        <if test="packageId !=0">
+        <if test="packageId !=0 and packageId !=null">
         ,PACKAGE_ID = #{packageId,jdbcType=NUMERIC}
         </if>
         WHERE ORDER_ID=#{orderId}

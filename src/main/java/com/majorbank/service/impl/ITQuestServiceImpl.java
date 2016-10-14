@@ -2,11 +2,14 @@ package com.majorbank.service.impl;
 
 import com.majorbank.common.CovertCodeUtil;
 import com.majorbank.mapper.ITQuestMapper;
+import com.majorbank.model.BankAnswers;
 import com.majorbank.model.ITQuestion;
 import com.majorbank.model.Options;
 import com.majorbank.service.ITQuestService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,9 +23,22 @@ import java.util.List;
 @Service("itQuestService")
 @Transactional
 public class ITQuestServiceImpl implements ITQuestService {
+    private static final Logger LOG = LoggerFactory.getLogger(ITQuestServiceImpl.class);
     @Autowired
     private ITQuestMapper itQuestMapper;
 
+    @Override
+    public List<BankAnswers> getBankAnswersByUserId(long userId) {
+        return null;
+    }
+
+    @Override
+    public BankAnswers insertAndGetAnswers(BankAnswers bankAnswers) {
+        BankAnswers bankAnswersRtn = new BankAnswers();
+        itQuestMapper.insertBankAnswersAndGetId(bankAnswers);
+        return bankAnswers;
+    }
+    @Override
     public List<ITQuestion> getAllITQuestions(ITQuestion itquestion){
         ITQuestion question;
         List<ITQuestion> itQuestionList =  itQuestMapper.getAllITQuestions(itquestion);
@@ -40,10 +56,12 @@ public class ITQuestServiceImpl implements ITQuestService {
 
         return itQuestionList;
     }
+    @Override
     public void insertITQuestion(ITQuestion itquestion){
         itQuestMapper.insertITQuestion(itquestion);
     }
 
+    @Override
     public ITQuestion getITQuestionById(long questionId){
         ITQuestion question = itQuestMapper.getITQuestionById(questionId);
         List<Options> optionsList = this.parseOptJsonToObject(question);
@@ -67,11 +85,11 @@ public class ITQuestServiceImpl implements ITQuestService {
         }
         return optionsList;
     }
-
+    @Override
     public void updateITQuestion(ITQuestion itquestion){
         itQuestMapper.updateITQuestion(itquestion);
     }
-
+    @Override
     public void deleteITQuestion(long questionId){
         itQuestMapper.deleteITQuestion(questionId);
     }

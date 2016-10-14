@@ -1,5 +1,6 @@
 package com.majorbank.controller;
 
+import com.majorbank.model.BankAnswers;
 import com.majorbank.model.ITQuestion;
 import com.majorbank.model.QuestBank;
 import com.majorbank.service.ITQuestService;
@@ -21,6 +22,19 @@ public class ITQuestController {
 
     @Autowired
     private ITQuestService itQuestService;
+
+    @ResponseBody
+    @RequestMapping(value={"/answers/userId/{userId}"},method = {RequestMethod.GET})
+    public List<BankAnswers> getBankAnswersByUserId(@PathVariable long userId){
+        List<BankAnswers> bankAnswersList = itQuestService.getBankAnswersByUserId(userId);
+        return bankAnswersList;
+    }
+
+    @ResponseBody
+    @RequestMapping(value={"/answers"},method = {RequestMethod.POST})
+    public BankAnswers insertAndGetAnswers(@RequestBody BankAnswers bankAnswers){
+        return itQuestService.insertAndGetAnswers(bankAnswers);
+    }
 
     /**
      * list all ITQuest

@@ -1,5 +1,6 @@
 package com.majorbank.service;
 
+import com.majorbank.model.BankAnswers;
 import com.majorbank.model.ITQuestion;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface ITQuestService {
     ITQuestion getITQuestionById(long questionId);
     void updateITQuestion(ITQuestion itQuestion);
     void deleteITQuestion(long questionId);
+    List<BankAnswers> getBankAnswersByUserId(long userId);
+    BankAnswers insertAndGetAnswers(BankAnswers bankAnswers);
 }

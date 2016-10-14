@@ -37,14 +37,14 @@
         <where>
             <if test="_parameter !=null ">
                 1=1
-                <if test="PACKAGE_ID != 0">
+                <if test="packageId != 0 and packageId !=null">
                     and PACKAGE_ID = #{packageId}
                 </if>
 
-                <if test="PACKAGE_NAME != null">
+                <if test="packageName != null">
                     and PACKAGE_NAME = #{packageName}
                 </if>
-                <if test="JOB_ID != 0">
+                <if test="jobId != 0 and jobId !=null">
                     and JOB_ID = #{jobId}
                 </if>
             </if>

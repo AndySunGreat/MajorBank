@@ -23,8 +23,9 @@ public class OrderServiceImpl implements OrderService {
     public List<Orders> getAllOrders(Orders order){
         return orderMapper.getAllOrders(order);
     }
-    public void insertOrder(Orders order){
+    public Orders insertOrder(Orders order){
         orderMapper.insertOrder(order);
+        return order;
     }
 
     public Orders getOrderById(long orderId){
@@ -32,6 +33,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     public void updateOrder(Orders order){
+
         orderMapper.updateOrder(order);
     }
 

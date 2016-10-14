@@ -1,5 +1,6 @@
 package com.majorbank.mapper;
 
+import com.majorbank.model.BankAnswers;
 import com.majorbank.model.ITQuestion;
 import org.springframework.stereotype.Repository;
 
@@ -15,4 +16,5 @@ public interface ITQuestMapper {
     ITQuestion getITQuestionById(long questionId);
     void updateITQuestion(ITQuestion itQuestion);
     void deleteITQuestion(long questionId);
+    Long insertBankAnswersAndGetId(BankAnswers bankAnswers);
 }

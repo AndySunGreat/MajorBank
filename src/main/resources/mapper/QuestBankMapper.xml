@@ -40,14 +40,14 @@
         <where>
             <if test="_parameter !=null ">
                 1=1
-                <if test="packageId != 0">
+                <if test="packageId != 0 and packageId !=null">
                     and PACKAGE_ID = #{packageId}
                 </if>
 
                 <if test="packageName != null">
                     and PACKAGE_NAME = #{packageName}
                 </if>
-                <if test="jobId != 0">
+                <if test="jobId != 0 and jobId !=null">
                     and JOB_ID = #{jobId}
                 </if>
             </if>
@@ -116,7 +116,7 @@
         <if test="qbType !=null">
         ,QB_TYPE = #{qbType,jdbcType=VARCHAR}
         </if>
-        <if test="version !=null">
+        <if test="VERSION !=null">
         ,VERSION = #{version,jdbcType=VARCHAR}
         </if>
         WHERE BANK_ID=#{bankId,jdbcType=NUMERIC}

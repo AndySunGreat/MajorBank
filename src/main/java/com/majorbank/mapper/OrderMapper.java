@@ -11,8 +11,8 @@ import java.util.List;
 @Repository
 public interface OrderMapper {
     List<Orders> getAllOrders(Orders order);
-    void insertOrder(Orders order);
+    int insertOrder(Orders order);
     Orders getOrderById(long orderId);
-    void updateOrder(Orders order);
-    void deleteOrder(long orderId);
+    int updateOrder(Orders order);
+    int deleteOrder(long orderId);
 }

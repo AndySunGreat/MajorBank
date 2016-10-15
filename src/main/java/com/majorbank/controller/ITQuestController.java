@@ -7,6 +7,8 @@ import com.majorbank.service.ITQuestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -61,10 +63,14 @@ public class ITQuestController {
      * ps: Content-Type要用application/json,Body选raw写入json才可以
      * @return
      */
-    @ResponseBody
-    @RequestMapping(value={"/itquest"},method = {RequestMethod.POST})
-    public void insertITQuest(@RequestBody ITQuestion itquest){
-        itQuestService.insertITQuestion(itquest);
+    @PostMapping("/itquest")
+    public ResponseEntity insertITQuest(@RequestBody ITQuestion itquest){
+        int insertResult = itQuestService.insertITQuestion(itquest);
+        if(insertResult>0){
+            return new ResponseEntity("Insert IT question " + insertResult+" Record successfully!", HttpStatus.OK);
+        }else{
+            return new ResponseEntity("Insert IT question failure!",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
@@ -82,26 +88,33 @@ public class ITQuestController {
      * update ITQuest info
      * @param questionId
      */
-    @ResponseBody
-    @RequestMapping(value={"/itquest/{questionId}"},method = {RequestMethod.PUT})
-    public void updateITQuest(@PathVariable long questionId,
+    @PutMapping("/itquest/{questionId}")
+    public ResponseEntity updateITQuest(@PathVariable long questionId,
                            @RequestBody ITQuestion itQuest){
         if(itQuest.getQuestionId()==0L){
             itQuest.setQuestionId(questionId);
         }
         LOG.debug("itQuest.getQuestionId():"+itQuest.getQuestionId());
-        itQuestService.updateITQuestion(itQuest);
+        int updateResult = itQuestService.updateITQuestion(itQuest);
+        if(updateResult>0){
+            return new ResponseEntity("Update IT question " + updateResult+" Record successfully!", HttpStatus.OK);
+        }else{
+            return new ResponseEntity("Update IT question failure!",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     /***
      * delete ITQuest info
      * @param questionId
      */
-    @ResponseBody
-    @RequestMapping(value={"/itquest/{questionId}"},method = {RequestMethod.DELETE})
-    public void deleteITQuest(@PathVariable long questionId){
-
-        itQuestService.deleteITQuestion(questionId);
+    @DeleteMapping("/itquest/{questionId}")
+    public ResponseEntity deleteITQuest(@PathVariable long questionId){
+        int deleteResult = itQuestService.deleteITQuestion(questionId);
+        if(deleteResult>0){
+            return new ResponseEntity("Delete IT question " + deleteResult+" Record successfully!", HttpStatus.OK);
+        }else{
+            return new ResponseEntity("Delete IT question failure!",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }

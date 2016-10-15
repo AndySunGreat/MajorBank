@@ -24,20 +24,20 @@ public class UserServiceImpl implements UserService {
         return userMapper.getAllUsers(user);
     }
 
-    public void insertUser(User user){
-        userMapper.insertUser(user);
+    public int insertUser(User user){
+        return userMapper.insertUser(user);
     }
 
     public User getUserById(long userId){
         return userMapper.getUserById(userId);
     }
 
-    public void updateUser(User user){
-        userMapper.updateUser(user);
+    public int updateUser(User user){
+        return userMapper.updateUser(user);
     }
 
-    public void deleteUser(long userId){
-        userMapper.deleteUser(userId);
+    public int deleteUser(long userId){
+        return userMapper.deleteUser(userId);
     }
 
     public List<Orders> getAllOrderByUserId(long userId,String orderType){

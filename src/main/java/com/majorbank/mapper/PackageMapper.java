@@ -11,9 +11,9 @@ import java.util.List;
 @Repository
 public interface PackageMapper {
     List<Package> getAllPackages(Package package1);
-    void insertPackage(Package package1);
+    int insertPackage(Package package1);
     Package getPackageById(long packageId);
-    void updatePackage(Package package1);
-    void deletePackage(long packageId);
+    int updatePackage(Package package1);
+    int deletePackage(long packageId);
     List<Package> getAutoPackageByJobId(long jobId);
 }

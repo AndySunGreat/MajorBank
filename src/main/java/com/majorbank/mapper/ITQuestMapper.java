@@ -12,9 +12,9 @@ import java.util.List;
 @Repository
 public interface ITQuestMapper {
     List<ITQuestion> getAllITQuestions(ITQuestion itQuestion);
-    void insertITQuestion(ITQuestion itQuestion);
+    int insertITQuestion(ITQuestion itQuestion);
     ITQuestion getITQuestionById(long questionId);
-    void updateITQuestion(ITQuestion itQuestion);
-    void deleteITQuestion(long questionId);
+    int updateITQuestion(ITQuestion itQuestion);
+    int deleteITQuestion(long questionId);
     Long insertBankAnswersAndGetId(BankAnswers bankAnswers);
 }

@@ -11,16 +11,26 @@ public class BankAnswers {
     private long score;
     private String wrongQuestIds;
     private Date createDate;
+    private long bankId;
 
     public BankAnswers() {
     }
 
-    public BankAnswers(long answerId, long orderId, long score, String wrongQuestIds, Date createDate) {
+    public BankAnswers(long answerId, long orderId, long score, String wrongQuestIds, Date createDate,long bankId) {
         this.answerId = answerId;
         this.orderId = orderId;
         this.score = score;
         this.wrongQuestIds = wrongQuestIds;
         this.createDate = createDate;
+        this.bankId = bankId;
+    }
+
+    public long getBankId() {
+        return bankId;
+    }
+
+    public void setBankId(long bankId) {
+        this.bankId = bankId;
     }
 
     public long getOrderId() {

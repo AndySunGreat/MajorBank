@@ -21,20 +21,20 @@ public class QuestBankServiceImpl implements QuestBankService{
     public List<QuestBank> getAllQuestBanks(QuestBank questbank){
         return questbankMapper.getAllQuestBanks(questbank);
     }
-    public void insertQuestBank(QuestBank questbank){
-        questbankMapper.insertQuestBank(questbank);
+    public int insertQuestBank(QuestBank questbank){
+        return questbankMapper.insertQuestBank(questbank);
     }
 
     public QuestBank getQuestBankById(long bankId){
         return questbankMapper.getQuestBankById(bankId);
     }
 
-    public void updateQuestBank(QuestBank questbank){
-        questbankMapper.updateQuestBank(questbank);
+    public int updateQuestBank(QuestBank questbank){
+        return questbankMapper.updateQuestBank(questbank);
     }
 
-    public void deleteQuestBank(long bankId){
-        questbankMapper.deleteQuestBank(bankId);
+    public int deleteQuestBank(long bankId){
+        return questbankMapper.deleteQuestBank(bankId);
     }
     
 }

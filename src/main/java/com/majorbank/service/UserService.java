@@ -12,10 +12,10 @@ import java.util.List;
 
 public interface UserService {
     List<User> getAllUsers(User user);
-    void insertUser(User user);
+    int insertUser(User user);
     User getUserById(long userId);
-    void updateUser(User user);
-    void deleteUser(long userId);
+    int updateUser(User user);
+    int deleteUser(long userId);
     List<Orders> getAllOrderByUserId(long userId,String orderType);
     Orders getOrderByIds(long userId, long orderId);
 }

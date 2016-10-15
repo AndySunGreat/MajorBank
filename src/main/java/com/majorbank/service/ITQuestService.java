@@ -10,10 +10,10 @@ import java.util.List;
  */
 public interface ITQuestService {
     List<ITQuestion> getAllITQuestions(ITQuestion itQuestion);
-    void insertITQuestion(ITQuestion itQuestion);
+    int insertITQuestion(ITQuestion itQuestion);
     ITQuestion getITQuestionById(long questionId);
-    void updateITQuestion(ITQuestion itQuestion);
-    void deleteITQuestion(long questionId);
+    int updateITQuestion(ITQuestion itQuestion);
+    int deleteITQuestion(long questionId);
     List<BankAnswers> getBankAnswersByUserId(long userId);
     BankAnswers insertAndGetAnswers(BankAnswers bankAnswers);
 }

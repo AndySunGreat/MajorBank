@@ -57,8 +57,9 @@ public class ITQuestServiceImpl implements ITQuestService {
         return itQuestionList;
     }
     @Override
-    public void insertITQuestion(ITQuestion itquestion){
-        itQuestMapper.insertITQuestion(itquestion);
+    public int insertITQuestion(ITQuestion itquestion){
+
+        return itQuestMapper.insertITQuestion(itquestion);
     }
 
     @Override
@@ -86,12 +87,12 @@ public class ITQuestServiceImpl implements ITQuestService {
         return optionsList;
     }
     @Override
-    public void updateITQuestion(ITQuestion itquestion){
-        itQuestMapper.updateITQuestion(itquestion);
+    public int updateITQuestion(ITQuestion itquestion){
+        return itQuestMapper.updateITQuestion(itquestion);
     }
     @Override
-    public void deleteITQuestion(long questionId){
-        itQuestMapper.deleteITQuestion(questionId);
+    public int deleteITQuestion(long questionId){
+      return  itQuestMapper.deleteITQuestion(questionId);
     }
     
 }

@@ -19,6 +19,7 @@
         <result column="SCORE" property="score"/>
         <result column="WRONG_QUEST_IDS" property="wrongQuestIds"/>
         <result column="CREATE_DATE" property="createDate"/>
+        <result column="BANK_ID" property="bankId"/>
     </resultMap>
 
 
@@ -98,8 +99,8 @@
     <insert id="insertBankAnswersAndGetId"
             useGeneratedKeys="true" keyProperty="answerId" keyColumn="ANSWER_ID"
             parameterType="com.majorbank.model.BankAnswers">
-        insert into bank_answers(ORDER_ID,SCORE,WRONG_QUEST_IDS,CREATE_DATE)
-        values(#{orderId},#{score},#{wrongQuestIds},now())
+        insert into bank_answers(ORDER_ID,SCORE,WRONG_QUEST_IDS,CREATE_DATE,BANK_ID)
+        values(#{orderId},#{score},#{wrongQuestIds},now(),#{bankId})
         <selectKey keyProperty="answerId" keyColumn="ANSWER_ID" resultType="long" order="AFTER">
             SELECT LAST_INSERT_ID() ;
         </selectKey>

@@ -9,8 +9,8 @@ import java.util.List;
  */
 public interface QuestBankService {
     List<QuestBank> getAllQuestBanks(QuestBank questBank);
-    void insertQuestBank(QuestBank questBank);
+    int insertQuestBank(QuestBank questBank);
     QuestBank getQuestBankById(long bankId);
-    void updateQuestBank(QuestBank questBank);
-    void deleteQuestBank(long bankId);
+    int updateQuestBank(QuestBank questBank);
+    int deleteQuestBank(long bankId);
 }

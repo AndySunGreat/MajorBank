@@ -5,6 +5,8 @@ import com.majorbank.service.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,7 +42,6 @@ public class OrdersController {
     @ResponseBody
     @RequestMapping(value={"/orders"},method = {RequestMethod.POST})
     public Orders insertOrder(@RequestBody Orders order){
-
         return orderService.insertOrder(order);
     }
 
@@ -58,25 +59,33 @@ public class OrdersController {
     /***
      * update Order info
      */
-    @ResponseBody
-    @RequestMapping(value={"/orders/{orderId}"},method = {RequestMethod.PUT})
-    public void updateOrder(@PathVariable long orderId,
-                            @RequestBody Orders order1){
+    @PutMapping("/orders/{orderId}")
+    public ResponseEntity updateOrder(@PathVariable long orderId,
+                                      @RequestBody Orders order1){
         if(order1.getOrderId()==0L){
             order1.setOrderId(orderId);
         }
         LOG.debug("package.getOrderId():"+order1.getOrderId());
-        orderService.updateOrder(order1);
+        int updateResult = orderService.updateOrder(order1);
+        if(updateResult>0){
+            return new ResponseEntity("{\"msg\":\"Update Order status of " + updateResult+" Record successfully!\"}",HttpStatus.OK);
+        }else{
+            return new ResponseEntity("{\"msg\":\"Update Order status failure!\"}",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     /***
      * delete Order info
      * @param orderId
      */
-    @ResponseBody
-    @RequestMapping(value={"/orders/{orderId}"},method = {RequestMethod.DELETE})
-    public void deleteOrder(@PathVariable long orderId){
-        orderService.deleteOrder(orderId);
+    @DeleteMapping("/orders/{orderId}")
+    public ResponseEntity deleteOrder(@PathVariable long orderId){
+        int deleteResult = orderService.deleteOrder(orderId);
+        if(deleteResult>0){
+            return new ResponseEntity("Delete Order of " + deleteResult+" Record successfully!", HttpStatus.OK);
+        }else{
+            return new ResponseEntity("Delete Order Record failure!",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 

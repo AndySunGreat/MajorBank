@@ -32,13 +32,14 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.getOrderById(orderId);
     }
 
-    public void updateOrder(Orders order){
+    public int updateOrder(Orders order){
 
-        orderMapper.updateOrder(order);
+        int updateRst = orderMapper.updateOrder(order);
+        return updateRst;
     }
 
-    public void deleteOrder(long orderId){
-        orderMapper.deleteOrder(orderId);
+    public int deleteOrder(long orderId){
+        return  orderMapper.deleteOrder(orderId);
     }
     
 }

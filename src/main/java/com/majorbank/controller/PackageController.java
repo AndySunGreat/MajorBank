@@ -43,11 +43,14 @@ public class PackageController {
      * ps: Content-Type要用application/json,Body选raw写入json才可以
      * @return
      */
-    @ResponseBody
-    @RequestMapping(value={"/package"},method = {RequestMethod.POST})
-    public void insertPackage(@RequestBody Package package1){
-
-        packageService.insertPackage(package1);
+    @PostMapping("/package")
+    public ResponseEntity insertPackage(@RequestBody Package package1){
+        int insertResult = packageService.insertPackage(package1);
+        if(insertResult>0){
+            return new ResponseEntity("Insert package " + insertResult+" Record successfully!", HttpStatus.OK);
+        }else{
+            return new ResponseEntity("Insert package failure!",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
@@ -67,24 +70,33 @@ public class PackageController {
      */
     @ResponseBody
     @RequestMapping(value={"/package/{packageId}"},method = {RequestMethod.PUT})
-    public void updatePackage(@PathVariable long packageId,
+    public ResponseEntity updatePackage(@PathVariable long packageId,
                            @RequestBody Package package1){
         if(package1.getPackageId()==0L){
             package1.setPackageId(packageId);
         }
         LOG.debug("package.getPackageId():"+package1.getPackageId());
-        packageService.updatePackage(package1);
+        int updateResult = packageService.updatePackage(package1);
+        if(updateResult>0){
+            return new ResponseEntity("Update package " + updateResult+" Record successfully!", HttpStatus.OK);
+        }else{
+            return new ResponseEntity("Update package failure!",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     /***
      * delete Package info[tested]
      * @param packageId
      */
-    @ResponseBody
-    @RequestMapping(value={"/package/{packageId}"},method = {RequestMethod.DELETE})
-    public void deletePackage(@PathVariable long packageId){
+    @DeleteMapping("/package/{packageId}")
+    public ResponseEntity deletePackage(@PathVariable long packageId){
 
-        packageService.deletePackage(packageId);
+        int deleteResult = packageService.deletePackage(packageId);
+        if(deleteResult>0){
+            return new ResponseEntity("Delete Package " + deleteResult+" Record successfully!", HttpStatus.OK);
+        }else{
+            return new ResponseEntity("Delete Package failure!",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**

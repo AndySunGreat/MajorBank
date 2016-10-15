@@ -27,20 +27,20 @@ public class PackageServiceImpl implements PackageService{
         LOG.info("a:" + a);
         return packageMapper.getAllPackages(package1);
     }
-    public void insertPackage(Package package1){
-        packageMapper.insertPackage(package1);
+    public int insertPackage(Package package1){
+        return packageMapper.insertPackage(package1);
     }
 
     public Package getPackageById(long packageId){
         return packageMapper.getPackageById(packageId);
     }
 
-    public void updatePackage(Package package1){
-        packageMapper.updatePackage(package1);
+    public int updatePackage(Package package1){
+        return packageMapper.updatePackage(package1);
     }
 
-    public void deletePackage(long packageId){
-        packageMapper.deletePackage(packageId);
+    public int deletePackage(long packageId){
+        return packageMapper.deletePackage(packageId);
     }
 
     public List<Package> getAutoPackageByJobId(long jobId){

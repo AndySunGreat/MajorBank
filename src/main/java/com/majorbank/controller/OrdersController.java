@@ -2,6 +2,7 @@ package com.majorbank.controller;
 
 import com.majorbank.model.Orders;
 import com.majorbank.service.OrderService;
+import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,12 +66,20 @@ public class OrdersController {
         if(order1.getOrderId()==0L){
             order1.setOrderId(orderId);
         }
+        JSONObject jsonObject = new JSONObject();
         LOG.debug("package.getOrderId():"+order1.getOrderId());
         int updateResult = orderService.updateOrder(order1);
         if(updateResult>0){
-            return new ResponseEntity("{\"msg\":\"Update Order status of " + updateResult+" Record successfully!\"}",HttpStatus.OK);
+            jsonObject.put("orderId",orderId);
+            jsonObject.put("answerId",order1.getAnswerId());
+            jsonObject.put("msg","Update Order status of"+ updateResult+" Record successfully!");
+            return  new ResponseEntity(jsonObject,HttpStatus.OK);
+            //return new ResponseEntity("{\"orderId\":\""+orderId+"\"," +
+             //       "{\"answerId\":\""+order1.getAnswerId()+"\"," +
+              //      "\"msg\":\"Update Order status of " + updateResult+" Record successfully!\"}",HttpStatus.OK);
         }else{
-            return new ResponseEntity("{\"msg\":\"Update Order status failure!\"}",HttpStatus.INTERNAL_SERVER_ERROR);
+            jsonObject.put("msg","Update Order status failure!");
+            return new ResponseEntity(jsonObject,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

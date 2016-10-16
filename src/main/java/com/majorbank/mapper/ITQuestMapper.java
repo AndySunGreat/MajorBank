@@ -17,4 +17,6 @@ public interface ITQuestMapper {
     int updateITQuestion(ITQuestion itQuestion);
     int deleteITQuestion(long questionId);
     Long insertBankAnswersAndGetId(BankAnswers bankAnswers);
+    BankAnswers getBankAnswersById(long answerId);
+    List<BankAnswers> getAllBankAnswers(BankAnswers bankAnswers);
 }

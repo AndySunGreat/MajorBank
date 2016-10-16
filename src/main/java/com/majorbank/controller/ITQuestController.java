@@ -2,8 +2,11 @@ package com.majorbank.controller;
 
 import com.majorbank.model.BankAnswers;
 import com.majorbank.model.ITQuestion;
+import com.majorbank.model.Orders;
 import com.majorbank.model.QuestBank;
 import com.majorbank.service.ITQuestService;
+import com.majorbank.service.OrderService;
+import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,17 @@ public class ITQuestController {
 
     @Autowired
     private ITQuestService itQuestService;
+
+    @Autowired
+    private OrderService orderService;
+
+
+    @ResponseBody
+    @RequestMapping(value={"/answers/{answerId}"},method = {RequestMethod.GET})
+    public BankAnswers getBankAnswersById(@PathVariable long answerId){
+        BankAnswers bankAnswers = itQuestService.getBankAnswersById(answerId);
+        return bankAnswers;
+    }
 
     @ResponseBody
     @RequestMapping(value={"/answers/userId/{userId}"},method = {RequestMethod.GET})

@@ -12,7 +12,7 @@
     private String wrongQuestIds;
     private Date createDate;
     -->
-    <resultMap id="bankAnswers"
+    <resultMap id="bankAnswersMap"
                type="com.majorbank.model.BankAnswers">
         <result column="ANSWER_ID" property="answerId"/>
         <result column="ORDER_ID" property="orderId"/>
@@ -69,6 +69,8 @@
         <include refid="questionFilterWhereClause" />
     </select>
 
+
+
     <!-- find user by id -->
     <select id="getITQuestionById" resultMap="itQuestRstMap" parameterType="long">
         SELECT
@@ -83,18 +85,54 @@
         WHERE QUESTION_ID=#{questionId}
     </select>
 
-    <!--
-    <resultMap id="bankAnswers"
-               type="com.majorbank.model.BankAnswers">
-        <result column="ANSWER_ID" property="answerId"/>
-        <result column="BANK_ID" property="bankId"/>
-        <result column="SCORE" property="score"/>
-        <result column="UER_ID" property="userId"/>
-        <result column="WRONG_QUEST_IDS" property="wrongQuestIds"/>
-        <result column="CREATE_DATE" property="createDate"/>
-    </resultMap>
-    -->
+    <!-- find user by id -->
+    <select id="getBankAnswersById" resultMap="bankAnswersMap" parameterType="long">
+        SELECT
+        ANSWER_ID,
+        ORDER_ID,
+        SCORE,
+        WRONG_QUEST_IDS,
+        CREATE_DATE,
+        BANK_ID
+        FROM BANK_ANSWERS
+        WHERE ANSWER_ID=#{answerId}
+    </select>
+    <!-- get all users record -->
+    <sql id="selectBankAnswers">
+        SELECT
+        ANSWER_ID,
+        BANK_ID,
+        SCORE,
+        USER_ID,
+        WRONG_QUEST_IDS,
+        CREATE_DATE
+        FROM BANK_ANSWERS
+    </sql>
+    <sql id="answersFilterWhereClause">
+        <where>
+            <if test="_parameter !=null ">
+                1=1
+                <if test="questionId != 0">
+                    and ANSWER_ID = #{answerId}
+                </if>
 
+                <if test="bankId != 0">
+                    and BANK_ID = #{bankId}
+                </if>
+                <if test="questType != null">
+                    and SCORE = #{score}
+                </if>
+                <if test="questType != null">
+                    and USER_ID = #{userId}
+                </if>
+            </if>
+        </where>
+    </sql>
+    <select id="getAllBankAnswers" resultMap="bankAnswersMap"
+            parameterType="com.majorbank.model.BankAnswers">
+        <include refid="selectBankAnswers" />
+        <include refid="answersFilterWhereClause" />
+    </select>
 
     <insert id="insertBankAnswersAndGetId"
             useGeneratedKeys="true" keyProperty="answerId" keyColumn="ANSWER_ID"

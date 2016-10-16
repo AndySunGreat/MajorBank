@@ -33,6 +33,13 @@ public class ITQuestServiceImpl implements ITQuestService {
     }
 
     @Override
+    public BankAnswers getBankAnswersById(long answerId){
+        BankAnswers bankAnswers = itQuestMapper.getBankAnswersById(answerId);
+        return bankAnswers;
+    }
+
+
+    @Override
     public BankAnswers insertAndGetAnswers(BankAnswers bankAnswers) {
         BankAnswers bankAnswersRtn = new BankAnswers();
         itQuestMapper.insertBankAnswersAndGetId(bankAnswers);

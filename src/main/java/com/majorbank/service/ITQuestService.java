@@ -16,4 +16,6 @@ public interface ITQuestService {
     int deleteITQuestion(long questionId);
     List<BankAnswers> getBankAnswersByUserId(long userId);
     BankAnswers insertAndGetAnswers(BankAnswers bankAnswers);
+
+    BankAnswers getBankAnswersById(long answerId);
 }

@@ -71,6 +71,15 @@ public class ITQuestController {
         List<ITQuestion> itquestList = itQuestService.getAllITQuestions(itquest);
         return itquestList;
     }
+    @ResponseBody
+    @RequestMapping(value={"/itquest"},method = {RequestMethod.GET})
+    public List<ITQuestion> getITQuestsByQuestionIds(@RequestParam("questionIds") String questionIds){
+        ITQuestion itquest = new ITQuestion();
+        String[] questionArray = questionIds.split(",");
+        itquest.setQuestionIds(questionArray);
+        List<ITQuestion> itquestList = itQuestService.getAllITQuestions(itquest);
+        return itquestList;
+    }
 
     /**
      * create one ITQuest

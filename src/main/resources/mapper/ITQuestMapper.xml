@@ -53,7 +53,12 @@
                 <if test="questionId != 0">
                     and QUESTION_ID = #{questionId}
                 </if>
-
+                <if test="questionIds !=null">
+                    and QUESTION_ID in
+                    <foreach item="item" index="index" collection="questionIds" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                </if>
                 <if test="bankId != 0">
                     and BANK_ID = #{bankId}
                 </if>

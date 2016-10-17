@@ -21,6 +21,7 @@ public class    ITQuestion implements Serializable {
     private String correctAnswer; // 正确答案
     private Date changeDate;
     private String correctIndexes; // 正确答案序列号
+    private String[] questionIds;
 
     public ITQuestion() {
     }
@@ -50,6 +51,30 @@ public class    ITQuestion implements Serializable {
         this.correctAnswer = correctAnswer;
         this.changeDate = changeDate;
         this.correctIndexes = correctIndexes;
+    }
+
+    public ITQuestion(long questionId, long bankId, String questContent,
+                      String questType, String questOptionsJson,
+                      List<Options> questOptions, String correctAnswer,
+                      Date changeDate, String correctIndexes, String[] questionIds) {
+        this.questionId = questionId;
+        this.bankId = bankId;
+        this.questContent = questContent;
+        this.questType = questType;
+        this.questOptionsJson = questOptionsJson;
+        this.questOptions = questOptions;
+        this.correctAnswer = correctAnswer;
+        this.changeDate = changeDate;
+        this.correctIndexes = correctIndexes;
+        this.questionIds = questionIds;
+    }
+
+    public String[] getQuestionIds() {
+        return questionIds;
+    }
+
+    public void setQuestionIds(String[] questionIds) {
+        this.questionIds = questionIds;
     }
 
     public String getCorrectIndexes() {

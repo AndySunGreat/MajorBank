@@ -108,8 +108,8 @@
         #{orderType,jdbcType=VARCHAR},
         #{orderStatus,jdbcType=VARCHAR},
         NOW(),
-        #{bankId,jdbcType=NUMERIC},
-        #{answerId,jdbcType=NUMERIC},
+        #{bankId,jdbcType=VARCHAR},
+        #{answerId,jdbcType=VARCHAR},
         #{packageId,jdbcType=NUMERIC}
         )
         <selectKey keyProperty="orderId" keyColumn="ORDER_ID" resultType="long" order="AFTER">
@@ -131,11 +131,11 @@
         <if test="orderStatus !=null">
         ,ORDER_STATUS = #{orderStatus,jdbcType=VARCHAR}
         </if>
-        <if test="bankId !=0 and bankId !=null">
-        ,BANK_ID = #{bankId,jdbcType=NUMERIC}
+        <if test="bankId !=null">
+        ,BANK_ID = #{bankId,jdbcType=VARCHAR}
         </if>
-        <if test="answerId !=0 and answerId !=null">
-        ,ANSWER_ID = #{answerId,jdbcType=NUMERIC}
+        <if test="answerId !=null">
+        ,ANSWER_ID = #{answerId,jdbcType=VARCHAR}
         </if>
         <if test="packageId !=0 and packageId !=null">
         ,PACKAGE_ID = #{packageId,jdbcType=NUMERIC}

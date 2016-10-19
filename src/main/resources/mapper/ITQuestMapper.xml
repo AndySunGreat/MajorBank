@@ -124,10 +124,10 @@
                 <if test="bankId != 0">
                     and BANK_ID = #{bankId}
                 </if>
-                <if test="questType != null">
+                <if test="SCORE != null">
                     and SCORE = #{score}
                 </if>
-                <if test="questType != null">
+                <if test="userId != null">
                     and USER_ID = #{userId}
                 </if>
             </if>

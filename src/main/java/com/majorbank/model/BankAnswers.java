@@ -8,7 +8,7 @@ import java.util.Date;
 public class BankAnswers {
     private long answerId;
     private long orderId;
-    private long score;
+    private float score;
     private String wrongQuestIds;
     private Date createDate;
     private long bankId;
@@ -16,7 +16,7 @@ public class BankAnswers {
     public BankAnswers() {
     }
 
-    public BankAnswers(long answerId, long orderId, long score, String wrongQuestIds, Date createDate,long bankId) {
+    public BankAnswers(long answerId, long orderId, float score, String wrongQuestIds, Date createDate,long bankId) {
         this.answerId = answerId;
         this.orderId = orderId;
         this.score = score;
@@ -49,11 +49,11 @@ public class BankAnswers {
         this.answerId = answerId;
     }
 
-    public long getScore() {
+    public float getScore() {
         return score;
     }
 
-    public void setScore(long score) {
+    public void setScore(float score) {
         this.score = score;
     }
 

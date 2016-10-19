@@ -72,7 +72,8 @@ public class OrdersController {
         if(updateResult>0){
             jsonObject.put("orderId",orderId);
             jsonObject.put("answerId",order1.getAnswerId());
-            jsonObject.put("msg","Update Order status of"+ updateResult+" Record successfully!");
+            jsonObject.put("orderStatus",order1.getOrderStatus());
+            jsonObject.put("msg","Update Order status of "+ updateResult+" Record successfully!");
             return  new ResponseEntity(jsonObject,HttpStatus.OK);
             //return new ResponseEntity("{\"orderId\":\""+orderId+"\"," +
              //       "{\"answerId\":\""+order1.getAnswerId()+"\"," +

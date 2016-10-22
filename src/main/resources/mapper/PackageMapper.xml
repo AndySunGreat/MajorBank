@@ -31,7 +31,7 @@
         BANK_IDS_JSON,
         CREATE_DATE,
         CHANGE_DATE
-        FROM PACKAGE
+        FROM PACKAGES
     </sql>
     <sql id="packageFilterWhereClause">
         <where>
@@ -65,7 +65,7 @@
         BANK_IDS_JSON,
         CREATE_DATE,
         CHANGE_DATE
-        FROM PACKAGE
+        FROM PACKAGES
         WHERE PACKAGE_ID=#{packageId}
     </select>
 
@@ -77,7 +77,7 @@
         BANK_IDS_JSON,
         CREATE_DATE,
         CHANGE_DATE
-        FROM PACKAGE
+        FROM PACKAGES
         WHERE JOB_ID=#{jobId,jdbcType=NUMERIC}
     </select>
 
@@ -85,7 +85,7 @@
         <selectKey resultType="Long" order="BEFORE" keyProperty="packageId">
             SELECT _nextval('packageid') FROM DUAL
         </selectKey>
-        INSERT INTO PACKAGE(
+        INSERT INTO PACKAGES(
         PACKAGE_ID,
         PACKAGE_NAME,
         JOB_ID,
@@ -105,7 +105,7 @@
 
     <update id="updatePackage" parameterType="com.majorbank.model.Package">
         UPDATE
-        PACKAGE
+        PACKAGES
         SET
         CHANGE_DATE=NOW()
         <if test="packageName !=null">
@@ -122,7 +122,7 @@
 
     <delete id="deletePackage"  parameterType="long">
         DELETE
-        FROM PACKAGE
+        FROM PACKAGES
         WHERE PACKAGE_ID=#{packageId,jdbcType=NUMERIC}
     </delete>
 

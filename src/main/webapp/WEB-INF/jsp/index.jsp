@@ -1,5 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
+<%
+  String path = request.getContextPath();
+  String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+  System.out.print("basePath:"+basePath);
+%>
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
@@ -11,21 +16,28 @@
   <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.js"></script>
+  <script src="<%=basePath %>common/angular/angular-ui-router.js"></script>
+  <script src="<%=basePath %>common/angular/angular-resource.min.js"></script>
+  <script src="<%=basePath %>js/package/packages.js"></script>
+  <script src="<%=basePath %>js/package/states/packages-state-controller.js"></script>
+  <script src="<%=basePath %>js/home/home.js"></script>
+  <script src="<%=basePath %>js/app.js"></script>
+
   <![endif]-->
 </head>
-<body>
-
+<body ng-app="myApp">
 <nav class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">[后台管理系统]</a>
+      <a class="navbar-brand" ui-sref="home">[BMS]</a>
     </div>
     <div>
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">套餐管理</a></li>
+        <li class="active"><a ui-sref="PackagesMgt">套餐管理</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            IT题库管理
+          <a ui-sref="BanksMgt" class="dropdown-toggle" data-toggle="dropdown">
+            题库管理
             <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
@@ -53,10 +65,18 @@
     </div>
   </div>
 </nav>
+<div>
+  <div class="container" ui-view=""/>
+</div>
+<%--<div>
+ <div>
+    <span style="width:100px" ui-sref="Page1"><a href="">Page-1</a></span>
+    <span style="width:100px" ui-sref="Page2"><a href="">Page-2</a></span>
+    <span style="width:100px" ui-sref="Page3"><a href="">Page-3</a></span>
+  </div>
 
-<h1>Hello : ${name}</h1>
-<h1>这里是SpringMVC Demo首页</h1>
+</div>--%>
 
-<h3>出现此页面，说明配置成功。</h3>
+
 </body>
 </html>

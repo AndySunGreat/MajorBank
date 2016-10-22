@@ -18,6 +18,8 @@
     <slf4j.version>1.7.7</slf4j.version>
     <log4j.version>1.2.17</log4j.version>
     <jackson.version>2.8.3</jackson.version>
+    <!-- freemarker模板包版本 -->
+    <freemarker.version>2.3.23</freemarker.version>
   </properties>
 
   <dependencies>
@@ -259,7 +261,12 @@
       <artifactId>commons-collections</artifactId>
       <version>3.2.2</version>
     </dependency>
-
+    <!-- freemarker依赖 -->
+    <dependency>
+      <groupId>org.freemarker</groupId>
+      <artifactId>freemarker</artifactId>
+      <version>${freemarker.version}</version>
+    </dependency>
     <!-- JSON Object END -->
 
   </dependencies>

@@ -6,6 +6,7 @@ import com.majorbank.model.Package;
 import com.majorbank.model.QuestBank;
 import com.majorbank.service.PackageService;
 import com.majorbank.service.PackageService;
+import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,10 +47,13 @@ public class PackageController {
     @PostMapping("/package")
     public ResponseEntity insertPackage(@RequestBody Package package1){
         int insertResult = packageService.insertPackage(package1);
+        JSONObject jsonObject = new JSONObject();
         if(insertResult>0){
-            return new ResponseEntity("Insert package " + insertResult+" Record successfully!", HttpStatus.OK);
+            jsonObject.put("msg","Insert package " + insertResult+" Record successfully!");
+            return new ResponseEntity(jsonObject, HttpStatus.OK);
         }else{
-            return new ResponseEntity("Insert package failure!",HttpStatus.INTERNAL_SERVER_ERROR);
+            jsonObject.put("msg","Insert package failure!");
+            return new ResponseEntity(jsonObject,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -77,10 +81,13 @@ public class PackageController {
         }
         LOG.debug("package.getPackageId():"+package1.getPackageId());
         int updateResult = packageService.updatePackage(package1);
+        JSONObject jsonObject = new JSONObject();
         if(updateResult>0){
-            return new ResponseEntity("Update package " + updateResult+" Record successfully!", HttpStatus.OK);
+            jsonObject.put("msg","Update package " + updateResult+" Record successfully!");
+            return new ResponseEntity(jsonObject, HttpStatus.OK);
         }else{
-            return new ResponseEntity("Update package failure!",HttpStatus.INTERNAL_SERVER_ERROR);
+            jsonObject.put("msg","Update package failure!");
+            return new ResponseEntity(jsonObject,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -92,10 +99,14 @@ public class PackageController {
     public ResponseEntity deletePackage(@PathVariable long packageId){
 
         int deleteResult = packageService.deletePackage(packageId);
+        JSONObject jsonObject = new JSONObject();
+
         if(deleteResult>0){
-            return new ResponseEntity("Delete Package " + deleteResult+" Record successfully!", HttpStatus.OK);
+            jsonObject.put("msg","Delete Package " + deleteResult+" Record successfully!");
+            return new ResponseEntity(jsonObject,HttpStatus.OK);
         }else{
-            return new ResponseEntity("Delete Package failure!",HttpStatus.INTERNAL_SERVER_ERROR);
+            jsonObject.put("msg","Delete Package failure!");
+            return new ResponseEntity(jsonObject,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

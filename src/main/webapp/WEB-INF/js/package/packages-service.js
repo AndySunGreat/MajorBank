@@ -17,6 +17,10 @@ angular.module('bms-packages-service',['ngResource'])
                         getPackageDetail:{
                             url:baseUrl + "login/package/:packageId",
                             method: 'GET'
+                        },
+                        deletePackage:{
+                            url:baseUrl + "login/package/:packageId",
+                            method:'DELETE'
                         }
                     })
             };

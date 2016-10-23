@@ -17,8 +17,11 @@
   <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.js"></script>
+  <script src="<%=basePath %>common/angular/ui-bootstrap-tpls-2.2.0.min.js"></script>
   <script src="<%=basePath %>common/angular/angular-ui-router.js"></script>
   <script src="<%=basePath %>common/angular/angular-resource.min.js"></script>
+  <script src="<%=basePath %>common/angular/angular-animate.js"></script>
+  <script src="<%=basePath %>js/package/states/packages-state-update-controller.js"></script>
   <script src="<%=basePath %>js/package/states/packages-state-detail-controller.js"></script>
   <script src="<%=basePath %>js/package/states/packages-state-controller.js"></script>
   <script src="<%=basePath %>js/package/states/packages-states.js"></script>
@@ -71,8 +74,7 @@
 </nav>
 <div>
   <div class="container">
-    <div ui-view></div><!-- packages.ftl/banks.ftl plugs in here --><%--
-    <div ui-view="datalist"></div>--%>
+    <div ui-view></div>
   </div>
 </div>
 </body>

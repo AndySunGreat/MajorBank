@@ -27,13 +27,9 @@ angular.module('bms-packages-state-config', [])
                             packageDetail:['$stateParams','bmsPackagesService',
                                 function($stateParams,bmsPackagesService){
                                     console.log("$stateParams.packageId:"+$stateParams.packageId);
-                                    var test = bmsPackagesService.Packages.getPackageDetail(
-                                        {packageId : $stateParams.packageId},
-                                        function(){
-                                            console.log(test);
-                                        }
-                                    );
-                                    return test;
+                                    return  bmsPackagesService.Packages.getPackageDetail(
+                                        {packageId : $stateParams.packageId}
+                                    ).$promise;
                                 }
                             ]
                         },

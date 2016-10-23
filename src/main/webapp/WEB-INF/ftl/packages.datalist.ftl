@@ -13,15 +13,15 @@
                    </tr>
                </thead>
                <tbody>
-                    <tr ng-repeat="package in packages" ng-click="retrieveDetail(package.packageId)">
-                        <td style="width:150px;padding:5px;">{{package.packageId}}</td>
-                        <td style="width:150px;padding:5px;">{{package.packageName}}</td>
-                        <td style="width:150px;padding:5px;">{{package.jobId}}</td>
-                        <td style="width:150px;padding:5px;">{{package.bankIdsJson}}</td>
-                        <td style="width:150px;padding:5px;">{{package.createDate}}</td>
-                        <td style="width:150px;padding:5px;">{{package.changeDate}}</td>
+                    <tr ng-repeat="package in packages"   >
+                        <td style="width:150px;padding:5px;" ng-click="retrieveDetail($event,package.packageId)">{{package.packageId}}</td>
+                        <td style="width:150px;padding:5px;" ng-click="retrieveDetail($event,package.packageId)">{{package.packageName}}</td>
+                        <td style="width:150px;padding:5px;" ng-click="retrieveDetail($event,package.packageId)">{{package.jobId}}</td>
+                        <td style="width:150px;padding:5px;" ng-click="retrieveDetail($event,package.packageId)">{{package.bankIdsJson}}</td>
+                        <td style="width:150px;padding:5px;" ng-click="retrieveDetail($event,package.packageId)">{{package.createDate}}</td>
+                        <td style="width:150px;padding:5px;" ng-click="retrieveDetail($event,package.packageId)">{{package.changeDate}}</td>
                         <td style="width:150px;padding:5px;">
-                            <button id="editBtn" class="btn btn-small btn-primary" ng-click="editPackage(package.packageId)">Edit</button>
+                            <button id="editBtn" class="btn btn-small btn-primary" data-target="#myModal" ng-click="editPackage(package.packageId)">Edit</button>
                             <button id="deleteBtn" class="btn btn-small btn-danger" ng-click="deletePackage(package.packageId)">Delete</button>
                         </td>
 

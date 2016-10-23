@@ -1,9 +1,9 @@
 /**
  * Created by AndySun on 2016/10/20.
  */
-angular.module('bms-packages',['bms-packages-controller'])
+angular.module('bms-packages',['bms-packages-service','bms-packages-states'])
     .controller('bmsPackages',function($scope,$http,$q,$state){
-        var deferred = $q.defer();
+/*        var deferred = $q.defer();
         $scope.load = function(){
 
             $http.get('http://localhost:8081/MajorBank/api/login/package/').then(function(response){
@@ -25,5 +25,5 @@ angular.module('bms-packages',['bms-packages-controller'])
                 },function(error){
                     console.log(error);
                 });
-        }
+        }*/
     });

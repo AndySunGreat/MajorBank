@@ -14,11 +14,6 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl:"jsp/index.jsp",
             controller:"bmsMainPageController"
         })
-        .state("PackagesMgt",{
-            url:"/PackagesMgt",
-            templateUrl: "ftl/PackagesMgt.ftl",
-            controller: "bmsPackages"
-        })
         .state("BanksMgt",{
             url:"/BanksMgt",
             templateUrl: "ftl/BanksMgt.ftl",

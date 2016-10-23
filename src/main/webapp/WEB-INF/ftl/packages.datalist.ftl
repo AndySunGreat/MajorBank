@@ -13,7 +13,7 @@
                    </tr>
                </thead>
                <tbody>
-                    <tr ng-repeat="package in packages">
+                    <tr ng-repeat="package in packages" ng-click="retrieveDetail(package.packageId)">
                         <td style="width:150px;padding:5px;">{{package.packageId}}</td>
                         <td style="width:150px;padding:5px;">{{package.packageName}}</td>
                         <td style="width:150px;padding:5px;">{{package.jobId}}</td>
@@ -30,3 +30,4 @@
            </table>
     </div>
 </div>
+<div ui-view="detail"></div>

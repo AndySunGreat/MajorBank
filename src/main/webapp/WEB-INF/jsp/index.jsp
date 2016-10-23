@@ -19,8 +19,12 @@
   <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.js"></script>
   <script src="<%=basePath %>common/angular/angular-ui-router.js"></script>
   <script src="<%=basePath %>common/angular/angular-resource.min.js"></script>
-  <script src="<%=basePath %>js/package/packages.js"></script>
+  <script src="<%=basePath %>js/package/states/packages-state-detail-controller.js"></script>
   <script src="<%=basePath %>js/package/states/packages-state-controller.js"></script>
+  <script src="<%=basePath %>js/package/states/packages-states.js"></script>
+  <script src="<%=basePath %>js/package/packages-state-config.js"></script>
+  <script src="<%=basePath %>js/package/packages-service.js"></script>
+  <script src="<%=basePath %>js/package/packages.js"></script>
   <script src="<%=basePath %>js/home/home.js"></script>
   <script src="<%=basePath %>js/app.js"></script>
 
@@ -34,7 +38,7 @@
     </div>
     <div>
       <ul class="nav navbar-nav">
-        <li class="active"><a ui-sref="PackagesMgt">套餐管理</a></li>
+        <li class="active"><a ui-sref="packages">套餐管理</a></li>
         <li class="dropdown">
           <a ui-sref="BanksMgt" class="dropdown-toggle" data-toggle="dropdown">
             题库管理
@@ -66,17 +70,10 @@
   </div>
 </nav>
 <div>
-  <div class="container" ui-view=""/>
-</div>
-<%--<div>
- <div>
-    <span style="width:100px" ui-sref="Page1"><a href="">Page-1</a></span>
-    <span style="width:100px" ui-sref="Page2"><a href="">Page-2</a></span>
-    <span style="width:100px" ui-sref="Page3"><a href="">Page-3</a></span>
+  <div class="container">
+    <div ui-view></div><!-- packages.ftl/banks.ftl plugs in here --><%--
+    <div ui-view="datalist"></div>--%>
   </div>
-
-</div>--%>
-
-
+</div>
 </body>
 </html>

@@ -4,9 +4,29 @@
 angular.module('bms-packages-state-controller',['ui.bootstrap'])
     .controller('bmsPackagesStateController',
         function($scope,$uibModal,$q,$state,bmsPackagesService,$log){
-            $scope.items = ['item1', 'item2', 'item3'];
 
-       console.log($uibModal);
+
+        var emptyFilterForm = {
+            packageId: null,
+            packageName:null,
+            jobId:null,
+            bankIdsJson:null
+        };
+
+            $scope.queryForm = function(){
+                console.log("queryForm");
+                console.log($scope.searchFilter);
+                var searchResult = bmsPackagesService.Packages.query($scope.searchFilter);
+                //$state.go('packages', {searchResult : searchResult });
+                console.log(searchResult);
+                $scope.packages = searchResult;
+            };
+
+            $scope.resetForm = function(){
+
+            };
+
+        console.log($uibModal);
         console.log("bmsPackagesStateController");
         console.log($scope.packagedetail);
         var deferred = $q.defer();
@@ -16,7 +36,30 @@ angular.module('bms-packages-state-controller',['ui.bootstrap'])
                 $scope.packages = entry;
             });
 
-        }
+        };
+
+        $scope.createPackage = function(){
+            var modalInstance;
+            modalInstance = $uibModal.open({
+                size:'lg',
+                backdrop : false,
+                templateUrl: 'ftl/packages.modal.ftl',
+                resolve: {
+                    packageDetail: angular.copy(emptyFilterForm)
+                },
+                controller: 'bmsPackagesStateAddController'
+            });
+            modalInstance.opened.then(function() {// 模态窗口打开之后执行的函数
+                console.log('modal is opened');
+            });
+            modalInstance.result.then(function (result) {
+                $state.reload();
+            },function(){
+                console.log("modal failure!");
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
         $scope.editPackage = function(packageId){
             console.log("packageId:"+packageId);
             var modalInstance;
@@ -34,14 +77,13 @@ angular.module('bms-packages-state-controller',['ui.bootstrap'])
                     ]
                 },
                 controller: 'bmsPackagesStateUpdateController'
+
             });
             modalInstance.opened.then(function() {// 模态窗口打开之后执行的函数
                 console.log('modal is opened');
             });
-            modalInstance.result.then(function(selectedItem){
-                console.log("modal success!");
-                console.log(selectedItem);
-                $scope.selected = selectedItem;
+            modalInstance.result.then(function (result) {
+                $state.reload();
             },function(){
                 console.log("modal failure!");
                 $log.info('Modal dismissed at: ' + new Date());

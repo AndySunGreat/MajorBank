@@ -21,6 +21,7 @@
   <script src="<%=basePath %>common/angular/angular-ui-router.js"></script>
   <script src="<%=basePath %>common/angular/angular-resource.min.js"></script>
   <script src="<%=basePath %>common/angular/angular-animate.js"></script>
+  <script src="<%=basePath %>js/package/states/packages-state-add-controller.js"></script>
   <script src="<%=basePath %>js/package/states/packages-state-update-controller.js"></script>
   <script src="<%=basePath %>js/package/states/packages-state-detail-controller.js"></script>
   <script src="<%=basePath %>js/package/states/packages-state-controller.js"></script>

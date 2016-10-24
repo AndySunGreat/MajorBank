@@ -4,11 +4,37 @@
             <label for="pkgInputPackageId">套餐编号</label>
             <input type="text" class="form-control"
                    id="pkgInputPackageId"
-                   aria-describedby="packageIdHelp"
-                   placeholder="Enter package ID">
-            <small id="packageIdHelp"
-                   class="form-text text-muted">
-                We'll never share your id with anyone else.</small>
+                   placeholder="Enter package ID"
+                    style="width:200px;"  ng-modal="searchFilter.packageId"
+            >
+        </div>
+        <div class="form-group">
+            <label for="pkgInputPackageName">套餐名称</label>
+            <input type="text" class="form-control"
+                   id="pkgInputPackageName"
+                   placeholder="Enter package Name"
+                   style="width:200px;"  ng-modal="searchFilter.packageName"
+            >
+        </div>
+        <div class="form-group">
+            <label for="pkgInputJobId">职业编号</label>
+            <input type="text" class="form-control"
+                   id="pkgInputJobId"
+                   placeholder="Enter Job Id"
+                   style="width:200px;" ng-modal="searchFilter.jobId"
+            >
+        </div>
+        <div class="form-group">
+            <label for="pkgInputBankIds">题库编号</label>
+            <input type="text" class="form-control"
+                   id="pkgInputBankIds"
+                   placeholder="Enter Bank Ids"
+                   style="width:200px;" ng-modal="searchFilter.bankIdsJson"
+            >
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn btn-default" ng-click="queryForm()">查询</button>
+            <button type="button" class="btn btn-default" ng-click="resetForm()">重置</button>
         </div>
     </form>
 </div>

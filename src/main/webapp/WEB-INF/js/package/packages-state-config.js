@@ -6,7 +6,7 @@ angular.module('bms-packages-state-config', [])
                 views:{
                       '':{
                           templateUrl: "ftl/packages.ftl",
-                          controller:"bmsPackages"
+                          controller:"bmsPackagesStateController"
                       },
 /*                      "datalist":{  // 显示到index.jsp中<div ui-view="datalist">
                           templateUrl:"ftl/packages.datalist.ftl",

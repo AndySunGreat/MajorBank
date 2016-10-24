@@ -29,5 +29,7 @@
                </tbody>
            </table>
     </div>
+    <button id="createBtn" class="btn btn-small btn-success"
+            data-target="#myModal" ng-click="createPackage()">Create Package</button>
 </div>
 <div ui-view="detail"></div>

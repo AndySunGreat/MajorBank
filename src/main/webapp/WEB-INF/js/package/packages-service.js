@@ -11,7 +11,7 @@ angular.module('bms-packages-service',['ngResource'])
                             method: 'GET',
                             isArray: true
                         },
-                        create: {
+                        createPackage: {
                             method: 'POST'
                         },
                         getPackageDetail:{
@@ -21,6 +21,10 @@ angular.module('bms-packages-service',['ngResource'])
                         deletePackage:{
                             url:baseUrl + "login/package/:packageId",
                             method:'DELETE'
+                        },
+                        updatePackage:{
+                            url:baseUrl + "login/package/:packageId",
+                            method:'PUT'
                         }
                     })
             };

@@ -5,7 +5,7 @@ angular.module('bms-packages-state-config', [])
                 url:"/packages",
                 views:{
                       '':{
-                          templateUrl: "ftl/packages.ftl",
+                          templateUrl: "ftl/packages/packages.ftl",
                           controller:"bmsPackages"
                       }
 /*                     , "datalist":{  // 显示到index.jsp中<div ui-view="datalist">
@@ -20,7 +20,7 @@ angular.module('bms-packages-state-config', [])
                 params:{searchParams:null},
                 views:{
                     "data-list@packages":{  // 显示到state为packages的<div ui-view="data-list">
-                        templateUrl:"ftl/packages.list.ftl",
+                        templateUrl:"ftl/packages/packages.list.ftl",
                         controller:"bmsPackagesStateController"
                     }
                 }
@@ -29,7 +29,7 @@ angular.module('bms-packages-state-config', [])
                 url:"/{packageId}",
                 views:{
                     "detail@packages.list":{
-                        templateUrl:"ftl/packages.list.detail.ftl",
+                        templateUrl:"ftl/packages/packages.list.detail.ftl",
                         resolve:{
                             packageDetail:['$stateParams','bmsPackagesService',
                                 function($stateParams,bmsPackagesService){

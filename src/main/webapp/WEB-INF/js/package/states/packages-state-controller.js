@@ -29,7 +29,7 @@ angular.module('bms-packages-state-controller',['ui.bootstrap'])
             modalInstance = $uibModal.open({
                 size:'lg',
                 backdrop : false,
-                templateUrl: 'ftl/packages.modal.ftl',
+                templateUrl: 'ftl/packages/packages.modal.ftl',
                 resolve: {
                     packageDetail: angular.copy(emptyFilterForm)
                 },
@@ -52,7 +52,7 @@ angular.module('bms-packages-state-controller',['ui.bootstrap'])
             modalInstance = $uibModal.open({
                 size:'lg',
                 backdrop : false,
-                templateUrl: 'ftl/packages.modal.ftl',
+                templateUrl: 'ftl/packages/packages.modal.ftl',
                 resolve: {
                     packageDetail: ['bmsPackagesService',
                         function (bmsPackagesService) {

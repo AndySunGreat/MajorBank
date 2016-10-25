@@ -43,6 +43,7 @@
     <div>
       <ul class="nav navbar-nav">
         <li class="active"><a ui-sref="packages">套餐管理</a></li>
+        <li class="active"><a ui-sref="questions">试题管理</a></li>
         <li class="dropdown">
           <a ui-sref="BanksMgt" class="dropdown-toggle" data-toggle="dropdown">
             题库管理

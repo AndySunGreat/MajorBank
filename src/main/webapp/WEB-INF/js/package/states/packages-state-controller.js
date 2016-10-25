@@ -95,7 +95,7 @@ angular.module('bms-packages-state-controller',['ui.bootstrap'])
 
         $scope.retrieveDetail = function(event,packageId) {
             console.log(event.currentTarget);
-                $state.go('packages.detail', {
+                $state.go('packages.list.detail', {
                     packageId : packageId });
 
         }

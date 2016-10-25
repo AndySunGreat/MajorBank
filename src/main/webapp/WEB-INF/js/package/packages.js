@@ -14,7 +14,7 @@ angular.module('bms-packages',['bms-packages-service','bms-packages-states'])
             if(searchFilter!=undefined){
                 $state.go("packages.list",{searchParams:searchFilter},{reload:true});
             }else{
-                $state.go("packages.list",{searchParams:null});
+                $state.go("packages.list",{searchParams:null},{reload:true});
             }
         };
 

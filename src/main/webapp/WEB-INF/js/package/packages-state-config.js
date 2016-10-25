@@ -6,13 +6,20 @@ angular.module('bms-packages-state-config', [])
                 views:{
                       '':{
                           templateUrl: "ftl/packages.ftl",
-                          controller:"bmsPackagesStateController"
-                      },
-/*                      "datalist":{  // 显示到index.jsp中<div ui-view="datalist">
+                          controller:"bmsPackages"
+                      }
+/*                     , "datalist":{  // 显示到index.jsp中<div ui-view="datalist">
                           templateUrl:"ftl/packages.datalist.ftl",
                           controller:"bmsPackagesStateController"
                       },*/
-                      "data-list@packages":{  // 显示到state为packages的<div ui-view="data-list">
+
+                }
+            })
+            .state("packages.list",{
+                url:"/packages/list",
+                params:{searchParams:null},
+                views:{
+                    "data-list@packages":{  // 显示到state为packages的<div ui-view="data-list">
                         templateUrl:"ftl/packages.datalist.ftl",
                         controller:"bmsPackagesStateController"
                     }

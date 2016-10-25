@@ -3,8 +3,8 @@
  */
 angular.module('bms-packages-state-controller',['ui.bootstrap'])
     .controller('bmsPackagesStateController',
-        function($scope,$uibModal,$q,$state,bmsPackagesService,$log){
-
+        function($scope,$uibModal,$q,$state,bmsPackagesService,$log,$stateParams){
+        console.log("state-controller");
 
         var emptyFilterForm = {
             packageId: null,
@@ -12,30 +12,16 @@ angular.module('bms-packages-state-controller',['ui.bootstrap'])
             jobId:null,
             bankIdsJson:null
         };
-
-            $scope.queryForm = function(){
-                console.log("queryForm");
-                console.log($scope.searchFilter);
-                var searchResult = bmsPackagesService.Packages.query($scope.searchFilter);
-                //$state.go('packages', {searchResult : searchResult });
-                console.log(searchResult);
-                $scope.packages = searchResult;
-            };
-
-            $scope.resetForm = function(){
-
-            };
-
-        console.log($uibModal);
-        console.log("bmsPackagesStateController");
-        console.log($scope.packagedetail);
         var deferred = $q.defer();
-        $scope.load = function(){
-            var entry  = bmsPackagesService.Packages.query(function(){
+        $scope.load = function(packageListTemp){
+            console.log("load()");
+            console.log($stateParams.searchParams);
+            $scope.searchParams = $stateParams.searchParams;
+            console.log(angular.toJson($scope.searchParams));
+            var entry  = bmsPackagesService.PackagesList.searchFilter($scope.searchParams,function(){
                 console.log(entry);
                 $scope.packages = entry;
             });
-
         };
 
         $scope.createPackage = function(){

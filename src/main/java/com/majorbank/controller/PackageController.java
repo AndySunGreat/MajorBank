@@ -34,8 +34,24 @@ public class PackageController {
      */
     @ResponseBody
     @RequestMapping(value={"/package"},method = {RequestMethod.GET})
-    public List<Package> getAllPackages(){
-        List<Package> packageList2 = packageService.getAllPackages(null);
+    public List<Package> getAllPackages(@RequestParam(required = false) String packageId,
+                                        @RequestParam(required = false) String packageName,
+                                        @RequestParam(required = false) String jobId,
+                                        @RequestParam(required = false) String bankIdsJson){
+        Package package1 = new Package();
+        if(packageId!=null) {
+            package1.setPackageId(Long.valueOf(packageId));
+        }
+        if(packageName!=null) {
+            package1.setPackageName(packageName);
+        }
+        if(jobId!=null){
+            package1.setJobId(Long.valueOf(jobId));
+        }
+        if(bankIdsJson!=null){
+            package1.setBankIdsJson(bankIdsJson);
+        }
+        List<Package> packageList2 = packageService.getAllPackages(package1);
         return packageList2;
     }
 

@@ -5,9 +5,22 @@ angular.module('bms-packages-service',['ngResource'])
         // $get来返回provider实例
         this.$get =["$resource",function($resource){
             return {
+                PackagesList:$resource(baseUrl + "login/package/",
+                    {
+                        packageId:"@packageId"
+                    },
+                    {
+                        searchFilter:{
+                            url: baseUrl + "login/package",
+                            method: 'GET',
+                            isArray: true
+                        }
+                    })
+                ,
                 Packages: $resource(baseUrl + "login/package/", {},
                     {
                         query: {
+                            url: baseUrl + "login/package",
                             method: 'GET',
                             isArray: true
                         },

@@ -1,4 +1,4 @@
-<div class="row" ng-init="load()">
+<div class="row" ng-init="load(packages)">
     <div class="span7">
            <table class="table table-striped table-condensed">
                <thead>
@@ -13,7 +13,7 @@
                    </tr>
                </thead>
                <tbody>
-                    <tr ng-repeat="package in packages"   >
+                    <tr ng-repeat="package in packages">
                         <td style="width:150px;padding:5px;" ng-click="retrieveDetail($event,package.packageId)">{{package.packageId}}</td>
                         <td style="width:150px;padding:5px;" ng-click="retrieveDetail($event,package.packageId)">{{package.packageName}}</td>
                         <td style="width:150px;padding:5px;" ng-click="retrieveDetail($event,package.packageId)">{{package.jobId}}</td>

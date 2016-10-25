@@ -10,6 +10,16 @@ angular.module('bms-packages',['bms-packages-service','bms-packages-states'])
             bankIdsJson:null
         };
 
+        $scope.queryForm = function(searchFilter){
+            if(searchFilter!=undefined){
+                $state.go("packages.list",{searchParams:searchFilter},{reload:true});
+            }else{
+                $state.go("packages.list",{searchParams:null});
+            }
+        };
 
-
+        $scope.resetForm = function(){
+            $scope.searchFilter = angular.copy(emptyFilterForm);
+            $state.go('packages');
+        };
     });

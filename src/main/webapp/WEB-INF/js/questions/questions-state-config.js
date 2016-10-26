@@ -26,7 +26,7 @@ angular.module('bms-questions-state-config', [])
                 }
             })
             .state("questions.list.detail",{
-                url:"/{questionId}",
+                url:"/{bankId}/{questionId}",
                 views:{
                     "detail@questions.list":{
                         templateUrl:"ftl/questions/questions.list.detail.ftl",

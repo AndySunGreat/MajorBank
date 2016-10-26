@@ -7,14 +7,13 @@ angular.module('bms-questions-state-controller',['ui.bootstrap'])
         console.log("state-controller");
 
         var emptyFilterForm = {
-            packageId: null,
-            packageName:null,
-            jobId:null,
-            bankIdsJson:null
+            questionId: null,
+            bankId:null,
+            questContent:null,
+            questType:null
         };
-        var deferred = $q.defer();
-        $scope.load = function(packageListTemp){
-            console.log("load()");
+        //var deferred = $q.defer();
+        $scope.load = function(){
             console.log($stateParams.searchParams);
             $scope.searchParams = $stateParams.searchParams;
             console.log(angular.toJson($scope.searchParams));
@@ -46,7 +45,7 @@ angular.module('bms-questions-state-controller',['ui.bootstrap'])
             });
         };
 
-        $scope.editQuestion = function(questionId){
+        $scope.editQuestion = function(bankId,questionId){
             console.log("questionId:"+questionId);
             var modalInstance;
             modalInstance = $uibModal.open({
@@ -54,10 +53,11 @@ angular.module('bms-questions-state-controller',['ui.bootstrap'])
                 backdrop : false,
                 templateUrl: 'ftl/questions/questions.modal.ftl',
                 resolve: {
-                    packageDetail: ['bmsQuestionsService',
+                    questionDetail: ['bmsQuestionsService',
                         function (bmsQuestionsService) {
                             return bmsQuestionsService.Questions.getQuestionDetail(
-                                {questionId: questionId}
+                                {   bankId:bankId,
+                                    questionId: questionId}
                             ).$promise;
                         }
                     ]
@@ -77,9 +77,9 @@ angular.module('bms-questions-state-controller',['ui.bootstrap'])
 
         }
 
-        $scope.deleteQuestion = function(questionId){
-            console.log("packageId:"+questionId);
-            bmsQuestionsService.Questions.deleteQuestion({questionId:questionId}).$promise.then(
+        $scope.deleteQuestion = function(bankId,questionId){
+            console.log("questionId:"+questionId);
+            bmsQuestionsService.Questions.deleteQuestion({bankId:bankId,questionId:questionId}).$promise.then(
                 function(data){
                     console.log('delete question successfully');
                     console.log(data);
@@ -92,9 +92,9 @@ angular.module('bms-questions-state-controller',['ui.bootstrap'])
                 });
         }
 
-        $scope.retrieveDetail = function(event,questionId) {
-            console.log(event.currentTarget);
+        $scope.retrieveDetail = function(bankId,questionId) {
                 $state.go('questions.list.detail', {
+                    bankId:bankId,
                     questionId : questionId });
 
         }

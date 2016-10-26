@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.majorbank.mapper.ITQuestMapper">
+<mapper namespace="com.majorbank.mapper.QuestionsMapper">
     <!--
     public class BankAnswers {
     private long answerId;
@@ -23,8 +23,8 @@
     </resultMap>
 
 
-    <resultMap id="itQuestRstMap"
-        type="com.majorbank.model.ITQuestion">
+    <resultMap id="QuestionRstMap"
+        type="com.majorbank.model.Questions">
         <result column="QUESTION_ID" property="questionId" />
         <result column="BANK_ID" property="bankId" />
         <result column="QUEST_CONTENT" property="questContent" />
@@ -35,7 +35,7 @@
     </resultMap>
 
     <!-- get all users record -->
-    <sql id="selectITQuestion">
+    <sql id="selectQuestion">
         SELECT
         QUESTION_ID,
         BANK_ID,
@@ -44,7 +44,7 @@
         QUEST_OPTIONS_JSON,
         CORRECT_ANSWER,
         CHANGE_DATE
-        FROM IT_QUESTION
+        FROM QUESTIONS
     </sql>
     <sql id="questionFilterWhereClause">
         <where>
@@ -68,16 +68,19 @@
             </if>
         </where>
     </sql>
-    <select id="getAllITQuestions" resultMap="itQuestRstMap"
-            parameterType="com.majorbank.model.ITQuestion">
-        <include refid="selectITQuestion" />
+
+
+
+    <select id="getAllQuestions" resultMap="QuestionRstMap"
+            parameterType="com.majorbank.model.Questions">
+        <include refid="selectQuestion" />
         <include refid="questionFilterWhereClause" />
     </select>
 
 
 
     <!-- find user by id -->
-    <select id="getITQuestionById" resultMap="itQuestRstMap" parameterType="long">
+    <select id="getQuestionById" resultMap="QuestionRstMap" parameterType="java.util.Map">
         SELECT
         QUESTION_ID,
         BANK_ID,
@@ -86,8 +89,8 @@
         QUEST_OPTIONS_JSON,
         CORRECT_ANSWER,
         CHANGE_DATE
-        FROM IT_QUESTION
-        WHERE QUESTION_ID=#{questionId}
+        FROM QUESTIONS
+        WHERE QUESTION_ID=#{questionId} AND BANK_ID=#{bankId}
     </select>
 
     <!-- find user by id -->
@@ -157,11 +160,11 @@
  private List<Options> questOptions; // 问题选项
  private String correctAnswer; // 正确答案
  -->
-    <insert id="insertITQuestion" parameterType="com.majorbank.model.ITQuestion">
+    <insert id="insertQuestions" parameterType="com.majorbank.model.Questions">
         <selectKey resultType="Long" order="BEFORE" keyProperty="questionId">
             SELECT _nextval('itquestionid') FROM DUAL
         </selectKey>
-        INSERT INTO IT_QUESTION(
+        INSERT INTO QUESTIONS(
         QUESTION_ID,
         BANK_ID,
         QUEST_CONTENT,
@@ -181,9 +184,9 @@
         )
     </insert>
 
-    <update id="updateITQuestion" parameterType="com.majorbank.model.Package">
+    <update id="updateQuestions" parameterType="com.majorbank.model.Questions">
         UPDATE
-        IT_QUESTION
+        QUESTIONS
         SET
         CHANGE_DATE=NOW()
         <if test="bankId !=0 and bankId !=null">
@@ -204,9 +207,9 @@
         WHERE QUESTION_ID=#{questionId,jdbcType=NUMERIC}
     </update>
 
-    <delete id="deleteITQuestion"  parameterType="long">
+    <delete id="deleteQuestions"  parameterType="long">
         DELETE
-        FROM IT_QUESTION
+        FROM QUESTIONS
         WHERE QUESTION_ID=#{questionId,jdbcType=NUMERIC}
     </delete>
 

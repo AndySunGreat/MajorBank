@@ -21,14 +21,22 @@
   <script src="<%=basePath %>common/angular/angular-ui-router.js"></script>
   <script src="<%=basePath %>common/angular/angular-resource.min.js"></script>
   <script src="<%=basePath %>common/angular/angular-animate.js"></script>
-  <script src="<%=basePath %>js/package/states/packages-state-add-controller.js"></script>
-  <script src="<%=basePath %>js/package/states/packages-state-update-controller.js"></script>
-  <script src="<%=basePath %>js/package/states/packages-state-detail-controller.js"></script>
-  <script src="<%=basePath %>js/package/states/packages-state-controller.js"></script>
-  <script src="<%=basePath %>js/package/states/packages-states.js"></script>
-  <script src="<%=basePath %>js/package/packages-state-config.js"></script>
-  <script src="<%=basePath %>js/package/packages-service.js"></script>
-  <script src="<%=basePath %>js/package/packages.js"></script>
+  <script src="<%=basePath %>js/packages/states/packages-state-add-controller.js"></script>
+  <script src="<%=basePath %>js/packages/states/packages-state-update-controller.js"></script>
+  <script src="<%=basePath %>js/packages/states/packages-state-detail-controller.js"></script>
+  <script src="<%=basePath %>js/packages/states/packages-state-controller.js"></script>
+  <script src="<%=basePath %>js/packages/states/packages-states.js"></script>
+  <script src="<%=basePath %>js/packages/packages-state-config.js"></script>
+  <script src="<%=basePath %>js/packages/packages-service.js"></script>
+  <script src="<%=basePath %>js/packages/packages.js"></script>
+  <script src="<%=basePath %>js/questions/states/questions-state-add-controller.js"></script>
+  <script src="<%=basePath %>js/questions/states/questions-state-update-controller.js"></script>
+  <script src="<%=basePath %>js/questions/states/questions-state-detail-controller.js"></script>
+  <script src="<%=basePath %>js/questions/states/questions-state-controller.js"></script>
+  <script src="<%=basePath %>js/questions/states/questions-states.js"></script>
+  <script src="<%=basePath %>js/questions/questions-state-config.js"></script>
+  <script src="<%=basePath %>js/questions/questions-service.js"></script>
+  <script src="<%=basePath %>js/questions/questions.js"></script>
   <script src="<%=basePath %>js/home/home.js"></script>
   <script src="<%=basePath %>js/app.js"></script>
 
@@ -43,7 +51,7 @@
     <div>
       <ul class="nav navbar-nav">
         <li class="active"><a ui-sref="packages">套餐管理</a></li>
-        <li class="active"><a ui-sref="questions">试题管理</a></li>
+        <li><a ui-sref="questions">试题管理</a></li>
         <li class="dropdown">
           <a ui-sref="BanksMgt" class="dropdown-toggle" data-toggle="dropdown">
             题库管理

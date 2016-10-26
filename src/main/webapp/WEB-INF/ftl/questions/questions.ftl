@@ -1,36 +1,39 @@
 <div>
     <form>
         <div class="form-group">
-            <label for="pkgInputPackageId">套餐编号</label>
+            <label for="pkgInputBankId">题库编号</label>
             <input type="text" class="form-control"
-                   id="pkgInputPackageId"
-                   placeholder="Enter package ID"
-                    style="width:200px;"  ng-model="searchFilter.packageId"
-            >
-        </div>
-        <div class="form-group">
-            <label for="pkgInputPackageName">套餐名称</label>
-            <input type="text" class="form-control"
-                   id="pkgInputPackageName"
+                   id="pkgInputBankId"
                    placeholder="Enter package Name"
-                   style="width:200px;"  ng-model="searchFilter.packageName"
+                   style="width:200px;"  ng-model="searchFilter.bankId" ng-required="true"
             >
         </div>
         <div class="form-group">
-            <label for="pkgInputJobId">职业编号</label>
+            <label for="pkgInputQuestionId">问题编号</label>
             <input type="text" class="form-control"
-                   id="pkgInputJobId"
-                   placeholder="Enter Job Id"
-                   style="width:200px;" ng-model="searchFilter.jobId"
+                   id="pkgInputQuestionId"
+                   placeholder="Enter question ID"
+                    style="width:200px;"  ng-model="searchFilter.questionId"
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="pkgInputQuestContent">问题内容</label>
+            <input type="text" class="form-control"
+                   id="pkgInputQuestContent"
+                   placeholder="Enter question content"
+                   style="width:200px;" ng-model="searchFilter.questContent"
             >
         </div>
         <div class="form-group">
-            <label for="pkgInputBankIds">题库编号</label>
-            <input type="text" class="form-control"
-                   id="pkgInputBankIds"
-                   placeholder="Enter Bank Ids"
-                   style="width:200px;" ng-model="searchFilter.bankIdsJson"
-            >
+            <label for="pkgInputQuesType">问题类型</label>
+            <select id="pkgInputQuesType" class="form-control"
+                    ng-model="searchFilter.questType" style="width:200px;">
+                <option value ="单选题">单选题</option>
+                <option value ="多选题">多选题</option>
+                <option value="判断题">判断题</option>
+                <option value="实践题">实践题</option>
+            </select>
         </div>
         <div class="form-group">
             <button type="button" class="btn btn-default" ng-click="queryForm(searchFilter)" >查询</button>

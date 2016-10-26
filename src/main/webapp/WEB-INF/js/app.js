@@ -2,7 +2,7 @@
  * Created by AndySun on 2016/10/21.
  */
 var myApp = angular.module("myApp", ["ui.router",'ngResource',
-    'bms-home-controller','bms-packages']);
+    'bms-home-controller','bms-packages','bms-questions']);
 
 myApp.config(function ($stateProvider, $urlRouterProvider) {
 

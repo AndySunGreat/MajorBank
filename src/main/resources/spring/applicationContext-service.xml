@@ -7,7 +7,7 @@
 
     <bean id="packageService" class="com.majorbank.service.impl.PackageServiceImpl"/>
 
-    <bean id="itQuestService" class="com.majorbank.service.impl.ITQuestServiceImpl" />
+    <bean id="questionsService" class="com.majorbank.service.impl.QuestionsServiceImpl" />
 
     <bean id="questBankService" class="com.majorbank.service.impl.QuestBankServiceImpl" />
 

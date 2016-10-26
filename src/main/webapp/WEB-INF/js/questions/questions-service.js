@@ -5,22 +5,23 @@ angular.module('bms-questions-service',['ngResource'])
         // $get来返回provider实例
         this.$get =["$resource",function($resource){
             return {
-                QuestionsList:$resource(baseUrl + "login/question/",
+                QuestionsList:$resource(baseUrl + "banks/:bankId/questions/",
                     {
+                        bankId:"@bankId",
                         questionId:"@questionId"
                     },
                     {
                         searchFilter:{
-                            url: baseUrl + "login/question",
+                            url: baseUrl + "banks/:bankId/questions/",
                             method: 'GET',
                             isArray: true
                         }
                     })
                 ,
-                Questions: $resource(baseUrl + "login/question/", {},
+                Questions: $resource(baseUrl + "banks/:bankId/questions/", {},
                     {
                         query: {
-                            url: baseUrl + "login/question",
+                            url: baseUrl + "banks/:bankId/questions/",
                             method: 'GET',
                             isArray: true
                         },
@@ -28,15 +29,15 @@ angular.module('bms-questions-service',['ngResource'])
                             method: 'POST'
                         },
                         getQuestionDetail:{
-                            url:baseUrl + "login/question/:questionId",
+                            url:baseUrl + "banks/:bankId/questions/:questionId",
                             method: 'GET'
                         },
                         deleteQuestion:{
-                            url:baseUrl + "login/question/:questionId",
+                            url:baseUrl + "banks/:bankId/questions/:questionId",
                             method:'DELETE'
                         },
                         updateQuestion:{
-                            url:baseUrl + "login/question/:questionId",
+                            url:baseUrl + "banks/:bankId/questions/:questionId",
                             method:'PUT'
                         }
                     })

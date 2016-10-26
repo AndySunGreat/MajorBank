@@ -4,10 +4,10 @@
 angular.module('bms-questions',['bms-questions-service','bms-questions-states'])
     .controller('bmsQuestions',function($scope,$http,$q,$state,bmsQuestionsService){
         var emptyFilterForm = {
-            packageId: null,
-            packageName:null,
-            jobId:null,
-            bankIdsJson:null
+            questionId: null,
+            bankId:null,
+            questContent:null,
+            questType:null
         };
 
         $scope.queryForm = function(searchFilter){

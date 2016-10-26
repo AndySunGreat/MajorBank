@@ -11,7 +11,7 @@ import java.util.List;
  * Created by AndySun on 2016/10/5.
  * Industry Type: IT行业; 每个行业会对应有一张题库表
  */
-public class    ITQuestion implements Serializable {
+public class Questions implements Serializable {
     private long questionId;
     private long bankId;
     private String questContent; // 问题内容
@@ -23,12 +23,12 @@ public class    ITQuestion implements Serializable {
     private String correctIndexes; // 正确答案序列号
     private String[] questionIds;
 
-    public ITQuestion() {
+    public Questions() {
     }
 
-    public ITQuestion(long questionId, long bankId, String questContent,
-                      String questType,String questOptionsJson, List<Options> questOptions,
-                      String correctAnswer,Date changeDate) {
+    public Questions(long questionId, long bankId, String questContent,
+                     String questType, String questOptionsJson, List<Options> questOptions,
+                     String correctAnswer, Date changeDate) {
         this.questionId = questionId;
         this.bankId = bankId;
         this.questContent = questContent;
@@ -39,9 +39,9 @@ public class    ITQuestion implements Serializable {
         this.changeDate = changeDate;
     }
 
-    public ITQuestion(long questionId, long bankId, String questContent, String questType,
-                      String questOptionsJson, List<Options> questOptions,
-                      String correctAnswer, Date changeDate, String correctIndexes) {
+    public Questions(long questionId, long bankId, String questContent, String questType,
+                     String questOptionsJson, List<Options> questOptions,
+                     String correctAnswer, Date changeDate, String correctIndexes) {
         this.questionId = questionId;
         this.bankId = bankId;
         this.questContent = questContent;
@@ -53,10 +53,10 @@ public class    ITQuestion implements Serializable {
         this.correctIndexes = correctIndexes;
     }
 
-    public ITQuestion(long questionId, long bankId, String questContent,
-                      String questType, String questOptionsJson,
-                      List<Options> questOptions, String correctAnswer,
-                      Date changeDate, String correctIndexes, String[] questionIds) {
+    public Questions(long questionId, long bankId, String questContent,
+                     String questType, String questOptionsJson,
+                     List<Options> questOptions, String correctAnswer,
+                     Date changeDate, String correctIndexes, String[] questionIds) {
         this.questionId = questionId;
         this.bankId = bankId;
         this.questContent = questContent;

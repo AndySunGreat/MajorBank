@@ -2,30 +2,47 @@
 <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"  ng-click="$dismiss()">&times;</button>
-                    <h4 class="modal-title">套餐管理 模态框</h4>
+                    <h4 class="modal-title">问题管理 模态框</h4>
                 </div>
                 <div class="modal-body">
                     <div class="container">
                         <form>
-                            <div class="form-group" ng-show="packageDetail.packageId">
-                                    <label class="col-form-label" for="packageId">套餐编号:</label>
-                                    <input type="text" class="form-control" style="width:200px;" id="packageId" ng-model="packageDetail.packageId" />
+                            <div class="form-group" ng-show="questionDetail.questionId">
+                                    <label class="col-form-label" for="questionId">问题编号:</label>
+                                    <input type="text" class="form-control" style="width:200px;" id="packageId" ng-model="questionDetail.questionId" />
                               </div>
                             <div class="form-group">
-                                <label class="col-form-label" for="packageName">套餐名称:</label>
-                                <input type="text" class="form-control"  style="width:200px;" id="packageName" ng-model="packageDetail.packageName" />
+                                <label class="col-form-label" for="bankId">题库编号:</label>
+                                <input type="text" class="form-control"  style="width:200px;" id="bankId" ng-model="questionDetail.bankId" />
                             </div>
                             <div class="form-group">
-                                <label class="col-form-label" for="jobId">职业编号:</label>
-                                <input type="text" class="form-control " style="width:200px;"  id="jobId" ng-model="packageDetail.jobId" />
+                                <label class="col-form-label" for="questContent">问题内容:</label>
+                                <input type="text" class="form-control " style="width:200px;"
+                                       id="questContent" ng-model="questionDetail.questContent" />
+
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label" for="questType">问题类型:</label>
+                                <select id="questType" class="form-control"
+                                        ng-model="questionDetail.questType" style="width:200px;">
+                                    <option value ="单选题">单选题</option>
+                                    <option value ="多选题">多选题</option>
+                                    <option value="判断题">判断题</option>
+                                    <option value="实践题">实践题</option>
+                                </select>
                                 <!--
-                                TODO: Should be a dropdown list
+                                  TODO: Should be a dropdown list
                                 -->
                             </div>
-                            <div class="form-group">
-                                <label class="col-form-label" for="bankIdsJson">题库编号串:</label>
-                                <input type="text" class="form-control" style="width:200px;"  id="bankIdsJson" ng-model="packageDetail.bankIdsJson" />
-                            </div>
+                          <!--  <div class="form-group">
+                                <label class="col-form-label" for="questOptionsJson">问题选项:</label>
+                                <button ng-click="addAdditionalParams()">Add</button>
+                                <div ng-repeat="parameters in addiDynamicParamList">
+                                    <input type="input" id="keyDynamicParams" ng-model="parameters.key" />
+                                    <input type="input" id="valueDynamicParams" ng-model="parameters.value" />
+                                    <button ng-show="$index!=-1" style="color:red;" ng-click="delAdditionalParams($index)">Del</button>
+                                </div>
+                            </div>-->
                         </form>
                     </div>
                 </div>

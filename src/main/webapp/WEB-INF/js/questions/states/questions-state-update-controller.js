@@ -7,7 +7,8 @@ angular.module('bms-questions-state-update-controller',[ 'ui.bootstrap'])
             console.log("submit前数据提交：");
             console.log($scope.questionDetail);
             var questionId = $scope.questionDetail.questionId;
-            bmsQuestionsService.Questions.updateQuestion({questionId:questionId},$scope.questionDetail).$promise.then(
+            var bankId = $scope.questionDetail.bankId;
+            bmsQuestionsService.Questions.updateQuestion({bankId:bankId,questionId:questionId},$scope.questionDetail).$promise.then(
                 function(data){
                     console.log('update question successfully');
                     console.log(data);

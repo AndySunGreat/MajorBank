@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.majorbank.mapper.QuestBankMapper">
+<mapper namespace="com.majorbank.mapper.BanksMapper">
 
 
     <!--
@@ -14,53 +14,62 @@
     private String version;
     -->
     <resultMap id="questBankRstMap"
-        type="com.majorbank.model.QuestBank">
+        type="com.majorbank.model.Banks">
         <result column="BANK_ID" property="bankId" />
         <result column="BANK_NAME" property="bankName" />
         <result column="QB_CATEGORY" property="qbCategory" />
         <result column="INDUSTRY_TYPE" property="industryType" />
         <result column="QB_TYPE" property="qbType" />
-        <result column="VERSION" property="version" />
+        <result column="QB_VERSION" property="qbVersion" />
         <result column="CHANGE_DATE" property="changeDate"/>
     </resultMap>
 
     <!-- get all users record -->
-    <sql id="selectQuestBank">
+    <sql id="selectBank">
         SELECT
         BANK_ID,
         BANK_NAME,
         QB_CATEGORY,
         INDUSTRY_TYPE,
         QB_TYPE,
-        VERSION,
+        QB_VERSION,
         CHANGE_DATE
-        FROM QUEST_BANK
+        FROM BANKS
     </sql>
-    <sql id="questBankFilterWhereClause">
+    <sql id="bankFilterWhereClause">
         <where>
             <if test="_parameter !=null ">
                 1=1
-                <if test="packageId != 0 and packageId !=null">
-                    and PACKAGE_ID = #{packageId}
+                <if test="bankId != 0 and bankId !=null">
+                    and BANK_ID = #{packageId}
                 </if>
 
-                <if test="packageName != null">
-                    and PACKAGE_NAME = #{packageName}
+                <if test="bankName != null">
+                    and BANK_NAME = #{bankName}
                 </if>
-                <if test="jobId != 0 and jobId !=null">
-                    and JOB_ID = #{jobId}
+                <if test="qbCategory != 0 and qbCategory !=null">
+                    and QB_CATEGORY = #{qbCategory}
+                </if>
+                <if test="industryType != 0 and industryType !=null">
+                    and INDUSTRY_TYPE = #{industryType}
+                </if>
+                <if test="qbType != 0 and qbType !=null">
+                    and QB_TYPE = #{qbType}
+                </if>
+                <if test="qbVersion != null">
+                    and QB_VERSION = #{qbVersion}
                 </if>
             </if>
         </where>
     </sql>
-    <select id="getAllQuestBanks" parameterType="com.majorbank.model.QuestBank"
-            resultType="com.majorbank.model.QuestBank">
-        <include refid="selectQuestBank" />
-        <include refid="questBankFilterWhereClause" />
+    <select id="getAllBanks" parameterType="com.majorbank.model.Banks"
+            resultMap="questBankRstMap">
+        <include refid="selectBank" />
+        <include refid="bankFilterWhereClause" />
     </select>
 
     <!-- find user by id -->
-    <select id="getQuestBankById"
+    <select id="getBankById"
             resultMap="questBankRstMap"
             parameterType="long">
         SELECT
@@ -69,23 +78,20 @@
         QB_CATEGORY,
         INDUSTRY_TYPE,
         QB_TYPE,
-        VERSION,
+        QB_VERSION,
         CHANGE_DATE
-        FROM QUEST_BANK
+        FROM BANKS
         WHERE BANK_ID=#{bankId}
     </select>
 
-    <insert id="insertQuestBank" parameterType="com.majorbank.model.QuestBank">
-        <selectKey resultType="Long" order="BEFORE" keyProperty="bankId">
-            SELECT _nextval('bankid') FROM DUAL
-        </selectKey>
-        INSERT INTO QUEST_BANK(
+    <insert id="insertBank" parameterType="com.majorbank.model.Banks">
+        INSERT INTO BANKS(
         BANK_ID,
         BANK_NAME,
         QB_CATEGORY,
         INDUSTRY_TYPE,
         QB_TYPE,
-        VERSION,
+        QB_VERSION,
         CHANGE_DATE
         )
         VALUES(
@@ -94,14 +100,17 @@
         #{qbCategory,jdbcType=VARCHAR},
         #{industryType,jdbcType=VARCHAR},
         #{qbType,jdbcType=VARCHAR},
-        #{version,jdbcType=VARCHAR},
+        #{qbVersion,jdbcType=VARCHAR},
         NOW()
         )
+        <selectKey keyProperty="bankId" keyColumn="BANK_ID" resultType="long" order="AFTER">
+            SELECT LAST_INSERT_ID() ;
+        </selectKey>
     </insert>
 
-    <update id="updateQuestBank" parameterType="com.majorbank.model.QuestBank">
+    <update id="updateBank" parameterType="com.majorbank.model.Banks">
         UPDATE
-        QUEST_BANK
+        BANKS
         SET
         CHANGE_DATE=NOW()
         <if test="bankName !=null">
@@ -116,15 +125,15 @@
         <if test="qbType !=null">
         ,QB_TYPE = #{qbType,jdbcType=VARCHAR}
         </if>
-        <if test="VERSION !=null">
-        ,VERSION = #{version,jdbcType=VARCHAR}
+        <if test="qbVersion !=null">
+        ,QB_VERSION = #{qbVersion,jdbcType=VARCHAR}
         </if>
         WHERE BANK_ID=#{bankId,jdbcType=NUMERIC}
     </update>
 
-    <delete id="deleteQuestBank"  parameterType="long">
+    <delete id="deleteBank"  parameterType="long">
         DELETE
-        FROM QUEST_BANK
+        FROM BANKS
         WHERE BANK_ID=#{bankId,jdbcType=NUMERIC}
     </delete>
 

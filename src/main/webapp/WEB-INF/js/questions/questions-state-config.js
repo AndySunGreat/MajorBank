@@ -26,7 +26,7 @@ angular.module('bms-questions-state-config', [])
                 }
             })
             .state("questions.list.detail",{
-                url:"/{bankId}/{questionId}",
+                url:"/{questionId}",
                 views:{
                     "detail@questions.list":{
                         templateUrl:"ftl/questions/questions.list.detail.ftl",
@@ -34,10 +34,8 @@ angular.module('bms-questions-state-config', [])
                             questionDetail:['$stateParams','bmsQuestionsService',
                                 function($stateParams,bmsQuestionsService){
                                     console.log("$stateParams.questionId:"+$stateParams.questionId);
-                                    console.log("$stateParams.bankId:"+$stateParams.bankId);
                                     return  bmsQuestionsService.Questions.getQuestionDetail(
-                                        {   bankId:$stateParams.bankId,
-                                            questionId : $stateParams.questionId}
+                                        {    questionId : $stateParams.questionId}
                                     ).$promise;
                                 }
                             ]

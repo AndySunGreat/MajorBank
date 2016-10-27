@@ -1,13 +1,17 @@
 angular.module('bms-packages-state-add-controller',[ 'ui.bootstrap'])
     .controller('bmsPackagesStateAddController',function($scope,$state,$uibModalInstance,bmsPackagesService,packageDetail){
-       console.log("bmsPackagesStateAddController");
-        console.log($uibModalInstance);
-        console.log(packageDetail);
+       //console.log("bmsPackagesStateAddController");
+        //console.log($uibModalInstance);
+        //console.log(packageDetail);
         $scope.packageDetail = packageDetail;
-        console.log($scope.packageDetail);
+        //console.log($scope.packageDetail);
+
+
+
         $scope.submitModal = function() {
             console.log("submit前数据提交：");
             console.log($scope.packageDetail);
+
             var packageId = $scope.packageDetail.packageId;
             bmsPackagesService.Packages.createPackage($scope.packageDetail).$promise.then(
                 function(data){

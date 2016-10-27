@@ -1,10 +1,7 @@
 package com.majorbank.controller;
 
-import com.majorbank.model.Orders;
+import com.majorbank.model.Banks;
 import com.majorbank.model.Package;
-import com.majorbank.model.Package;
-import com.majorbank.model.QuestBank;
-import com.majorbank.service.PackageService;
 import com.majorbank.service.PackageService;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
@@ -143,7 +140,7 @@ public class PackageController {
      */
     @ResponseBody
     @RequestMapping(value={"/package/{userId}/banks"},method = {RequestMethod.GET})
-    public List<QuestBank> getAvailableBanks(@PathVariable long userId){
+    public List<Banks> getAvailableBanks(@PathVariable long userId){
         //packageService.getAvailableBanks(packageId);
         return null;
     }

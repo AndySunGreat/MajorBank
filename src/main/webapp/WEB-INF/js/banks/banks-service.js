@@ -1,42 +1,51 @@
 //$provide服务负责告诉Angular如何创造一个新的可注入的东西：即服务(service)。
-angular.module('bms-questions-service',['ngResource'])
-    .provider("bmsQuestionsService",function(){
+angular.module('bms-banks-service',['ngResource'])
+    .provider("bmsBanksService",function(){
         var baseUrl = "http://localhost:8081/MajorBank/api/";
         // $get来返回provider实例
         this.$get =["$resource",function($resource){
             return {
-                QuestionsList:$resource(baseUrl + "questions/",
+                OptionsList:$resource(baseUrl + "options/:itemParentValue",{},
                     {
-                         questionId:"@questionId"
+                    queryByParentValue:{
+                        url: baseUrl + "options/:itemParentValue",
+                        method: 'GET',
+                        isArray: true
+                    }
+                })
+                ,
+                BanksList:$resource(baseUrl + "banks/",
+                    {
+                        bankId:"@bankId"
                     },
                     {
                         searchFilter:{
-                            url: baseUrl + "questions/",
+                            url: baseUrl + "banks/",
                             method: 'GET',
                             isArray: true
                         }
                     })
                 ,
-                Questions: $resource(baseUrl + "questions/", {},
+                Banks: $resource(baseUrl + "banks/", {},
                     {
                         query: {
-                            url: baseUrl + "questions/",
+                            url: baseUrl + "banks/",
                             method: 'GET',
                             isArray: true
                         },
-                        createQuestion: {
+                        createBank: {
                             method: 'POST'
                         },
-                        getQuestionDetail:{
-                            url:baseUrl + "questions/:questionId",
+                        getBankDetail:{
+                            url:baseUrl + "banks/:bankId",
                             method: 'GET'
                         },
-                        deleteQuestion:{
-                            url:baseUrl + "questions/:questionId",
+                        deleteBank:{
+                            url:baseUrl + "banks/:bankId",
                             method:'DELETE'
                         },
-                        updateQuestion:{
-                            url:baseUrl + "questions/:questionId",
+                        updateBank:{
+                            url:baseUrl + "banks/:bankId",
                             method:'PUT'
                         }
                     })

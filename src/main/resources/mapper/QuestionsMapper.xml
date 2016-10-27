@@ -90,7 +90,7 @@
         CORRECT_ANSWER,
         CHANGE_DATE
         FROM QUESTIONS
-        WHERE QUESTION_ID=#{questionId} AND BANK_ID=#{bankId}
+        WHERE QUESTION_ID=#{questionId}
     </select>
 
     <!-- find user by id -->
@@ -161,9 +161,6 @@
  private String correctAnswer; // 正确答案
  -->
     <insert id="insertQuestions" parameterType="com.majorbank.model.Questions">
-        <selectKey resultType="Long" order="BEFORE" keyProperty="questionId">
-            SELECT _nextval('itquestionid') FROM DUAL
-        </selectKey>
         INSERT INTO QUESTIONS(
         QUESTION_ID,
         BANK_ID,
@@ -182,6 +179,9 @@
         #{correctAnswer,jdbcType=VARCHAR},
         now()
         )
+        <selectKey keyProperty="questionId" keyColumn="QUESTION_ID" resultType="long" order="AFTER">
+            SELECT LAST_INSERT_ID() ;
+        </selectKey>
     </insert>
 
     <update id="updateQuestions" parameterType="com.majorbank.model.Questions">

@@ -1,8 +1,8 @@
-angular.module('bms-questions-state-update-controller',[ 'ui.bootstrap'])
-    .controller('bmsQuestionsStateUpdateController',function($scope,$state,$uibModalInstance,bmsQuestionsService,questionDetail){
+angular.module('bms-banks-state-update-controller',[ 'ui.bootstrap'])
+    .controller('bmsBanksStateUpdateController',function($scope,$state,$uibModalInstance,bmsBanksService,bankDetail){
 
         //$scope.addiDynamicParamList = [{optSeq:"",optContent:""}];
-        $scope.addiDynamicParamList = angular.fromJson(questionDetail.questOptionsJson);
+        $scope.addiDynamicParamList = angular.fromJson(bankDetail.questOptionsJson);
         $scope.addAdditionalParams = function(){
             var obj={optSeq:"",optContent:""};
             $scope.addiDynamicParamList.push(obj);
@@ -11,22 +11,22 @@ angular.module('bms-questions-state-update-controller',[ 'ui.bootstrap'])
             $scope.addiDynamicParamList.splice(idx,1);
         };
 
-        $scope.questionDetail = questionDetail;
-        console.log($scope.questionDetail);
+        $scope.bankDetail = bankDetail;
+        console.log($scope.bankDetail);
         $scope.submitModal = function() {
             console.log("submit前数据提交：");
-            console.log($scope.questionDetail);
-            var questionId = $scope.questionDetail.questionId;
-            $scope.questionDetail.questOptionsJson = angular.toJson($scope.addiDynamicParamList);
-            bmsQuestionsService.Questions.updateQuestion({questionId:questionId},$scope.questionDetail).$promise.then(
+            console.log($scope.bankDetail);
+            var bankId = $scope.bankDetail.bankId;
+            $scope.bankDetail.questOptionsJson = angular.toJson($scope.addiDynamicParamList);
+            bmsBanksService.Banks.updateBank({bankId:bankId},$scope.bankDetail).$promise.then(
                 function(data){
-                    console.log('update question successfully');
+                    console.log('update bank successfully');
                     console.log(data);
                     // 重新执行load函数
                     $state.reload();
                 },
                 function(error){
-                    console.log('delete question failure');
+                    console.log('delete bank failure');
                     console.log(error);
                 });
             $uibModalInstance.close();

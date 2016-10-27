@@ -30,7 +30,7 @@ public class QuestionsServiceImpl implements QuestionsService {
     private QuestionsMapper questionsMapper;
 
     @Override
-    public List<Questions> getAllQuestionsByBankId(Questions questions){
+    public List<Questions> getAllQuestions(Questions questions){
         Questions question;
         List<Questions> questionsList = questionsMapper.getAllQuestions(questions);
         List<Options> optionsList;
@@ -46,9 +46,8 @@ public class QuestionsServiceImpl implements QuestionsService {
     }
 
     @Override
-    public Questions getQuestionById(long bankId,long questionId){
+    public Questions getQuestionById(long questionId){
         Map map = new HashMap();
-        map.put("bankId",bankId);
         map.put("questionId",questionId);
         Questions question = questionsMapper.getQuestionById(map);
         List<Options> optionsList = this.parseOptJsonToObject(question);

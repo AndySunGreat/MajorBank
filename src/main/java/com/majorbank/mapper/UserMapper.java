@@ -1,7 +1,6 @@
 package com.majorbank.mapper;
 
 import com.majorbank.model.Orders;
-import com.majorbank.model.QuestBank;
 import com.majorbank.model.User;
 import org.springframework.stereotype.Repository;
 

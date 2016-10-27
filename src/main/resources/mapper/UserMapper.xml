@@ -118,7 +118,7 @@
     </delete>
 
     <!-- /user/{userId}/questbank
-       List<QuestBank> getAllBankByUserId(long userId);
+       List<Banks> getAllBankByUserId(long userId);
        获得某个用户的所有题库
      -->
     <select id="getAllOrderByUserId"  parameterType="com.majorbank.model.Orders">
@@ -137,7 +137,7 @@
 
     <!--
     获得某个用户的某个题库
-   QuestBank getBankByIds(long userId,long bankId);
+   Banks getBankByIds(long userId,long bankId);
    -->
     <select id="getOrderByIds" parameterMap="userBankMap" >
       SELECT

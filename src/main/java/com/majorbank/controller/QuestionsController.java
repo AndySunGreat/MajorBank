@@ -35,24 +35,7 @@ public class QuestionsController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value={"/banks/{bankId}/questions"},method = {RequestMethod.GET})
-    public List<Questions> getAllQuestionsByBankId(@PathVariable long bankId,
-                                                   @RequestParam(required = false) String questionId,
-                                                   @RequestParam(required = false) String questType){
-        Questions questions = new Questions();
-        questions.setBankId(bankId);
-        if(questionId!=null){
-            questions.setQuestionId(Long.valueOf(questionId));
-        }
-        if(questType!=null){
-            questions.setQuestType(questType);
-        }
-        List<Questions> questionsList = questionsService.getAllQuestionsByBankId(questions);
-        return questionsList;
-    }
-
-    @ResponseBody
-    @RequestMapping(value={"/banks/questions"},method = {RequestMethod.GET})
+    @RequestMapping(value={"/questions"},method = {RequestMethod.GET})
     public List<Questions> getAllQuestions(@RequestParam(required = false) String questionId,
                                            @RequestParam(required = false) String bankId,
                                            @RequestParam(required = false) String questContent,
@@ -70,9 +53,10 @@ public class QuestionsController {
         if(questType!=null){
             questions.setQuestType(questType);
         }
-        List<Questions> questionsList = questionsService.getAllQuestionsByBankId(questions);
+        List<Questions> questionsList = questionsService.getAllQuestions(questions);
         return questionsList;
     }
+
 
     /**
      * list question details based on question id
@@ -80,13 +64,11 @@ public class QuestionsController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value={"/banks/{bankId}/questions/{questionId}"},method = {RequestMethod.GET})
-    public Questions getQuestionDetailByQuestionId(@PathVariable long bankId,
-                                                   @PathVariable long questionId){
+    @RequestMapping(value={"/questions/{questionId}"},method = {RequestMethod.GET})
+    public Questions getQuestionDetailById(@PathVariable long questionId){
         Questions questions = new Questions();
-        questions.setBankId(bankId);
         questions.setQuestionId(questionId);
-        Questions questionsList = questionsService.getQuestionById(bankId,questionId);
+        Questions questionsList = questionsService.getQuestionById(questionId);
         return questionsList;
     }
 
@@ -96,19 +78,17 @@ public class QuestionsController {
     /**
      * retrieve questions by question ids array
      * version: 2016.10.26
-     * @param bankId
      * @param questionIds
      * @return
      */
     @ResponseBody
-    @RequestMapping(value={"/banks/{bankId}/questions/qids"},method = {RequestMethod.GET})
+    @RequestMapping(value={"/questions/qids"},method = {RequestMethod.GET})
     public List<Questions> getQuestionsByQuestIds(
-            @PathVariable long bankId,
             @RequestParam("questionIds") String questionIds){
         Questions itquest = new Questions();
         String[] questionArray = questionIds.split(",");
         itquest.setQuestionIds(questionArray);
-        List<Questions> itquestList = questionsService.getAllQuestionsByBankId(itquest);
+        List<Questions> itquestList = questionsService.getAllQuestions(itquest);
         return itquestList;
     }
 
@@ -119,8 +99,8 @@ public class QuestionsController {
      * @return
      */
     @PostMapping("/questions")
-    public ResponseEntity insertQuestions(@RequestBody Questions itquest){
-        int insertResult = questionsService.insertQuestions(itquest);
+    public ResponseEntity insertQuestions(@RequestBody Questions questions){
+        int insertResult = questionsService.insertQuestions(questions);
         JSONObject jsonObject = new JSONObject();
         if(insertResult>0){
             jsonObject.put("msg","Insert question " + insertResult+" Record successfully!");
@@ -135,16 +115,14 @@ public class QuestionsController {
      * update Quest info
      * @param questionId
      */
-    @PutMapping("/banks/{bankId}/questions/{questionId}")
-    public ResponseEntity updateQuestions(@PathVariable long bankId,
-                                            @PathVariable long questionId,
-                                        @RequestBody Questions itQuest){
-        if(itQuest.getQuestionId()==0L){
-            itQuest.setQuestionId(questionId);
+    @PutMapping("/questions/{questionId}")
+    public ResponseEntity updateQuestions(@PathVariable long questionId,
+                                        @RequestBody Questions questions){
+        if(questions.getQuestionId()==0L){
+            questions.setQuestionId(questionId);
         }
-        itQuest.setBankId(bankId);
-        LOG.debug("itQuest.getQuestionId():"+itQuest.getQuestionId());
-        int updateResult = questionsService.updateQuestions(itQuest);
+        LOG.debug("itQuest.getQuestionId():"+questions.getQuestionId());
+        int updateResult = questionsService.updateQuestions(questions);
         JSONObject jsonObject = new JSONObject();
         if(updateResult>0){
             jsonObject.put("msg","Update question " + updateResult+" Record successfully!");
@@ -159,9 +137,8 @@ public class QuestionsController {
      * delete Quest info
      * @param questionId
      */
-    @DeleteMapping("/banks/{bankId}/questions/{questionId}")
+    @DeleteMapping("/questions/{questionId}")
     public ResponseEntity deleteQuestions(
-            @PathVariable long bankId,
             @PathVariable long questionId){
         int deleteResult = questionsService.deleteQuestions(questionId);
         JSONObject jsonObject = new JSONObject();

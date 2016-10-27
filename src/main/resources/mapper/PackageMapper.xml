@@ -82,9 +82,6 @@
     </select>
 
     <insert id="insertPackage" parameterType="com.majorbank.model.Package">
-        <selectKey resultType="Long" order="BEFORE" keyProperty="packageId">
-            SELECT _nextval('packageid') FROM DUAL
-        </selectKey>
         INSERT INTO PACKAGES(
         PACKAGE_ID,
         PACKAGE_NAME,
@@ -101,6 +98,9 @@
         NOW(),
         NOW()
         )
+        <selectKey keyProperty="packageId" keyColumn="PACKAGE_ID" resultType="long" order="AFTER">
+            SELECT LAST_INSERT_ID() ;
+        </selectKey>
     </insert>
 
     <update id="updatePackage" parameterType="com.majorbank.model.Package">

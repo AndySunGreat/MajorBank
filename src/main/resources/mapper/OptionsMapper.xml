@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.majorbank.mapper.OptionsMapper">
+
+
+    <resultMap id="optionsRstMap"
+        type="com.majorbank.model.OptionsMapping">
+        <result column="ID" property="id" />
+        <result column="ITEM_NAME" property="itemName" />
+        <result column="ITEM_KEY" property="itemKey" />
+        <result column="ITEM_VALUE" property="itemValue" />
+        <result column="ITEM_PARENT_VALUE" property="itemParentValue" />
+    </resultMap>
+
+    <!-- get all users record -->
+    <sql id="selectOptions">
+        SELECT
+        ID,
+        ITEM_NAME,
+        ITEM_KEY,
+        ITEM_VALUE,
+        ITEM_PARENT_VALUE
+        FROM OPTIONS_MAPPING
+    </sql>
+    <sql id="optionsFilterWhereClause">
+        <where>
+            <if test="_parameter !=null ">
+                1=1
+                <if test="id != 0 and id !=null">
+                    and ID = #{id}
+                </if>
+                <if test="itemName != null">
+                    and ITEM_NAME = #{itemName}
+                </if>
+                <if test="itemKey != null">
+                    and ITEM_KEY = #{itemKey}
+                </if>
+                <if test="itemValue != null">
+                    and ITEM_VALUE = #{itemValue}
+                </if>
+                <if test="itemParentValue != null">
+                    and ITEM_PARENT_VALUE = #{itemParentValue}
+                </if>
+            </if>
+        </where>
+    </sql>
+    <select id="getAllOptions" parameterType="com.majorbank.model.OptionsMapping"
+            resultMap="optionsRstMap">
+        <include refid="selectOptions" />
+        <include refid="optionsFilterWhereClause" />
+    </select>
+
+    <!-- find user by id -->
+    <select id="getOptionsByParentValue" resultMap="optionsRstMap" parameterType="String">
+        SELECT
+        ID,
+        ITEM_NAME,
+        ITEM_KEY,
+        ITEM_VALUE,
+        ITEM_PARENT_VALUE
+        FROM OPTIONS_MAPPING
+        WHERE ITEM_PARENT_VALUE=#{itemParentValue}
+    </select>
+
+
+
+
+
+</mapper>

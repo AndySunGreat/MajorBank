@@ -1,38 +1,40 @@
 /**
  * Created by AndySun on 2016/10/20.
  */
-angular.module('bms-questions-state-controller',['ui.bootstrap'])
-    .controller('bmsQuestionsStateController',
-        function($scope,$uibModal,$q,$state,bmsQuestionsService,$log,$stateParams){
+angular.module('bms-banks-state-controller',['ui.bootstrap'])
+    .controller('bmsBanksStateController',
+        function($scope,$uibModal,$q,$state,bmsBanksService,$log,$stateParams){
         console.log("state-controller");
 
-        var emptyFilterForm = {
-            questionId: null,
-            bankId:null,
-            questContent:null,
-            questType:null
-        };
+            var emptyFilterForm = {
+                bankId: null,
+                bankName:null,
+                qbCategory:null,
+                industryType:null,
+                qbType:null,
+                qbVersion:null
+            };
         //var deferred = $q.defer();
         $scope.load = function(){
             console.log($stateParams.searchParams);
             $scope.searchParams = $stateParams.searchParams;
             console.log(angular.toJson($scope.searchParams));
-            var entry  = bmsQuestionsService.QuestionsList.searchFilter($scope.searchParams,function(){
+            var entry  = bmsBanksService.BanksList.searchFilter($scope.searchParams,function(){
                 console.log(entry);
-                $scope.questions = entry;
+                $scope.banks = entry;
             });
         };
 
-        $scope.createQuestion = function(){
+        $scope.createBank = function(){
             var modalInstance;
             modalInstance = $uibModal.open({
                 size:'lg',
                 backdrop : false,
-                templateUrl: 'ftl/questions/questions.modal.ftl',
+                templateUrl: 'ftl/banks/banks.modal.ftl',
                 resolve: {
-                    questionDetail: angular.copy(emptyFilterForm)
+                    bankDetail: angular.copy(emptyFilterForm)
                 },
-                controller: 'bmsQuestionsStateAddController'
+                controller: 'bmsBanksStateAddController'
             });
             modalInstance.opened.then(function() {// 模态窗口打开之后执行的函数
                 console.log('modal is opened');
@@ -45,23 +47,23 @@ angular.module('bms-questions-state-controller',['ui.bootstrap'])
             });
         };
 
-        $scope.editQuestion = function(questionId){
-            console.log("questionId:"+questionId);
+        $scope.editBank = function(bankId){
+            console.log("bankId:"+bankId);
             var modalInstance;
             modalInstance = $uibModal.open({
                 size:'lg',
                 backdrop : false,
-                templateUrl: 'ftl/questions/questions.modal.ftl',
+                templateUrl: 'ftl/banks/banks.modal.ftl',
                 resolve: {
-                    questionDetail: ['bmsQuestionsService',
-                        function (bmsQuestionsService) {
-                            return bmsQuestionsService.Questions.getQuestionDetail(
-                                {   questionId: questionId}
+                    bankDetail: ['bmsBanksService',
+                        function (bmsBanksService) {
+                            return bmsBanksService.Banks.getBankDetail(
+                                {   bankId: bankId}
                             ).$promise;
                         }
                     ]
                 },
-                controller: 'bmsQuestionsStateUpdateController'
+                controller: 'bmsBanksStateUpdateController'
 
             });
             modalInstance.opened.then(function() {// 模态窗口打开之后执行的函数
@@ -76,24 +78,24 @@ angular.module('bms-questions-state-controller',['ui.bootstrap'])
 
         }
 
-        $scope.deleteQuestion = function(questionId){
-            console.log("questionId:"+questionId);
-            bmsQuestionsService.Questions.deleteQuestion({questionId:questionId}).$promise.then(
+        $scope.deleteBank = function(bankId){
+            console.log("bankId:"+bankId);
+            bmsBanksService.Banks.deleteBank({bankId:bankId}).$promise.then(
                 function(data){
-                    console.log('delete question successfully');
+                    console.log('delete bank successfully');
                     console.log(data);
                     // 重新执行load函数
                     $state.reload();
                 },
                 function(error){
-                    console.log('delete question failure');
+                    console.log('delete bank failure');
                     console.log(error);
                 });
         }
 
-        $scope.retrieveDetail = function(questionId) {
-                $state.go('questions.list.detail', {
-                     questionId : questionId });
+        $scope.retrieveDetail = function(bankId) {
+                $state.go('banks.list.detail', {
+                     bankId : bankId });
 
         }
     });

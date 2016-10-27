@@ -1,7 +1,7 @@
-angular.module('bms-questions-state-add-controller',[ 'ui.bootstrap'])
-    .controller('bmsQuestionsStateAddController',function($scope,$state,$uibModalInstance,bmsQuestionsService,questionDetail){
+angular.module('bms-banks-state-add-controller',[ 'ui.bootstrap'])
+    .controller('bmsBanksStateAddController',function($scope,$state,$uibModalInstance,bmsBanksService,bankDetail){
 
-        $scope.questionDetail = questionDetail;
+        $scope.bankDetail = bankDetail;
 
        $scope.addiDynamicParamList = [{optSeq:"",optContent:""}];
 
@@ -18,7 +18,7 @@ angular.module('bms-questions-state-add-controller',[ 'ui.bootstrap'])
 
         $scope.submitModal = function() {
             console.log("submit前数据提交：");
-            console.log($scope.questionDetail);
+            console.log($scope.bankDetail);
             $scope.concatListCE = $scope.addiDynamicParamList;
             console.log($scope.concatListCE);
             console.log("angular.toJson:" + angular.toJson($scope.concatListCE));
@@ -30,17 +30,17 @@ angular.module('bms-questions-state-add-controller',[ 'ui.bootstrap'])
                 convertTmpCE[tmpCE["key"]] = tmpCE["value"];
             }
             console.log(convertTmpCE);*/
-            $scope.questionDetail.questOptionsJson = angular.toJson($scope.concatListCE);
-            var questionId = $scope.questionDetail.questionId;
-            bmsQuestionsService.Questions.createQuestion($scope.questionDetail).$promise.then(
+            $scope.bankDetail.questOptionsJson = angular.toJson($scope.concatListCE);
+            var bankId = $scope.bankDetail.bankId;
+            bmsBanksService.Banks.createBank($scope.bankDetail).$promise.then(
                 function(data){
-                    console.log('create question successfully');
+                    console.log('create bank successfully');
                     console.log(data);
                     // 重新执行load函数
                     $state.reload();
                 },
                 function(error){
-                    console.log('create question failure');
+                    console.log('create bank failure');
                     console.log(error);
                 });
             $uibModalInstance.close();

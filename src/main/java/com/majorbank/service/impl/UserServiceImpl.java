@@ -2,7 +2,6 @@ package com.majorbank.service.impl;
 
 import com.majorbank.mapper.UserMapper;
 import com.majorbank.model.Orders;
-import com.majorbank.model.QuestBank;
 import com.majorbank.model.User;
 import com.majorbank.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

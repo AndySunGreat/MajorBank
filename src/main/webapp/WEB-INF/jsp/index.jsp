@@ -37,6 +37,14 @@
   <script src="<%=basePath %>js/questions/questions-state-config.js"></script>
   <script src="<%=basePath %>js/questions/questions-service.js"></script>
   <script src="<%=basePath %>js/questions/questions.js"></script>
+  <script src="<%=basePath %>js/banks/states/banks-state-add-controller.js"></script>
+  <script src="<%=basePath %>js/banks/states/banks-state-update-controller.js"></script>
+  <script src="<%=basePath %>js/banks/states/banks-state-detail-controller.js"></script>
+  <script src="<%=basePath %>js/banks/states/banks-state-controller.js"></script>
+  <script src="<%=basePath %>js/banks/states/banks-states.js"></script>
+  <script src="<%=basePath %>js/banks/banks-state-config.js"></script>
+  <script src="<%=basePath %>js/banks/banks-service.js"></script>
+  <script src="<%=basePath %>js/banks/banks.js"></script>
   <script src="<%=basePath %>js/home/home.js"></script>
   <script src="<%=basePath %>js/app.js"></script>
 
@@ -52,9 +60,10 @@
       <ul class="nav navbar-nav">
         <li class="active"><a ui-sref="packages">套餐管理</a></li>
         <li><a ui-sref="questions">试题管理</a></li>
+        <li><a ui-sref="banks">题库管理</a></li>
         <li class="dropdown">
           <a ui-sref="BanksMgt" class="dropdown-toggle" data-toggle="dropdown">
-            题库管理
+            菜单管理
             <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">

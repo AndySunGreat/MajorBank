@@ -9,8 +9,10 @@
 
     <bean id="questionsService" class="com.majorbank.service.impl.QuestionsServiceImpl" />
 
-    <bean id="questBankService" class="com.majorbank.service.impl.QuestBankServiceImpl" />
+    <bean id="questBankService" class="com.majorbank.service.impl.BanksServiceImpl" />
 
     <bean id="orderService" class="com.majorbank.service.impl.OrderServiceImpl" />
+
+    <bean id="optionsService" class="com.majorbank.service.impl.OptionsServiceImpl" />
 
 </beans>

@@ -10,9 +10,9 @@ import java.util.List;
  */
 public interface QuestionsService {
 
-    List<Questions> getAllQuestionsByBankId(Questions questions);
+    List<Questions> getAllQuestions(Questions questions);
 
-    Questions getQuestionById(long bankId, long questionId);
+    Questions getQuestionById(long questionId);
 
 
     int insertQuestions(Questions questions);

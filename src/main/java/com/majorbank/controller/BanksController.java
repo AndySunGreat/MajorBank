@@ -1,7 +1,6 @@
 package com.majorbank.controller;
 
-import com.majorbank.model.Banks;
-import com.majorbank.model.OptionsMapping;
+import com.majorbank.model.*;
 import com.majorbank.service.BanksService;
 import com.majorbank.service.OptionsService;
 import net.sf.json.JSONObject;
@@ -13,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,10 +30,55 @@ public class BanksController {
     private OptionsService optionsService;
 
     @ResponseBody
-    @RequestMapping(value={"options/{itemParentValue}"},method = {RequestMethod.GET})
-    public List<OptionsMapping> getOptionsByParentValue(@PathVariable String itemParentValue){
-        List<OptionsMapping>optionsMapping = optionsService.getOptionsByParentValue(itemParentValue);
-        return optionsMapping;
+    @RequestMapping(value={"options/industryOptions"},method = {RequestMethod.GET})
+    public List<IndustryTypeOptions> getOptionsByParentValue(){
+        List<OptionsMapping> industryTypeList = optionsService.getOptionsByParentValue("questions");
+        List<OptionsMapping> bankCategoryList,bankTypeList;
+
+        OptionsMapping industryTypeOptionsMapping,bankCategoryOptionsMapping,bankTypeOptionsMapping;
+
+        IndustryTypeOptions industryTypeOptions = new IndustryTypeOptions();
+        List<IndustryTypeOptions> industryTypeOptionsList = new ArrayList<IndustryTypeOptions>();
+        BankCategoryOptions bankCategoryOptions;
+        List<BankCategoryOptions> bankCategoryOptionsList;
+        BankTypeOptions bankTypeOptions;
+        List<BankTypeOptions> bankTypeOptionsList;
+        for(int i=0;i<industryTypeList.size();i++){
+            industryTypeOptions = new IndustryTypeOptions();
+            industryTypeOptionsMapping = industryTypeList.get(i);
+            industryTypeOptions.setId(String.valueOf(industryTypeOptionsMapping.getId()));
+            industryTypeOptions.setKey(industryTypeOptionsMapping.getItemKey());
+            industryTypeOptions.setValue(industryTypeOptionsMapping.getItemValue());
+            bankCategoryOptionsList = new ArrayList<BankCategoryOptions>();
+            bankCategoryList = optionsService.getOptionsByParentValue(industryTypeOptionsMapping.getItemValue());
+            if(bankCategoryList!=null){
+                for(int j=0;j<bankCategoryList.size();j++){
+                    bankCategoryOptions = new BankCategoryOptions();
+                    bankCategoryOptionsMapping = bankCategoryList.get(j);
+                    bankCategoryOptions.setId(String.valueOf(bankCategoryOptionsMapping.getId()));
+                    bankCategoryOptions.setKey(bankCategoryOptionsMapping.getItemKey());
+                    bankCategoryOptions.setValue(bankCategoryOptionsMapping.getItemValue());
+                    bankTypeOptionsList = new ArrayList<BankTypeOptions>();
+                    bankTypeList =  optionsService.getOptionsByParentValue(bankCategoryOptionsMapping.getItemValue());
+                    if(bankTypeList!=null){
+                        for(int m=0;m<bankTypeList.size();m++){
+                            bankTypeOptions = new BankTypeOptions();
+                            bankTypeOptionsMapping = bankTypeList.get(m);
+                            bankTypeOptions.setId(String.valueOf(bankTypeOptionsMapping.getId()));
+                            bankTypeOptions.setKey(bankTypeOptionsMapping.getItemKey());
+                            bankTypeOptions.setValue(bankTypeOptionsMapping.getItemValue());
+                            bankTypeOptionsList.add(bankTypeOptions);
+                        }
+                    }
+                    bankCategoryOptions.setTypes(bankTypeOptionsList);
+                    bankCategoryOptionsList.add(bankCategoryOptions);
+                }
+            }
+
+            industryTypeOptions.setCategories(bankCategoryOptionsList);
+            industryTypeOptionsList.add(industryTypeOptions);
+        }
+        return industryTypeOptionsList;
     }
 
     /**
@@ -53,8 +98,20 @@ public class BanksController {
      */
     @ResponseBody
     @RequestMapping(value={"banks"},method = {RequestMethod.GET})
-    public List<Banks> getAllBanks(){
-        List<Banks> banksList = questBankService.getAllBanks(null);
+    public List<Banks> getAllBanks(@RequestParam(required = false) String industryType,
+                                   @RequestParam(required = false) String qbCategory,
+                                   @RequestParam(required = false) String qbType,
+                                   @RequestParam(required = false) String bankId,
+                                   @RequestParam(required = false) String bankName,
+                                   @RequestParam(required = false) String qbVersion){
+        Banks banks = new Banks();
+        banks.setBankId(bankId==null?0:Long.valueOf(bankId));
+        banks.setBankName(bankName);
+        banks.setIndustryType(industryType);
+        banks.setQbCategory(qbCategory);
+        banks.setQbType(qbType);
+        banks.setQbVersion(qbVersion);
+        List<Banks> banksList = questBankService.getAllBanks(banks);
         return banksList;
     }
 
@@ -63,7 +120,7 @@ public class BanksController {
      * ps: Content-Type要用application/json,Body选raw写入json才可以
      * @return
      */
-    @PostMapping("/banks")
+    @PostMapping("banks")
     public ResponseEntity insertBank(@RequestBody Banks banks){
         int insertResult = questBankService.insertBank(banks);
 

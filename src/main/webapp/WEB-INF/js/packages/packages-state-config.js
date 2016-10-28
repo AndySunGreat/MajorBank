@@ -6,6 +6,15 @@ angular.module('bms-packages-state-config', [])
                 views:{
                       '':{
                           templateUrl: "ftl/packages/packages.ftl",
+                          resolve:{
+                              industryTypeOptions:['bmsBanksService',
+                                  function(bmsPackagesService){
+                                      var test =   bmsPackagesService.OptionsList.queryByParentValue().$promise;
+                                      console.log(test);
+                                      return test;
+                                  }
+                              ]
+                          },
                           controller:"bmsPackages"
                       }
 /*                     , "datalist":{  // 显示到index.jsp中<div ui-view="datalist">

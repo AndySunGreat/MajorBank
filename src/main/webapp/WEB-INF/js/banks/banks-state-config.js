@@ -9,8 +9,7 @@ angular.module('bms-banks-state-config', [])
                           resolve:{
                               industryTypeOptions:['bmsBanksService',
                                   function(bmsBanksService){
-                                      var test =   bmsBanksService.OptionsList.queryByParentValue(
-                                          {    itemParentValue: "questions"}).$promise;
+                                      var test =   bmsBanksService.OptionsList.queryByParentValue().$promise;
                                       console.log(test);
                                       return test;
                                   }

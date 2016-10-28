@@ -12,6 +12,9 @@ public class IndustryTypeOptions implements Serializable {
     private String value;
     private List<BankCategoryOptions> categories;
 
+    public IndustryTypeOptions() {
+    }
+
     public IndustryTypeOptions(String id, String key, String value, List<BankCategoryOptions> categories) {
         this.id = id;
         this.key = key;

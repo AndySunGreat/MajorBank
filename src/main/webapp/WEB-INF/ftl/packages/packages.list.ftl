@@ -3,7 +3,7 @@
            <table class="table table-striped table-condensed">
                <thead>
                    <tr>
-                        <th style="width:150px;padding:5px;">套餐ID</th>
+                        <th style="width:150px;padding:5px;">套餐编号</th>
                         <th style="width:150px;padding:5px;">套餐名称</th>
                         <th style="width:150px;padding:5px;">职业ID</th>
                         <th style="width:150px;padding:5px;">题库ID串</th>

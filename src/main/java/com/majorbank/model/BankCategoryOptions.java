@@ -12,6 +12,9 @@ public class BankCategoryOptions implements Serializable {
     private String value;
     private List<BankTypeOptions> types;
 
+    public BankCategoryOptions() {
+    }
+
     public BankCategoryOptions(String id, String key, String value, List<BankTypeOptions> types) {
         this.id = id;
         this.key = key;

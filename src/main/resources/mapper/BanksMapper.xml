@@ -41,19 +41,19 @@
             <if test="_parameter !=null ">
                 1=1
                 <if test="bankId != 0 and bankId !=null">
-                    and BANK_ID = #{packageId}
+                    and BANK_ID = #{bankId}
                 </if>
 
                 <if test="bankName != null">
                     and BANK_NAME = #{bankName}
                 </if>
-                <if test="qbCategory != 0 and qbCategory !=null">
+                <if test="qbCategory !=null">
                     and QB_CATEGORY = #{qbCategory}
                 </if>
-                <if test="industryType != 0 and industryType !=null">
+                <if test="industryType !=null">
                     and INDUSTRY_TYPE = #{industryType}
                 </if>
-                <if test="qbType != 0 and qbType !=null">
+                <if test="qbType !=null">
                     and QB_TYPE = #{qbType}
                 </if>
                 <if test="qbVersion != null">

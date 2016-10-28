@@ -2,47 +2,33 @@
 <div class="container">
         <form>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">问题编号:</label>
-                <label class="col-sm-2 col-form-label">{{questionDetail.questionId}} </label>
-            </div>
-            <div class="form-group row">
                 <label class="col-sm-2 col-form-label">题库编号:</label>
-                <label class="col-sm-2 col-form-label">{{questionDetail.bankId}} </label>
+                <label class="col-sm-2 col-form-label">{{bankDetail.bankId}} </label>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">问题内容:</label>
-                <label class="col-sm-2 col-form-label">{{questionDetail.questContent}} </label>
+                <label class="col-sm-2 col-form-label">题库名称:</label>
+                <label class="col-sm-2 col-form-label">{{bankDetail.bankName}} </label>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">问题类型:</label>
-                <label class="col-sm-2 col-form-label">{{questionDetail.questType}} </label>
+                <label class="col-sm-2 col-form-label">行业类型:</label>
+                <label class="col-sm-2 col-form-label">{{bankDetail.industryType}} </label>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">正确答案:</label>
-                <label class="col-sm-2 col-form-label">{{questionDetail.correctAnswer}} </label>
+                <label class="col-sm-2 col-form-label">题库范畴:</label>
+                <label class="col-sm-2 col-form-label">{{bankDetail.qbCategory}} </label>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">题库类型:</label>
+                <label class="col-sm-2 col-form-label">{{bankDetail.qbType}} </label>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">题库版本:</label>
+                <label class="col-sm-2 col-form-label">{{bankDetail.changeDate}} </label>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">修改日期:</label>
-                <label class="col-sm-2 col-form-label">{{questionDetail.changeDate}} </label>
+                <label class="col-sm-2 col-form-label">{{bankDetail.qbVersion}} </label>
             </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">问题选项:</label>
-                <div class="span7">
-                    <table class="table table-striped table-condensed">
-                        <thead>
-                            <tr>
-                                <th style="width:150px;padding:5px;">选项序号</th>
-                                <th style="width:150px;padding:5px;">选项内容</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="option in questionDetail.questOptions ">
-                                <td style="width:150px;padding:5px;" ">{{option.optSeq}}</td>
-                                <td style="width:150px;padding:5px;" ">{{option.optContent}}</td>
-                            </tr>
-                        <tr>
-                    </table>
-                 </div>
-            </div>
+
         </form>
     </div>

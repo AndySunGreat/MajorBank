@@ -1,9 +1,11 @@
 angular.module('bms-packages-state-update-controller',[ 'ui.bootstrap'])
-    .controller('bmsPackagesStateUpdateController',function($scope,$state,$uibModalInstance,bmsPackagesService,packageDetail){
+    .controller('bmsPackagesStateUpdateController',
+        function($scope,$state,$uibModalInstance,bmsPackagesService,packageDetail,industryTypeOptions){
        console.log("bmsPackagesStateUpdateController");
         console.log($uibModalInstance);
         console.log(packageDetail);
         $scope.packageDetail = packageDetail;
+        $scope.industryTypeOptions = industryTypeOptions;
         console.log($scope.packageDetail);
         $scope.submitModal = function() {
             console.log("submit前数据提交：");

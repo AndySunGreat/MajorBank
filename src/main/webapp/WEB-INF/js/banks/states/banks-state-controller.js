@@ -5,6 +5,7 @@ angular.module('bms-banks-state-controller',['ui.bootstrap'])
     .controller('bmsBanksStateController',
         function($scope,$uibModal,$q,$state,bmsBanksService,$log,$stateParams){
         console.log("state-controller");
+            console.log($stateParams.searchParams);
 
             var emptyFilterForm = {
                 bankId: null,
@@ -32,7 +33,14 @@ angular.module('bms-banks-state-controller',['ui.bootstrap'])
                 backdrop : false,
                 templateUrl: 'ftl/banks/banks.modal.ftl',
                 resolve: {
-                    bankDetail: angular.copy(emptyFilterForm)
+                    bankDetail: angular.copy(emptyFilterForm),
+                    industryTypeOptions:['bmsBanksService',
+                        function(bmsBanksService){
+                            var test =   bmsBanksService.OptionsList.queryByParentValue().$promise;
+                            console.log(test);
+                            return test;
+                        }
+                    ]
                 },
                 controller: 'bmsBanksStateAddController'
             });
@@ -60,6 +68,13 @@ angular.module('bms-banks-state-controller',['ui.bootstrap'])
                             return bmsBanksService.Banks.getBankDetail(
                                 {   bankId: bankId}
                             ).$promise;
+                        }
+                    ],
+                    industryTypeOptions:['bmsBanksService',
+                        function(bmsBanksService){
+                            var test =   bmsBanksService.OptionsList.queryByParentValue().$promise;
+                            console.log(test);
+                            return test;
                         }
                     ]
                 },

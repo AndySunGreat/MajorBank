@@ -5,10 +5,10 @@ angular.module('bms-banks-service',['ngResource'])
         // $get来返回provider实例
         this.$get =["$resource",function($resource){
             return {
-                OptionsList:$resource(baseUrl + "options/:itemParentValue",{},
+                OptionsList:$resource(baseUrl + "options/industryOptions",{},
                     {
                     queryByParentValue:{
-                        url: baseUrl + "options/:itemParentValue",
+                        url: baseUrl + "options/industryOptions",
                         method: 'GET',
                         isArray: true
                     }

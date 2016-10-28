@@ -15,22 +15,30 @@ angular.module('bms-banks',['bms-banks-service','bms-banks-states'])
         $scope.industryTypeOptions = industryTypeOptions;
 
 
-        $scope.changeForIndustryOption = function(industryType){
-            console.log(industryType);
-            $scope.qbCategoryOptions = bmsBanksService.OptionsList.queryByParentValue(
-                {    itemParentValue: industryType.itemValue}).$promise;
-        }
-
-        $scope.changeForQBCategoryOption = function(qbCategory){
-            console.log(qbCategory);
-        }
-
-
         $scope.queryForm = function(searchFilter){
-            if(searchFilter!=undefined){
-                $state.go("banks.list",{searchParams:searchFilter},{reload:true});
-            }else{
+            //console.log($scope.searchFilter);
+            //console.log($scope.option);
+           // console.log($scope.categories);
+            if(searchFilter==undefined && $scope.option==undefined
+                && $scope.categories == undefined
+                && $scope.types == undefined)
+            {
                 $state.go("banks.list",{searchParams:null},{reload:true});
+            }else{
+                if(searchFilter==undefined){
+                    $scope.searchFilter = new Object();
+                }
+                if($scope.option!=undefined){
+                    $scope.searchFilter.industryType = $scope.option.value;
+                }
+                if($scope.categories!=undefined) {
+                    $scope.searchFilter.qbCategory = $scope.categories.value;
+                }
+                if($scope.types!=undefined) {
+                    $scope.searchFilter.qbType = $scope.types.value;
+                }
+                console.log("bankjs searchFilter:"+$scope.searchFilter);
+                $state.go("banks.list",{searchParams:$scope.searchFilter},{reload:true});
             }
         };
 

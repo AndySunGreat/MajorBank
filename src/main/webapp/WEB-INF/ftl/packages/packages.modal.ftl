@@ -78,6 +78,7 @@
                                     <tr>
                                         <th width="30%">题库编号</th>
                                         <th>题库名称</th>
+                                        <th>类型</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -85,6 +86,7 @@
                                         <tr ng-repeat="bankOption in bankOptions">
                                             <td>{{bankOption.bankId}}</td>
                                             <td>{{bankOption.bankName}}</td>
+                                            <td>{{bankOption.qbType}}</td>
                                             <td> <button ng-show="$index!=-1" class="btn btn-default btn-primary"
                                                          ng-click="delBankOptions($index)">Del</button></td>
                                         </tr>

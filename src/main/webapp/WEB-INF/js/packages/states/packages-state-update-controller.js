@@ -15,7 +15,8 @@ angular.module('bms-packages-state-update-controller',[ 'ui.bootstrap'])
 
             for(var i=0;i<$scope.banksDetailForPkgId.length;i++){
                 var obj = {bankId:$scope.banksDetailForPkgId[i].bankId,
-                    bankName:$scope.banksDetailForPkgId[i].bankName};
+                    bankName:$scope.banksDetailForPkgId[i].bankName,
+                    qbType:$scope.banksDetailForPkgId[i].qbType};
                 $scope.bankOptions.push(obj);
             }
 
@@ -25,8 +26,12 @@ angular.module('bms-packages-state-update-controller',[ 'ui.bootstrap'])
                         && $scope.bankOptions[0].bankId==""){
                         $scope.bankOptions[0].bankId = $scope.banks.bankId;
                         $scope.bankOptions[0].bankName = $scope.banks.bankName;
+                        $scope.bankOptions[0].qbType = $scope.banks.qbType;
                     }else{
-                        var obj = {bankId:$scope.banks.bankId,bankName:$scope.banks.bankName};
+                        var obj = {bankId:$scope.banks.bankId,
+                            bankName:$scope.banks.bankName,
+                            qbType:$scope.banks.qbType
+                        };
                         $scope.bankOptions.push(obj);
                     }
                 }
@@ -36,14 +41,24 @@ angular.module('bms-packages-state-update-controller',[ 'ui.bootstrap'])
                 $scope.bankOptions.splice(idx,1);
             };
             $scope.addBank = function(){
-                var obj = {bankId:$scope.banks.bankId,bankName:$scope.banks.bankName};
+                var obj = {bankId:$scope.banks.bankId,
+                    bankName:$scope.banks.bankName,
+                    qbType:$scope.banks.qbType};
                 $scope.bankOptions.push(obj);
 
             }
             $scope.submitModal = function() {
                 console.log("submit前数据提交：");
                 console.log($scope.packageDetail);
+                var strBankIdsJson = "";
+                for(var i=0;i<$scope.bankOptions.length;i++){
+                    strBankIdsJson = strBankIdsJson + $scope.bankOptions[i].bankId;
+                    if(i<$scope.bankOptions.length-1){
+                        strBankIdsJson = strBankIdsJson + ",";
+                    }
+                }
                 var packageId = $scope.packageDetail.packageId;
+                $scope.packageDetail.bankIdsJson = strBankIdsJson;
                 bmsPackagesService.Packages.updatePackage({packageId:packageId},$scope.packageDetail).$promise.then(
                     function(data){
                         console.log('update package successfully');

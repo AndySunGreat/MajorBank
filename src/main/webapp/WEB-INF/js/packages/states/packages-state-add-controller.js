@@ -7,7 +7,7 @@ angular.module('bms-packages-state-add-controller',[ 'ui.bootstrap'])
             $scope.packageDetail = packageDetail;
             $scope.industryTypeOptions = industryTypeOptions;
             $scope.searchBanksParams = new Object();
-            $scope.bankOptions = [{bankId:"",bankName:""}];
+            $scope.bankOptions = [{bankId:"",bankName:"",qbType:""}];
             //$scope.bankOptions=[];
             $scope.modelBID = {};
             $scope.modelBName = {};
@@ -17,8 +17,11 @@ angular.module('bms-packages-state-add-controller',[ 'ui.bootstrap'])
                         && $scope.bankOptions[0].bankId==""){
                         $scope.bankOptions[0].bankId = $scope.banks.bankId;
                         $scope.bankOptions[0].bankName = $scope.banks.bankName;
+                        $scope.bankOptions[0].qbType = $scope.banks.qbType;
                     }else{
-                        var obj = {bankId:$scope.banks.bankId,bankName:$scope.banks.bankName};
+                        var obj = {bankId:$scope.banks.bankId,
+                                bankName:$scope.banks.bankName,
+                                qbType:$scope.banks.qbType};
                         $scope.bankOptions.push(obj);
                     }
                 }
@@ -27,7 +30,7 @@ angular.module('bms-packages-state-add-controller',[ 'ui.bootstrap'])
                 $scope.bankOptions.splice(idx,1);
             };
             $scope.addBank = function(){
-                var obj = {bankId:$scope.banks.bankId,bankName:$scope.banks.bankName};
+                var obj = {bankId:$scope.banks.bankId,bankName:$scope.banks.bankName,qbType:$scope.banks.qbType};
                 $scope.bankOptions.push(obj);
 
             }

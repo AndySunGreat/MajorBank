@@ -59,6 +59,13 @@
                 <if test="qbVersion != null">
                     and QB_VERSION = #{qbVersion}
                 </if>
+                <if test="bankIds != null">
+                    and BANK_ID IN
+                    <foreach item="item" index="index" collection="bankIds"
+                             open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                </if>
             </if>
         </where>
     </sql>

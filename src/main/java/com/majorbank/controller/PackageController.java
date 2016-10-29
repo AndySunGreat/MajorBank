@@ -2,6 +2,7 @@ package com.majorbank.controller;
 
 import com.majorbank.model.Banks;
 import com.majorbank.model.Package;
+import com.majorbank.service.BanksService;
 import com.majorbank.service.PackageService;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
@@ -24,6 +25,9 @@ public class PackageController {
 
     @Autowired
     private PackageService packageService;
+
+    @Autowired
+    private BanksService banksService;
 
     /**
      * list all Package[tested]
@@ -80,6 +84,20 @@ public class PackageController {
         Package package1 = packageService.getPackageById(packageId);
         return package1;
     }
+    @ResponseBody
+    @RequestMapping(value={"/package/banksDetail/{packageId}"},method = {RequestMethod.GET})
+    public List<Banks> getBanksDetailByPkgId(@PathVariable long packageId){
+        Package package1 = packageService.getPackageById(packageId);
+        String bankIdsJson = package1.getBankIdsJson();
+        Banks banks = new Banks();
+        if(bankIdsJson!=null && bankIdsJson!="") {
+            String[] bankIdsArray = bankIdsJson.split(",");
+            banks.setBankIds(bankIdsArray);
+        }
+        List<Banks> banksList = banksService.getAllBanks(banks);
+        return banksList;
+    }
+
 
     /***
      * update Package info[tested]

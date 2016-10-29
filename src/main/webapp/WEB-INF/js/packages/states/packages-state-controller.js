@@ -68,7 +68,16 @@ angular.module('bms-packages-state-controller',['ui.bootstrap'])
                             ).$promise;
                         }
                     ],
-                    industryTypeOptions:['bmsBanksService',
+                    banksDetailForPkgId: ['bmsPackagesService',
+                        function (bmsPackagesService) {
+                            var test1 = bmsPackagesService.Packages.getBanksDetail(
+                                {packageId: packageId}
+                            ).$promise;
+                            console.log(test1);
+                            return test1;
+                        }
+                    ],
+                    industryTypeOptions:['bmsPackagesService',
                         function(bmsPackagesService){
                             var test =   bmsPackagesService.OptionsList.queryByParentValue().$promise;
                             console.log(test);

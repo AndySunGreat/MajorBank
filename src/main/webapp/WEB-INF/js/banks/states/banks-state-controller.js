@@ -19,6 +19,7 @@ angular.module('bms-banks-state-controller',['ui.bootstrap'])
         $scope.load = function(){
             console.log($stateParams.searchParams);
             $scope.searchParams = $stateParams.searchParams;
+            console.log("state-controller-load():"+ $stateParams.searchParams);
             console.log(angular.toJson($scope.searchParams));
             var entry  = bmsBanksService.BanksList.searchFilter($scope.searchParams,function(){
                 console.log(entry);

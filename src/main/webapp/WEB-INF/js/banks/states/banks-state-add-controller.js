@@ -4,6 +4,8 @@ angular.module('bms-banks-state-add-controller',[ 'ui.bootstrap'])
         $scope.bankDetail = bankDetail;
         $scope.industryTypeOptions = industryTypeOptions;
 
+
+
         $scope.submitModal = function() {
             console.log("submit前数据提交：");
             console.log($scope.option);

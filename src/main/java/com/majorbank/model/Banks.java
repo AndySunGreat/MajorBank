@@ -11,13 +11,11 @@ public class Banks implements Serializable {
     private long bankId;
     private String bankName; // JAVA CORE
     private String qbCategory; // 1:前端开发  2.后端开发 3.移动开发  4.测试  5.运维  6.DBA 7.硬件开发 8.高端职位
-    private String qbCategoryValue;
     private String industryType; // IT
-    private String industryTypeValue;
     private String qbType; // JAVA,PHP,C#,C++,.NET,Python,Perl
-    private String qbTypeValue;
     private String qbVersion;
     private Date changeDate;
+    private String[] bankIds;
 
     public Banks() {
     }
@@ -36,71 +34,28 @@ public class Banks implements Serializable {
     }
 
     public Banks(long bankId, String bankName, String qbCategory,
-                 String qbCategoryValue, String industryType,
-                 String industryTypeValue, String qbType,
-                 String qbTypeValue, String qbVersion, Date changeDate) {
+                 String industryType, String qbType,
+                 String qbVersion, Date changeDate, String[] bankIds) {
         this.bankId = bankId;
         this.bankName = bankName;
         this.qbCategory = qbCategory;
-        this.qbCategoryValue = qbCategoryValue;
         this.industryType = industryType;
-        this.industryTypeValue = industryTypeValue;
         this.qbType = qbType;
-        this.qbTypeValue = qbTypeValue;
         this.qbVersion = qbVersion;
         this.changeDate = changeDate;
+        this.bankIds = bankIds;
     }
 
-    public String getQbCategoryValue() {
-        return qbCategoryValue;
+    public String[] getBankIds() {
+        return bankIds;
     }
 
-    public void setQbCategoryValue(String qbCategoryValue) {
-        this.qbCategoryValue = qbCategoryValue;
-    }
-
-    public String getIndustryTypeValue() {
-        return industryTypeValue;
-    }
-
-    public void setIndustryTypeValue(String industryTypeValue) {
-        this.industryTypeValue = industryTypeValue;
-    }
-
-    public String getQbTypeValue() {
-        return qbTypeValue;
-    }
-
-    public void setQbTypeValue(String qbTypeValue) {
-        this.qbTypeValue = qbTypeValue;
-    }
-
-    public String getQbVersion() {
-        return qbVersion;
-    }
-
-    public void setQbVersion(String qbVersion) {
-        this.qbVersion = qbVersion;
-    }
-
-    public Date getChangeDate() {
-        return changeDate;
-    }
-
-    public void setChangeDate(Date changeDate) {
-        this.changeDate = changeDate;
+    public void setBankIds(String[] bankIds) {
+        this.bankIds = bankIds;
     }
 
     public long getBankId() {
         return bankId;
-    }
-
-    public String getIndustryType() {
-        return industryType;
-    }
-
-    public void setIndustryType(String industryType) {
-        this.industryType = industryType;
     }
 
     public void setBankId(long bankId) {
@@ -123,6 +78,14 @@ public class Banks implements Serializable {
         this.qbCategory = qbCategory;
     }
 
+    public String getIndustryType() {
+        return industryType;
+    }
+
+    public void setIndustryType(String industryType) {
+        this.industryType = industryType;
+    }
+
     public String getQbType() {
         return qbType;
     }
@@ -131,4 +94,19 @@ public class Banks implements Serializable {
         this.qbType = qbType;
     }
 
+    public String getQbVersion() {
+        return qbVersion;
+    }
+
+    public void setQbVersion(String qbVersion) {
+        this.qbVersion = qbVersion;
+    }
+
+    public Date getChangeDate() {
+        return changeDate;
+    }
+
+    public void setChangeDate(Date changeDate) {
+        this.changeDate = changeDate;
+    }
 }

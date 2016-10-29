@@ -43,6 +43,8 @@ public class BanksController {
         List<BankCategoryOptions> bankCategoryOptionsList;
         BankTypeOptions bankTypeOptions;
         List<BankTypeOptions> bankTypeOptionsList;
+        Banks banks;
+        List<Banks> banksList;
         for(int i=0;i<industryTypeList.size();i++){
             industryTypeOptions = new IndustryTypeOptions();
             industryTypeOptionsMapping = industryTypeList.get(i);
@@ -67,6 +69,13 @@ public class BanksController {
                             bankTypeOptions.setId(String.valueOf(bankTypeOptionsMapping.getId()));
                             bankTypeOptions.setKey(bankTypeOptionsMapping.getItemKey());
                             bankTypeOptions.setValue(bankTypeOptionsMapping.getItemValue());
+                            banksList = new ArrayList<Banks>();
+                            banks = new Banks();
+                            banks.setIndustryType(industryTypeOptionsMapping.getItemValue());
+                            banks.setQbCategory(bankCategoryOptionsMapping.getItemValue());
+                            banks.setQbType(bankTypeOptionsMapping.getItemValue());
+                            banksList = questBankService.getAllBanks(banks);
+                            bankTypeOptions.setBanks(banksList);
                             bankTypeOptionsList.add(bankTypeOptions);
                         }
                     }
@@ -103,7 +112,8 @@ public class BanksController {
                                    @RequestParam(required = false) String qbType,
                                    @RequestParam(required = false) String bankId,
                                    @RequestParam(required = false) String bankName,
-                                   @RequestParam(required = false) String qbVersion){
+                                   @RequestParam(required = false) String qbVersion,
+                                   @RequestParam(required = false) String bankIds){
         Banks banks = new Banks();
         banks.setBankId(bankId==null?0:Long.valueOf(bankId));
         banks.setBankName(bankName);
@@ -111,6 +121,10 @@ public class BanksController {
         banks.setQbCategory(qbCategory);
         banks.setQbType(qbType);
         banks.setQbVersion(qbVersion);
+        if(bankIds!=null) {
+            String[] bankIdsArray = bankIds.split(",");
+            banks.setBankIds(bankIdsArray);
+        }
         List<Banks> banksList = questBankService.getAllBanks(banks);
         return banksList;
     }

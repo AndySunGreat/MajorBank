@@ -1,6 +1,7 @@
 package com.majorbank.service.impl;
 
 import com.majorbank.mapper.PackageMapper;
+import com.majorbank.model.Banks;
 import com.majorbank.model.Package;
 import com.majorbank.service.PackageService;
 import org.slf4j.Logger;
@@ -27,6 +28,9 @@ public class PackageServiceImpl implements PackageService{
         LOG.info("a:" + a);
         return packageMapper.getAllPackages(package1);
     }
+
+
+
     public int insertPackage(Package package1){
         return packageMapper.insertPackage(package1);
     }

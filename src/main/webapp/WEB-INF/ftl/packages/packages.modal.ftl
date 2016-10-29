@@ -50,49 +50,50 @@
                                 <div class="col-sm-3">
                                     <select id="pkgInputQbType" class="form-control"
                                             ng-model="types"
+                                            ng-change="changeBankTypeList()"
                                             ng-options="types.value for types in categories.types">
                                         <option value="">-- 请选择 --</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="questOptionsJson">题库选项:</label>
+                                <label class="control-label col-sm-2" for="pkgInputBank">题库选择</label>
                                 <div class="col-sm-3">
-                                    <button ng-click="addAdditionalParams()"
+                                    <select id="pkgInputBank" class="form-control"
+                                            ng-model="banks"
+                                            ng-options="banks.bankName for banks in types.banks track by banks.bankId">
+                                        <option value="">-- 请选择 --</option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-1">
+                                    <button ng-click="addBank()"
                                             class="btn btn-default btn-success">Add</button>
                                 </div>
                             </div>
-                            <div ng-repeat="parameters in addiDynamicParamList">
-                                <div class="form-group">
-                                    <label class="control-label col-sm-2" for="keyDynamicParams">(选项:{{parameters.optSeq}})</label>
-                                    <div class="col-xs-1">
-                                        <input type="input" id="keyDynamicParams" class="form-control"
-                                               ng-model="parameters.optSeq"/>
-                                    </div>
-                                    <div class="col-sm-5">
-                                            <textarea  id="valueDynamicParams" class="form-control"
-                                                       ng-model="parameters.optContent" rows="3" />
-                                    </div>
-                                    <button ng-show="$index!=-1" class="btn btn-default btn-primary"
-                                            ng-click="delAdditionalParams($index)">Del</button>
-                                </div>
-                            </div>
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="bankIdsJson">题库编号串:</label>
-                                <div class="col-sm-3">
-                                        <input type="text" class="form-control"
-                                               id="bankIdsJson"
-                                               ng-model="packageDetail.bankIdsJson" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-
+                                <label class="control-label col-sm-2" for="pkgInputQbType">(已选列表)</label>
+                                <div class="col-sm-5">
+                                <table class="table table-hover" ng-show="bankOptions">
+                                    <thead>
+                                    <tr>
+                                        <th width="30%">题库编号</th>
+                                        <th>题库名称</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="bankOption in bankOptions">
+                                            <td>{{bankOption.bankId}}</td>
+                                            <td>{{bankOption.bankName}}</td>
+                                            <td> <button ng-show="$index!=-1" class="btn btn-default btn-primary"
+                                                         ng-click="delBankOptions($index)">Del</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                    </div>
                             </div>
                         </form>
-
-
                     </div>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" ng-click="submitModal()">提交</button>

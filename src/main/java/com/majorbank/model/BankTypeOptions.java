@@ -10,6 +10,7 @@ public class BankTypeOptions implements Serializable {
     private String id;
     private String key;
     private String value;
+    private List<Banks> banks;
 
     public BankTypeOptions() {
     }
@@ -19,7 +20,20 @@ public class BankTypeOptions implements Serializable {
         this.key = key;
         this.value = value;
     }
+    public BankTypeOptions(String id, String key, String value, List<Banks> banks) {
+        this.id = id;
+        this.key = key;
+        this.value = value;
+        this.banks = banks;
+    }
 
+    public List<Banks> getBanks() {
+        return banks;
+    }
+
+    public void setBanks(List<Banks> banks) {
+        this.banks = banks;
+    }
 
     public String getId() {
         return id;

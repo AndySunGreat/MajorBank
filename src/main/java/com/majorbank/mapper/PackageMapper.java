@@ -1,5 +1,6 @@
 package com.majorbank.mapper;
 
+import com.majorbank.model.Banks;
 import com.majorbank.model.Package;
 import org.springframework.stereotype.Repository;
 

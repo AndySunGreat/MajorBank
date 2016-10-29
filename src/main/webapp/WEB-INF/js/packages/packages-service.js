@@ -14,6 +14,17 @@ angular.module('bms-packages-service',['ngResource'])
                         }
                     })
                 ,
+                BanksList:$resource(baseUrl + "banks/",
+                    {
+                    },
+                    {
+                        searchFilter:{
+                            url: baseUrl + "banks/",
+                            method: 'GET',
+                            isArray: true
+                        }
+                    })
+                ,
                 PackagesList:$resource(baseUrl + "login/package/",
                     {
                         packageId:"@packageId"
@@ -35,6 +46,11 @@ angular.module('bms-packages-service',['ngResource'])
                         },
                         createPackage: {
                             method: 'POST'
+                        },
+                        getBanksDetail:{
+                            url: baseUrl + "login/package/banksDetail/:packageId",
+                            method: 'GET',
+                            isArray: true
                         },
                         getPackageDetail:{
                             url:baseUrl + "login/package/:packageId",

@@ -14,7 +14,6 @@ public class IndexController {
     @RequestMapping("/")
     public String hello(Model model) {
         model.addAttribute("name", "helloworld");
-        //returns the view name
         return "index";
     }
 

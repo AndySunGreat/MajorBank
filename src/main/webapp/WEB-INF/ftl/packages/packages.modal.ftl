@@ -20,6 +20,13 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="control-label col-sm-2" for="packageDesc">套餐描述</label>
+                                <div class="col-sm-3">
+                                     <textarea  id="packageDesc" class="form-control"
+                                                ng-model="packageDetail.packageDesc" rows="3" />
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="control-label col-sm-2" for="jobId">职业编号:</label>
                                 <div class="col-sm-3" >
                                     <input type="text" class="form-control" id="jobId" ng-model="packageDetail.jobId" />

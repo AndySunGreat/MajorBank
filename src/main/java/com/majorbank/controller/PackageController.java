@@ -13,7 +13,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by AndySun on 2016/10/3.
@@ -53,6 +59,21 @@ public class PackageController {
             package1.setBankIdsJson(bankIdsJson);
         }
         List<Package> packageList2 = packageService.getAllPackages(package1);
+        String startdate = "2016-11-1";
+        Date date = null;
+        try {
+            date = (new SimpleDateFormat("yyyy-MM-dd")).parse(startdate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.DATE, 1);
+        System.out.println((new SimpleDateFormat("yyyy-MM-dd")).format(cal.getTime()));
+        Date currentDate = new Date();
+        long diff = currentDate.getTime() - date.getTime();
+        long diffDays = TimeUnit.MILLISECONDS.toDays(diff);
+
         return packageList2;
     }
 

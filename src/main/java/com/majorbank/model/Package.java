@@ -15,6 +15,7 @@ public class Package implements Serializable {
     private String bankIdsJson;// 存放该套餐配置的一组bankID
     private Date createDate; // 创建时间
     private Date changeDate; // 套餐修改时间
+    private String packageDesc;
 
     public Package() {
     }
@@ -28,6 +29,26 @@ public class Package implements Serializable {
         this.bankIdsJson = bankIdsJson;
         this.createDate = createDate;
         this.changeDate = changeDate;
+    }
+
+    public Package(long packageId, String packageName,
+                   long jobId, String bankIdsJson,
+                   Date createDate, Date changeDate, String packageDesc) {
+        this.packageId = packageId;
+        this.packageName = packageName;
+        this.jobId = jobId;
+        this.bankIdsJson = bankIdsJson;
+        this.createDate = createDate;
+        this.changeDate = changeDate;
+        this.packageDesc = packageDesc;
+    }
+
+    public String getPackageDesc() {
+        return packageDesc;
+    }
+
+    public void setPackageDesc(String packageDesc) {
+        this.packageDesc = packageDesc;
     }
 
     public long getPackageId() {

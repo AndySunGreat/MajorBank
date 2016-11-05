@@ -10,6 +10,10 @@
                 <label class="col-sm-2 col-form-label">{{packageDetail.packageName}} </label>
             </div>
             <div class="form-group row">
+                <label class="col-sm-2 col-form-label">套餐描述:</label>
+                <label class="col-sm-2 col-form-label">{{packageDetail.packageDesc}} </label>
+            </div>
+            <div class="form-group row">
                 <label class="col-sm-2 col-form-label">职业编号:</label>
                 <label class="col-sm-2 col-form-label">{{packageDetail.jobId}} </label>
             </div>

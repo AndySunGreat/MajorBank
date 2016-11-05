@@ -28,12 +28,21 @@
     <mvc:annotation-driven/>
     <!-- 静态资源(js、image等)的访问 -->
     <!--    <mvc:default-servlet-handler/>-->
-    <mvc:resources mapping="/html/**" location="/WEB-INF/html/" />
     <mvc:resources mapping="/ftl/**" location="/WEB-INF/ftl/" />
     <mvc:resources mapping="/common/**" location="/WEB-INF/common/" />
     <mvc:resources mapping="/js/**" location="/WEB-INF/js/" />
     <mvc:resources mapping="/image/**" location="/WEB-INF/image/" />
     <mvc:resources mapping="/style/**" location="/WEB-INF/style/" />
+
+<!--    &lt;!&ndash;ViewResolver 视图解析器&ndash;&gt;
+    &lt;!&ndash;用于支持Servlet、JSP视图解析&ndash;&gt;
+    <bean id="viewResolverJsp" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+        <property name="order" value="1"/>
+    </bean>-->
+
 
 
     <!-- freemarker的配置 -->
@@ -52,10 +61,10 @@
         </property>
     </bean>
     <!-- 针对freemarker的视图配置 -->
-    <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+    <bean id="viewResolverFtl" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <property name="cache" value="true" />
-        <property name="prefix" value="" />
         <property name="suffix" value=".ftl" />
+        <property name="order" value="0" />
         <property name="contentType" value="text/html;charset=UTF-8"></property>
         <property name="requestContextAttribute" value="request" />
         <property name="exposeSpringMacroHelpers" value="true" />
@@ -64,13 +73,6 @@
     </bean>
 
 
-    <!--ViewResolver 视图解析器-->
-    <!--用于支持Servlet、JSP视图解析-->
-    <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="/WEB-INF/jsp/"/>
-        <property name="suffix" value=".jsp"/>
-    </bean>
 
 
 

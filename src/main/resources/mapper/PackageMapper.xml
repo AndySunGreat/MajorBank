@@ -20,6 +20,7 @@
         <result column="BANK_IDS_JSON" property="bankIdsJson" />
         <result column="CREATE_DATE" property="createDate" />
         <result column="CHANGE_DATE" property="changeDate" />
+        <result column="PACKAGE_DESC" property="packageDesc" />
     </resultMap>
 
     <!-- get all users record -->
@@ -30,7 +31,8 @@
         JOB_ID,
         BANK_IDS_JSON,
         CREATE_DATE,
-        CHANGE_DATE
+        CHANGE_DATE,
+        PACKAGE_DESC
         FROM PACKAGES
     </sql>
     <sql id="packageFilterWhereClause">
@@ -64,7 +66,8 @@
         JOB_ID,
         BANK_IDS_JSON,
         CREATE_DATE,
-        CHANGE_DATE
+        CHANGE_DATE,
+        PACKAGE_DESC
         FROM PACKAGES
         WHERE PACKAGE_ID=#{packageId}
     </select>
@@ -79,7 +82,8 @@
         JOB_ID,
         BANK_IDS_JSON,
         CREATE_DATE,
-        CHANGE_DATE
+        CHANGE_DATE,
+        PACKAGE_DESC
         FROM PACKAGES
         WHERE JOB_ID=#{jobId,jdbcType=NUMERIC}
     </select>
@@ -91,7 +95,8 @@
         JOB_ID,
         BANK_IDS_JSON,
         CREATE_DATE,
-        CHANGE_DATE
+        CHANGE_DATE,
+        PACKAGE_DESC
         )
         VALUES(
         #{packageId,jdbcType=NUMERIC},
@@ -99,7 +104,8 @@
         #{jobId,jdbcType=NUMERIC},
         #{bankIdsJson,jdbcType=VARCHAR},
         NOW(),
-        NOW()
+        NOW(),
+        #{packageDesc,jdbcType=VARCHAR}
         )
         <selectKey keyProperty="packageId" keyColumn="PACKAGE_ID" resultType="long" order="AFTER">
             SELECT LAST_INSERT_ID() ;
@@ -119,6 +125,9 @@
         </if>
         <if test="bankIdsJson !=null">
         ,BANK_IDS_JSON = #{bankIdsJson,jdbcType=VARCHAR}
+        </if>
+        <if test="packageDesc !=null">
+        ,PACKAGE_DESC = #{packageDesc,jdbcType=VARCHAR}
         </if>
         WHERE PACKAGE_ID= #{packageId,jdbcType=NUMERIC}
     </update>

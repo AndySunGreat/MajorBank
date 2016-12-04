@@ -36,5 +36,5 @@ public class BanksServiceImpl implements BanksService {
     public int deleteBank(long bankId){
         return bankMapper.deleteBank(bankId);
     }
-    
+
 }

@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
   <title>后台管理系统</title>
-
   <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.js"></script>
   <script src="common/angular/ui-bootstrap-tpls-2.2.0.min.js"></script>
+  <script src="common/autocomplete/ui-autocomplete.js"></script>
   <script src="common/angular/angular-ui-router.js"></script>
   <script src="common/angular/angular-resource.min.js"></script>
   <script src="common/angular/angular-animate.js"></script>

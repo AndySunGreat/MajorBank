@@ -5,6 +5,17 @@ angular.module('bms-questions-service',['ngResource'])
         // $get来返回provider实例
         this.$get =["$resource",function($resource){
             return {
+                BanksList:$resource(baseUrl + "banks/",
+                    {
+                    },
+                    {
+                        searchFilter:{
+                            url: baseUrl + "banks/",
+                            method: 'GET',
+                            isArray: true
+                        }
+                    })
+                ,
                 QuestionsList:$resource(baseUrl + "questions/",
                     {
                          questionId:"@questionId"

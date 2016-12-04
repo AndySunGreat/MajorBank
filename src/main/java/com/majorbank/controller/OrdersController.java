@@ -30,8 +30,36 @@ public class OrdersController {
      */
     @ResponseBody
     @RequestMapping(value={"/orders"},method = {RequestMethod.GET})
-    public List<Orders> getAllOrders(){
-        List<Orders> orderList = orderService.getAllOrders(null);
+    public List<Orders> getAllOrders(@RequestParam(required = false) String orderId,
+                                     @RequestParam(required = false) String userId,
+                                     @RequestParam(required = false) String orderType,
+                                     @RequestParam(required = false) String orderStatus,
+                                     @RequestParam(required = false) String bankId,
+                                     @RequestParam(required = false) String answerId,
+                                     @RequestParam(required = false) String packageId){
+        Orders orders = new Orders();
+        if(orderId!=null){
+            orders.setOrderId(Long.valueOf(orderId));
+        }
+        if(userId!=null){
+            orders.setUserId(Long.valueOf(userId));
+        }
+        if(packageId!=null) {
+            orders.setPackageId(packageId);
+        }
+        if(orderType!=null){
+            orders.setOrderType(orderType);
+        }
+        if(orderStatus!=null){
+            orders.setOrderStatus(orderStatus);
+        }
+        if(bankId!=null){
+            orders.setBankId(bankId);
+        }
+        if(answerId!=null){
+            orders.setAnswerId(answerId);
+        }
+        List<Orders> orderList = orderService.getAllOrders(orders);
         return orderList;
     }
 

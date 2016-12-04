@@ -2,11 +2,11 @@
 <div>
     <form  class="form-horizontal" role="form">
         <div class="form-group">
-            <label class="control-label col-sm-2" for="pkgInputBankId">题库编号</label>
+            <label class="control-label col-sm-2" for="pkgInputBankId">题库名称</label>
             <div class="col-sm-3">
                 <input type="text" class="form-control"
                        id="pkgInputBankId"
-                       placeholder="Enter package Name"
+                       placeholder="请输入题库名称"
                        ng-model="searchFilter.bankId"
                        ng-required="true"
                 >
@@ -17,7 +17,7 @@
             <div class="col-sm-3">
                 <input type="text" class="form-control"
                        id="pkgInputQuestionId"
-                       placeholder="Enter question ID"
+                       placeholder="请输入问题编号"
                        ng-model="searchFilter.questionId"
                 >
             </div>
@@ -28,7 +28,7 @@
             <div class="col-sm-3">
                 <input type="text" class="form-control"
                        id="pkgInputQuestContent"
-                       placeholder="Enter question content"
+                       placeholder="请输入问题内容"
                        ng-model="searchFilter.questContent"
                 >
             </div>

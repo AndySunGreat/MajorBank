@@ -1,7 +1,9 @@
 package com.majorbank.controller;
 
 import com.majorbank.model.BankAnswers;
+import com.majorbank.model.Banks;
 import com.majorbank.model.Questions;
+import com.majorbank.service.BanksService;
 import com.majorbank.service.QuestionsService;
 import com.majorbank.service.OrderService;
 import net.sf.json.JSONObject;
@@ -25,6 +27,9 @@ public class QuestionsController {
 
     @Autowired
     private QuestionsService questionsService;
+
+    @Autowired
+    private BanksService banksService;
 
     @Autowired
     private OrderService orderService;
@@ -54,6 +59,10 @@ public class QuestionsController {
             questions.setQuestType(questType);
         }
         List<Questions> questionsList = questionsService.getAllQuestions(questions);
+        for(int i=0;i<questionsList.size();i++){
+            Banks banks = banksService.getBankById(((Questions)questionsList.get(i)).getBankId());
+            ((Questions)questionsList.get(i)).setBankName(banks.getBankName());
+        }
         return questionsList;
     }
 
@@ -69,6 +78,8 @@ public class QuestionsController {
         Questions questions = new Questions();
         questions.setQuestionId(questionId);
         Questions questionsList = questionsService.getQuestionById(questionId);
+        Banks banks = banksService.getBankById(questionsList.getBankId());
+        questionsList.setBankName(banks.getBankName());
         return questionsList;
     }
 

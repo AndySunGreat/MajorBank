@@ -14,6 +14,7 @@ import java.util.List;
 public class Questions implements Serializable {
     private long questionId;
     private long bankId;
+    private String bankName;
     private String questContent; // 问题内容
     private String questType; // 问题类型 1-单选  2-多选  3-判断  4-问答(暂不支持)
     private String questOptionsJson; // 问题选项JSON
@@ -67,6 +68,32 @@ public class Questions implements Serializable {
         this.changeDate = changeDate;
         this.correctIndexes = correctIndexes;
         this.questionIds = questionIds;
+    }
+
+    public Questions(long questionId, long bankId, String bankName,
+                     String questContent, String questType, String questOptionsJson,
+                     List<Options> questOptions,
+                     String correctAnswer, Date changeDate, String correctIndexes,
+                     String[] questionIds) {
+        this.questionId = questionId;
+        this.bankId = bankId;
+        this.bankName = bankName;
+        this.questContent = questContent;
+        this.questType = questType;
+        this.questOptionsJson = questOptionsJson;
+        this.questOptions = questOptions;
+        this.correctAnswer = correctAnswer;
+        this.changeDate = changeDate;
+        this.correctIndexes = correctIndexes;
+        this.questionIds = questionIds;
+    }
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
     }
 
     public String[] getQuestionIds() {

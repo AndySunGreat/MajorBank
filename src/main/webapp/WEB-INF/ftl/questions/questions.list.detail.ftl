@@ -10,6 +10,10 @@
                 <label class="col-sm-2 col-form-label">{{questionDetail.bankId}} </label>
             </div>
             <div class="form-group row">
+                <label class="col-sm-2 col-form-label">题库名称:</label>
+                <label class="col-sm-2 col-form-label">{{questionDetail.bankName}} </label>
+            </div>
+            <div class="form-group row">
                 <label class="col-sm-2 col-form-label">问题内容:</label>
                 <label class="col-sm-2 col-form-label">{{questionDetail.questContent}} </label>
             </div>

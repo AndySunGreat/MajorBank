@@ -1,7 +1,7 @@
 /**
  * Created by AndySun on 2016/10/20.
  */
-angular.module('bms-questions',['bms-questions-service','bms-questions-states'])
+angular.module('bms-questions',['bms-questions-service','bms-questions-states','ngTagsInput'])
     .controller('bmsQuestions',function($scope,$http,$q,$state,bmsQuestionsService){
         var emptyFilterForm = {
             questionId: null,
@@ -9,7 +9,15 @@ angular.module('bms-questions',['bms-questions-service','bms-questions-states'])
             questContent:null,
             questType:null
         };
+        var entry  = bmsQuestionsService.BanksList.searchFilter($scope.searchParams,function(){
+            console.log(entry);
+            $scope.tags = entry;
+        });
+        $scope.tags = [];
 
+        $scope.loadTags = function(query) {
+            return tags.query().$promise;
+        };
         $scope.queryForm = function(searchFilter){
             if(searchFilter!=undefined){
                 $state.go("questions.list",{searchParams:searchFilter},{reload:true});

@@ -1,7 +1,7 @@
 /**
  * Created by AndySun on 2016/10/20.
  */
-angular.module('bms-questions',['bms-questions-service','bms-questions-states','ngTagsInput'])
+angular.module('bms-questions',['bms-questions-service','bms-questions-states'])
     .controller('bmsQuestions',function($scope,$http,$q,$state,bmsQuestionsService){
         var emptyFilterForm = {
             questionId: null,

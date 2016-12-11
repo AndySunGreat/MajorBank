@@ -11,7 +11,6 @@
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.js"></script>
   <script src="common/angular/ui-bootstrap-tpls-2.2.0.min.js"></script>
-  <script src="common/autocomplete/ui-autocomplete.js"></script>
   <script src="common/angular/angular-ui-router.js"></script>
   <script src="common/angular/angular-resource.min.js"></script>
   <script src="common/angular/angular-animate.js"></script>

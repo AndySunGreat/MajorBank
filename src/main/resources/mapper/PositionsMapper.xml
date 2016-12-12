@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.majorbank.mapper.PositionsMapper">
+    <!--
+    public class BankAnswers {
+    private long answerId;
+    private long bankId;
+    private long score;
+    private long userId;
+    private String wrongQuestIds;
+    private Date createDate;
+    -->
+
+
+    <resultMap id="PositionRstMap"
+        type="com.majorbank.model.Positions">
+        <result column="POSITION_ID" property="positionId" />
+        <result column="POSITION_NAME" property="positionName" />
+        <result column="REQUIRED_JSON" property="requiredJson" />
+        <result column="SALARY" property="salary" />
+        <result column="EXPERIENCE" property="experience" />
+        <result column="CITY" property="city" />
+        <result column="COMPANY_ID" property="companyId" />
+        <result column="CHANGE_DATE" property="changeDate" />
+    </resultMap>
+
+    <!-- get all users record -->
+    <sql id="selectPosition">
+        SELECT
+        POSITION_ID,
+        POSITION_NAME,
+        REQUIRED_JSON,
+        SALARY,
+        EXPERIENCE,
+        CITY,
+        COMPANY_ID,
+        CHANGE_DATE
+        FROM HOPPER_POSITIONS
+    </sql>
+    <sql id="positionFilterWhereClause">
+        <where>
+            <if test="_parameter !=null ">
+                1=1
+                <if test="positionId != 0">
+                    and POSITION_ID = #{positionId}
+                </if>
+                <if test="positionIds !=null">
+                    and POSITION_ID in
+                    <foreach item="item" index="index" collection="positionIds" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                </if>
+                <if test="companyId != 0">
+                    and COMPANY_ID = #{companyId}
+                </if>
+                <if test="experience != 0">
+                    and EXPERIENCE = #{experience}
+                </if>
+                <if test="positionName != null">
+                    and POSITION_NAME = #{positionName}
+                </if>
+                <if test="salary != null">
+                    and SALARY = #{salary}
+                </if>
+                <if test="city != null">
+                    and CITY = #{city}
+                </if>
+            </if>
+        </where>
+    </sql>
+
+
+
+    <select id="getAllPositions" resultMap="PositionRstMap"
+            parameterType="com.majorbank.model.Positions">
+        <include refid="selectPosition" />
+        <include refid="positionFilterWhereClause" />
+    </select>
+
+
+
+    <!-- find user by id -->
+    <select id="getPositionById" resultMap="PositionRstMap" parameterType="java.util.Map">
+        SELECT
+            POSITION_ID,
+            POSITION_NAME,
+            REQUIRED_JSON,
+            SALARY,
+            EXPERIENCE,
+            CITY,
+            COMPANY_ID,
+            CHANGE_DATE
+        FROM HOPPER_POSITIONS
+        WHERE POSITION_ID=#{positionId}
+    </select>
+
+
+    <!--
+ private long positionId;
+ private long bankId;
+ private String questContent; // 问题内容
+ private String questType; // 问题类型 1-单选  2-多选  3-判断  4-问答(暂不支持)
+ private String questOptionsJson; // 问题选项JSON
+ private List<Options> questOptions; // 问题选项
+ private String correctAnswer; // 正确答案
+ -->
+    <insert id="insertPositions" parameterType="com.majorbank.model.Positions">
+        INSERT INTO HOPPER_POSITIONS(
+        POSITION_ID,
+        POSITION_NAME,
+        REQUIRED_JSON,
+        SALARY,
+        EXPERIENCE,
+        CITY,
+        COMPANY_ID,
+        CHANGE_DATE
+        )
+        VALUES(
+        #{positionId,jdbcType=NUMERIC},
+        #{positionName,jdbcType=VARCHAR},
+        #{requiredJson,jdbcType=VARCHAR},
+        #{salary,jdbcType=VARCHAR},
+        #{experience,jdbcType=NUMERIC},
+        #{city,jdbcType=VARCHAR},
+        #{companyId,jdbcType=NUMERIC},
+        NOW()
+        )
+        <selectKey keyProperty="positionId" keyColumn="POSITION_ID" resultType="long" order="AFTER">
+            SELECT LAST_INSERT_ID() ;
+        </selectKey>
+    </insert>
+
+    <update id="updatePositions" parameterType="com.majorbank.model.Positions">
+        UPDATE
+        HOPPER_POSITIONS
+        SET
+        CHANGE_DATE=NOW()
+        <if test="positionId !=0 and positionId !=null">
+        ,POSITION_ID = #{positionId,jdbcType=NUMERIC}
+        </if>
+        <if test="positionName !=null">
+        ,POSITION_NAME = #{positionName,jdbcType=VARCHAR}
+        </if>
+        <if test="requiredJson !=null">
+        ,REQUIRED_JSON = #{questType,jdbcType=VARCHAR}
+        </if>
+        <if test="salary !=null">
+        ,SALARY = #{salary,jdbcType=VARCHAR}
+        </if>
+        <if test="experience !=0 and experience !=null">
+        ,EXPERIENCE = #{experience,jdbcType=NUMERIC}
+        </if>
+        <if test="city !=null">
+        ,CITY = #{city,jdbcType=VARCHAR}
+        </if>
+        <if test="companyId !=null">
+        ,COMPANY_ID = #{companyId,jdbcType=NUMERIC}
+        </if>
+        WHERE POSITION_ID=#{positionId,jdbcType=NUMERIC}
+    </update>
+
+    <delete id="deletePositions"  parameterType="long">
+        DELETE
+        FROM HOPPER_POSITIONS
+        WHERE POSITION_ID=#{positionId,jdbcType=NUMERIC}
+    </delete>
+
+
+</mapper>

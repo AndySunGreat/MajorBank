@@ -1,8 +1,5 @@
-/**
- * Created by AndySun on 2016/10/20.
- */
-angular.module('bms-banks',['bms-banks-service','bms-banks-states'])
-    .controller('bmsBanks',function($scope,$http,$q,$state,bmsBanksService,industryTypeOptions){
+angular.module('bms-logon',['ui.router','ngResource','bms-logon-service','bms-logon-states'])
+    .controller('bmsLogon',function($scope,$http,$q,$state,bmsLogonService,$location){
         var emptyFilterForm = {
             bankId: null,
             bankName:null,
@@ -11,19 +8,19 @@ angular.module('bms-banks',['bms-banks-service','bms-banks-states'])
             qbType:null,
             qbVersion:null
         };
-
-        $scope.industryTypeOptions = industryTypeOptions;
-
-
-        $scope.queryForm = function(searchFilter){
+        $scope.logonForm = function(){
+/*            var entry  = bmsLogonService.UserInfo.logon().$promise.then(
+                //console.log(entry);
+                //$scope.banks = entry;
+            );*/
             //console.log($scope.searchFilter);
             //console.log($scope.option);
-           // console.log($scope.categories);
-            if(searchFilter==undefined && $scope.option==undefined
+            // console.log($scope.categories);
+/*            if(searchFilter==undefined && $scope.option==undefined
                 && $scope.categories == undefined
                 && $scope.types == undefined)
             {
-                $state.go("home.banks.list",{searchParams:null},{reload:true});
+                $state.go("banks.list",{searchParams:null},{reload:true});
             }else{
                 if(searchFilter==undefined){
                     $scope.searchFilter = new Object();
@@ -38,12 +35,13 @@ angular.module('bms-banks',['bms-banks-service','bms-banks-states'])
                     $scope.searchFilter.qbType = $scope.types.value;
                 }
                 console.log("bankjs searchFilter:"+$scope.searchFilter);
-                $state.go("home.banks.list",{searchParams:$scope.searchFilter},{reload:true});
-            }
+                $state.go("banks.list",{searchParams:$scope.searchFilter},{reload:true});
+            }*/
+           $state.go("home");
         };
 
         $scope.resetForm = function(){
-            $scope.searchFilter = angular.copy(emptyFilterForm);
-            $state.go('home.banks');
+            //$scope.searchFilter = angular.copy(emptyFilterForm);
+           // $state.go("logon");
         };
     });

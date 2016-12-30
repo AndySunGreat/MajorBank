@@ -1,10 +1,10 @@
 angular.module('bms-banks-state-config', [])
     .config([ '$stateProvider', function ($stateProvider) {
         $stateProvider
-            .state("banks",{
+            .state("home.banks",{
                 url:"/banks",
                 views:{
-                      '':{
+                      'home-condition@home':{
                           templateUrl: "ftl/banks/banks.ftl",
                           resolve:{
                               industryTypeOptions:['bmsBanksService',
@@ -24,20 +24,20 @@ angular.module('bms-banks-state-config', [])
 
                 }
             })
-            .state("banks.list",{
+            .state("home.banks.list",{
                 url:"/list",
                 params:{searchParams:null},
                 views:{
-                    "data-list@banks":{  // 显示到state为banks的<div ui-view="data-list">
+                    "data-list@home.banks":{  // 显示到state为banks的<div ui-view="data-list">
                         templateUrl:"ftl/banks/banks.list.ftl",
                         controller:"bmsBanksStateController"
                     }
                 }
             })
-            .state("banks.list.detail",{
+            .state("home.banks.list.detail",{
                 url:"/{bankId}",
                 views:{
-                    "detail@banks.list":{
+                    "detail@home.banks.list":{
                         templateUrl:"ftl/banks/banks.list.detail.ftl",
                         resolve:{
                             bankDetail:['$stateParams','bmsBanksService',

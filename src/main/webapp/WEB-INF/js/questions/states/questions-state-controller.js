@@ -92,7 +92,7 @@ angular.module('bms-questions-state-controller',['ui.bootstrap'])
         }
 
         $scope.retrieveDetail = function(questionId) {
-                $state.go('questions.list.detail', {
+                $state.go('home.questions.list.detail', {
                      questionId : questionId });
 
         }

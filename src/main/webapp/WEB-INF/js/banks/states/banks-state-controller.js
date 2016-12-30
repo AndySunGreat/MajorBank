@@ -110,7 +110,7 @@ angular.module('bms-banks-state-controller',['ui.bootstrap'])
         }
 
         $scope.retrieveDetail = function(bankId) {
-                $state.go('banks.list.detail', {
+                $state.go('home.banks.list.detail', {
                      bankId : bankId });
 
         }

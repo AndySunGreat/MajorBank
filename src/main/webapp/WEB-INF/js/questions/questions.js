@@ -20,14 +20,14 @@ angular.module('bms-questions',['bms-questions-service','bms-questions-states'])
         };
         $scope.queryForm = function(searchFilter){
             if(searchFilter!=undefined){
-                $state.go("questions.list",{searchParams:searchFilter},{reload:true});
+                $state.go("home.questions.list",{searchParams:searchFilter},{reload:true});
             }else{
-                $state.go("questions.list",{searchParams:null},{reload:true});
+                $state.go("home.questions.list",{searchParams:null},{reload:true});
             }
         };
 
         $scope.resetForm = function(){
             $scope.searchFilter = angular.copy(emptyFilterForm);
-            $state.go('questions');
+            $state.go('home.questions');
         };
     });

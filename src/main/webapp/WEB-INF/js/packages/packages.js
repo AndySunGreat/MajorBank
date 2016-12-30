@@ -12,14 +12,14 @@ angular.module('bms-packages',['bms-packages-service','bms-packages-states'])
         $scope.industryTypeOptions = industryTypeOptions;
         $scope.queryForm = function(searchFilter){
             if(searchFilter!=undefined){
-                $state.go("packages.list",{searchParams:searchFilter},{reload:true});
+                $state.go("home.packages.list",{searchParams:searchFilter},{reload:true});
             }else{
-                $state.go("packages.list",{searchParams:null},{reload:true});
+                $state.go("home.packages.list",{searchParams:null},{reload:true});
             }
         };
 
         $scope.resetForm = function(){
             $scope.searchFilter = angular.copy(emptyFilterForm);
-            $state.go('packages');
+            $state.go('home.packages');
         };
     });

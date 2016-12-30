@@ -2,7 +2,7 @@
  * Created by AndySun on 2016/10/20.
  */
 angular.module('bms-home-controller',[])
-    .controller('bmsHomeController',function($scope,$http){
+    .controller('bmsHome',function($scope,$http){
 /*        $scope.load = function(){
 
             $http.get('http://localhost:8081/MajorBank/api/login/package/').then(function(response){

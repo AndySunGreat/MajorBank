@@ -1,10 +1,10 @@
 angular.module('bms-packages-state-config', [])
     .config([ '$stateProvider', function ($stateProvider) {
         $stateProvider
-            .state("packages",{
+            .state("home.packages",{
                 url:"/packages",
                 views:{
-                      '':{
+                      'home-condition@home':{
                           templateUrl: "ftl/packages/packages.ftl",
                           resolve:{
                               industryTypeOptions:['bmsBanksService',
@@ -24,20 +24,20 @@ angular.module('bms-packages-state-config', [])
 
                 }
             })
-            .state("packages.list",{
+            .state("home.packages.list",{
                 url:"/list",
                 params:{searchParams:null},
                 views:{
-                    "data-list@packages":{  // 显示到state为packages的<div ui-view="data-list">
+                    "data-list@home.packages":{  // 显示到state为packages的<div ui-view="data-list">
                         templateUrl:"ftl/packages/packages.list.ftl",
                         controller:"bmsPackagesStateController"
                     }
                 }
             })
-            .state("packages.list.detail",{
+            .state("home.packages.list.detail",{
                 url:"/{packageId}",
                 views:{
-                    "detail@packages.list":{
+                    "detail@home.packages.list":{
                         templateUrl:"ftl/packages/packages.list.detail.ftl",
                         resolve:{
                             packageDetail:['$stateParams','bmsPackagesService',

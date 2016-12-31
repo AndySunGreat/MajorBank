@@ -3,7 +3,7 @@
  */
 angular.module('bms-questions-state-controller',['ui.bootstrap'])
     .controller('bmsQuestionsStateController',
-        function($scope,$uibModal,$q,$state,bmsQuestionsService,$log,$stateParams){
+        function($scope,$uibModal,$q,$state,bmsQuestionsService,bmsPackagesService,$log,$stateParams){
         console.log("state-controller");
 
         var emptyFilterForm = {
@@ -30,7 +30,14 @@ angular.module('bms-questions-state-controller',['ui.bootstrap'])
                 backdrop : false,
                 templateUrl: 'ftl/questions/questions.modal.ftl',
                 resolve: {
-                    questionDetail: angular.copy(emptyFilterForm)
+                    questionDetail: angular.copy(emptyFilterForm),
+                    industryTypeOptions:['bmsBanksService',
+                        function(bmsPackagesService){
+                            var test =   bmsPackagesService.OptionsList.queryByParentValue().$promise;
+                            console.log(test);
+                            return test;
+                        }
+                    ]
                 },
                 controller: 'bmsQuestionsStateAddController'
             });

@@ -6,7 +6,16 @@ angular.module('bms-questions-state-config', [])
                 views:{
                       'home-condition@home':{
                           templateUrl: "ftl/questions/questions.ftl",
-                          controller:"bmsQuestions"
+                          controller:"bmsQuestions",
+                          resolve: {
+                              industryTypeOptions: ['bmsBanksService',
+                                  function (bmsPackagesService) {
+                                      var test = bmsPackagesService.OptionsList.queryByParentValue().$promise;
+                                      console.log(test);
+                                      return test;
+                                  }
+                              ]
+                          }
                       }
 /*                     , "datalist":{  // 显示到index.jsp中<div ui-view="datalist">
                           templateUrl:"ftl/questions.datalist.ftl",

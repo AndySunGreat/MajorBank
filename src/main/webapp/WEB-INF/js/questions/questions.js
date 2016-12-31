@@ -2,13 +2,14 @@
  * Created by AndySun on 2016/10/20.
  */
 angular.module('bms-questions',['bms-questions-service','bms-questions-states'])
-    .controller('bmsQuestions',function($scope,$http,$q,$state,bmsQuestionsService){
+    .controller('bmsQuestions',function($scope,$http,$q,$state,bmsQuestionsService,industryTypeOptions){
         var emptyFilterForm = {
             questionId: null,
             bankId:null,
             questContent:null,
             questType:null
         };
+        $scope.industryTypeOptions = industryTypeOptions;
         var entry  = bmsQuestionsService.BanksList.searchFilter($scope.searchParams,function(){
             console.log(entry);
             $scope.tags = entry;

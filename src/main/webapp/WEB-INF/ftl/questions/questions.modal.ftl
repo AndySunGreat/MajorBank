@@ -7,6 +7,36 @@
                 <div class="modal-body">
                     <div class="container">
                         <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="pkgInputIndustryType">行业类型:</label>
+                                <div class="col-sm-3">
+                                    <select id="pkgInputIndustryType" class="form-control"
+                                            ng-model="option"
+                                            ng-options="option.value for option in industryTypeOptions">
+                                        <option value="">-- 请选择 --</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="pkgInputQbCategory">题库范畴:</label>
+                                <div class="col-sm-3">
+                                    <select id="pkgInputQbCategory" class="form-control"
+                                            ng-model="categories"
+                                            ng-options="categories.value for categories in option.categories">
+                                        <option value="">-- 请选择 --</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="pkgInputQbType">题库类型:</label>
+                                <div class="col-sm-3">
+                                    <select id="pkgInputQbType" class="form-control"
+                                            ng-model="types"
+                                            ng-options="types.value for types in categories.types">
+                                        <option value="">-- 请选择 --</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="form-group" ng-show="questionDetail.questionId">
                                     <label class="control-label col-sm-2" for="questionId">问题编号:</label>
                                     <div class="col-sm-3">

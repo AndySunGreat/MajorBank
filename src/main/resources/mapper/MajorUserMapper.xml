@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.majorbank.mapper.MajorUserMapper">
+
+    <resultMap id="userRstMap"
+        type="com.majorbank.model.MajorUser">
+        <result column="ID" property="id" />
+        <result column="USERNAME" property="username" />
+        <result column="PASSWORD" property="password" />
+        <result column="BANKROLE" property="bankrole" />
+        <result column="CHANGE_DATE" property="changeDate" />
+    </resultMap>
+
+    <!-- get all users record -->
+    <sql id="selectMajorUser">
+        SELECT
+        ID,
+        USERNAME,
+        PASSWORD,
+        BANKROLE,
+        CHANGE_DATE
+        FROM MAJOR_USER
+    </sql>
+    <sql id="userFilterWhereClause">
+        <where>
+            <if test="_parameter !=null ">
+                1=1
+                <if test="id != 0">
+                    and ID = #{id}
+                </if>
+
+                <if test="username != null">
+                    and USERNAME = #{username}
+                </if>
+
+                <if test="password != null">
+                    and PASSWORD = #{password}
+                </if>
+
+                <if test="bankrole != null">
+                    and BANKROLE = #{bankrole}
+                </if>
+            </if>
+        </where>
+    </sql>
+    <select id="getAllMajorUsers" parameterType="com.majorbank.model.MajorUser"
+            resultType="com.majorbank.model.MajorUser">
+        <include refid="selectMajorUser" />
+        <include refid="userFilterWhereClause" />
+    </select>
+
+    <!-- find user by id -->
+    <select id="getMajorUserById" resultMap="userRstMap" parameterType="long">
+        SELECT
+        ID,
+        USERNAME,
+        PASSWORD,
+        BANKROLE,
+        CHANGE_DATE
+        FROM MAJOR_USER
+        WHERE id=#{userId}
+    </select>
+
+    <insert id="insertMajorUser" parameterType="com.majorbank.model.MajorUser">
+        <selectKey resultType="Long" order="BEFORE" keyProperty="id">
+            SELECT _nextval('userid') FROM DUAL
+        </selectKey>
+        INSERT INTO MAJOR_USER(
+        ID,
+        USERNAME,
+        PASSWORD,
+        BANKROLE,
+        CHANGE_DATE
+        )
+        VALUES(
+        #{id,jdbcType=NUMERIC},
+        #{username,jdbcType=VARCHAR},
+        #{password,jdbcType=VARCHAR},
+        #{bankrole,jdbcType=VARCHAR},
+        NOW()
+        )
+    </insert>
+
+    <update id="updateMajorUser" parameterType="com.majorbank.model.MajorUser">
+        UPDATE
+        MAJOR_USER
+        SET
+        change_date=NOW()
+        <if test="username !=null">
+        ,username = #{username,jdbcType=VARCHAR}
+        </if>
+        <if test="password !=null">
+        ,password = #{password,jdbcType=VARCHAR}
+        </if>
+        <if test="bankrole !=null">
+        ,bankrole = #{bankrole,jdbcType=VARCHAR}
+        </if>
+        WHERE id= #{id,jdbcType=NUMERIC}
+    </update>
+
+    <delete id="deleteMajorUser"  parameterType="long">
+        DELETE
+        FROM MAJOR_USER
+        WHERE id = #{id,jdbcType=NUMERIC}
+    </delete>
+
+
+</mapper>

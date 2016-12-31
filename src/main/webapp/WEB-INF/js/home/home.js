@@ -2,24 +2,7 @@
  * Created by AndySun on 2016/10/20.
  */
 angular.module('bms-home-controller',[])
-    .controller('bmsHome',function($scope,$http){
-/*        $scope.load = function(){
+    .controller('bmsHome',function($scope,$http,$stateParams){
+        console.log($stateParams.test);
 
-            $http.get('http://localhost:8081/MajorBank/api/login/package/').then(function(response){
-                $scope.packages = response.data;
-                console.log($scope.packages);
-            });
-        }
-        $scope.editPackage = function(packageId){
-            console.log("packageId:"+packageId);
-        }
-
-        $scope.deletePackage = function(packageId){
-            console.log("packageId:"+packageId);
-            $http.delete('http://localhost:8081/MajorBank/api/login/package/'+packageId).$promise.then(function(result){
-                console.log(result);
-            },function(error){
-                console.log(error);
-            });
-        }*/
     });

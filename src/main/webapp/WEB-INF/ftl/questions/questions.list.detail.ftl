@@ -35,14 +35,14 @@
                     <table class="table table-striped table-condensed">
                         <thead>
                             <tr>
-                                <th style="width:150px;padding:5px;">选项序号</th>
-                                <th style="width:150px;padding:5px;">选项内容</th>
+                                <th style="width:20px;padding:5px;">选项序号</th>
+                                <th style="width:20px;padding:5px;">选项内容</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="option in questionDetail.questOptions ">
-                                <td style="width:150px;padding:5px;" ">{{option.optSeq}}</td>
-                                <td style="width:150px;padding:5px;" ">{{option.optContent}}</td>
+                                <td style="width:20px;padding:5px;">{{option.optSeq}}</td>
+                                <td style="width:20px;padding:5px;">{{option.optContent}}</td>
                             </tr>
                         <tr>
                     </table>

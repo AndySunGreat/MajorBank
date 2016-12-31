@@ -1,47 +1,71 @@
-angular.module('bms-logon',['ui.router','ngResource','bms-logon-service','bms-logon-states'])
-    .controller('bmsLogon',function($scope,$http,$q,$state,bmsLogonService,$location){
-        var emptyFilterForm = {
-            bankId: null,
-            bankName:null,
-            qbCategory:null,
-            industryType:null,
-            qbType:null,
-            qbVersion:null
+var bmsLogon = angular.module('bms-logon',
+    ['ui.router','ngResource','bms-logon-service','bms-logon-states']);
+
+bmsLogon.constant('AUTH_EVENTS', {  // 用户登录状态
+        loginSuccess: 'auth-login-success',
+        loginFailed: 'auth-login-failed',
+        logoutSuccess: 'auth-logout-success',
+        sessionTimeout: 'auth-session-timeout',
+        notAuthenticated: 'auth-not-authenticated',
+        notAuthorized: 'auth-not-authorized'
+    }).constant('USER_ROLES', {   // 用户权限
+        all: '*',
+        admin: 'admin',
+        editor: 'editor',
+        guest: 'guest'
+    });
+
+
+bmsLogon.service('Session', function () {
+    this.create = function (sessionId, userName, bankRole) {
+        this.id = sessionId;
+        this.userName = userName;
+        this.bankRole = bankRole;
+    };
+    this.destroy = function () {
+        this.id = null;
+        this.userName = null;
+        this.bankRole = null;
+    };
+});
+
+
+bmsLogon.controller('bmsLogon',function($scope,$http,$q,$state,bmsLogonService,Session,$rootScope,AUTH_EVENTS){
+        $scope.credentials = {
+            username: '',
+            password: '',
+            bankrole: ''
         };
-        $scope.logonForm = function(){
-/*            var entry  = bmsLogonService.UserInfo.logon().$promise.then(
-                //console.log(entry);
-                //$scope.banks = entry;
-            );*/
-            //console.log($scope.searchFilter);
-            //console.log($scope.option);
-            // console.log($scope.categories);
-/*            if(searchFilter==undefined && $scope.option==undefined
-                && $scope.categories == undefined
-                && $scope.types == undefined)
-            {
-                $state.go("banks.list",{searchParams:null},{reload:true});
-            }else{
-                if(searchFilter==undefined){
-                    $scope.searchFilter = new Object();
-                }
-                if($scope.option!=undefined){
-                    $scope.searchFilter.industryType = $scope.option.value;
-                }
-                if($scope.categories!=undefined) {
-                    $scope.searchFilter.qbCategory = $scope.categories.value;
-                }
-                if($scope.types!=undefined) {
-                    $scope.searchFilter.qbType = $scope.types.value;
-                }
-                console.log("bankjs searchFilter:"+$scope.searchFilter);
-                $state.go("banks.list",{searchParams:$scope.searchFilter},{reload:true});
-            }*/
-           $state.go("home");
+
+        var emptyFilterForm = {
+            /*
+            bankId: null,
+            bankName:null
+            */
+        };
+
+
+        $scope.logonForm = function (credentials) {
+            var entry = bmsLogonService.UserInfo.logon().$promise.then(
+                function(data){
+                    console.log(data);
+                    // sessionId, userId, userRole
+                    Session.create(data[0].id,data[0].userName,data[0].bankRole);
+                    $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+                    console.log('logon successfully');
+                    $state.go("home",{test:"123"});
+                },
+                function(error){
+                    $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+                    console.log('logon failure');
+                    console.log(error);
+                    // 重新执行load函数
+                    $state.reload();
+                });
         };
 
         $scope.resetForm = function(){
-            //$scope.searchFilter = angular.copy(emptyFilterForm);
-           // $state.go("logon");
+            $scope.searchFilter = angular.copy(emptyFilterForm);
+            $state.go("logon");
         };
     });

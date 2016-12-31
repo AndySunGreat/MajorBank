@@ -1,5 +1,3 @@
-
-
 var bmsLogin = angular.module('bms-login',['ngResource']);
 
 bmsLogin.constant('AUTH_EVENTS', {  // 用户登录状态

@@ -6,8 +6,10 @@ angular.module('bms-banks-state-add-controller',[ 'ui.bootstrap','ngCookies'])
         $scope.industryTypeOptions = industryTypeOptions;
         var globals = $cookieStore.get("globals");
         //console.log("cookies:" + globals.currentUser.bankrole);
-        //$scope.option.value = $cookieStore.get("")
-
+        $scope.option = globals.currentUser.industryTypeRole;
+        $scope.option.label = "IT";
+        console.log("$scope.option.value:"+$scope.option);
+        $scope.categories = globals.currentUser.qbCategoryRole;
 
         $scope.submitModal = function() {
             console.log("submit前数据提交：");

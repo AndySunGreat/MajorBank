@@ -43,13 +43,17 @@ bmsLogon.factory('AuthenticationService',
                  });*/
             };
 
-            service.SetCredentials = function (username, password,bankrole) {
+            service.SetCredentials = function (username, password,industryTypeRole,
+                                               qbCategoryRole,qbTypeRole,bankRole) {
                 var authdata = Base64.encode(username + ':' + password);
 
                 $rootScope.globals = {
                     currentUser: {
                         username: username,
-                        bankrole:bankrole,
+                        industryTypeRole:industryTypeRole,
+                        qbCategoryRole:qbCategoryRole,
+                        qbTypeRole:qbTypeRole,
+                        bankRole:bankRole,
                         authdata: authdata
                     }
                 };
@@ -169,7 +173,11 @@ bmsLogon.controller('bmsLogon',
             $scope.dataLoading = true;
             AuthenticationService.Login($scope.username, $scope.password, function(response) {
                 if(response.length==1) {
-                    AuthenticationService.SetCredentials($scope.username, $scope.password,response[0].bankrole);
+                    AuthenticationService.SetCredentials($scope.username, $scope.password,
+                        response[0].industryTypeRole,
+                        response[0].qbCategoryRole,
+                        response[0].qbTypeRole,
+                        response[0].bankrole);
                     //$location.path('/');
                     $state.go("home",{test:"123"});
                 } else {

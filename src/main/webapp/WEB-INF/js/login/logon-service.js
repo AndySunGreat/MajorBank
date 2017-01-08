@@ -7,7 +7,7 @@ angular.module('bms-logon-service',['ngResource'])
             return {
                 UserInfo: $resource(baseUrl + "majoruser/", {},
                     {
-                        logon: {
+                        login: {
                             url: baseUrl + "majoruser/",
                             method: 'GET',
                             isArray: true
@@ -16,4 +16,11 @@ angular.module('bms-logon-service',['ngResource'])
             };
         }];
 
+    })
+    .service("myService",function($rootScope){
+        return {
+            change: function(n){
+                $rootScope.$broadcast("valueChange",n);
+            }
+        }
     });

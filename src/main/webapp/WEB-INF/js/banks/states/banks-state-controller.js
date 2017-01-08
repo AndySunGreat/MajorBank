@@ -1,12 +1,12 @@
 /**
  * Created by AndySun on 2016/10/20.
  */
-angular.module('bms-banks-state-controller',['ui.bootstrap'])
+angular.module('bms-banks-state-controller',['ui.bootstrap','ngCookies'])
     .controller('bmsBanksStateController',
-        function($scope,$uibModal,$q,$state,bmsBanksService,$log,$stateParams){
+        function($scope,$uibModal,$q,$state,bmsBanksService,$log,$stateParams,$cookieStore){
         console.log("state-controller");
             console.log($stateParams.searchParams);
-
+            console.log($cookieStore);
             var emptyFilterForm = {
                 bankId: null,
                 bankName:null,

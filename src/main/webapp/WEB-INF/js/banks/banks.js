@@ -1,8 +1,8 @@
 /**
  * Created by AndySun on 2016/10/20.
  */
-angular.module('bms-banks',['bms-banks-service','bms-banks-states'])
-    .controller('bmsBanks',function($scope,$http,$q,$state,bmsBanksService,industryTypeOptions){
+angular.module('bms-banks',['bms-banks-service','bms-banks-states','ngCookies'])
+    .controller('bmsBanks',function($scope,$http,$q,$state,bmsBanksService,industryTypeOptions,$cookieStore){
         var emptyFilterForm = {
             bankId: null,
             bankName:null,
@@ -11,7 +11,8 @@ angular.module('bms-banks',['bms-banks-service','bms-banks-states'])
             qbType:null,
             qbVersion:null
         };
-
+        var globals = $cookieStore.get("globals");
+        console.log("cookies:" + globals.currentUser.bankrole);
         $scope.industryTypeOptions = industryTypeOptions;
 
 

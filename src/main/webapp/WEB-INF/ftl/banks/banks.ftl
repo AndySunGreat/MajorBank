@@ -36,7 +36,7 @@
             <div class="col-sm-3">
                 <input type="text" class="form-control"
                        id="pkgInputBankId"
-                       placeholder="Enter Bank Id"
+                       placeholder="请输入题库编号"
                          ng-model="searchFilter.bankId" ng-required="true"
                 >
             </div>
@@ -46,7 +46,7 @@
             <div class="col-sm-3">
                 <input type="text" class="form-control"
                        id="pkgInputBankName"
-                       placeholder="Enter Bank Name"
+                       placeholder="请输入题库名称"
                          ng-model="searchFilter.bankName"
                 >
             </div>
@@ -63,6 +63,10 @@
                 <button type="button"
                     class="btn btn-small btn-primary"
                     ng-click="resetForm()">重置</button>
+            </div>
+            <div class="col-sm-1">
+                <button id="createBtn" class="btn btn-small btn-success"
+                        data-target="#myModal" ng-click="createBank()">新建题库</button>
             </div>
         </div>
     </form>

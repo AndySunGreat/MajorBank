@@ -14,6 +14,7 @@
   <script src="common/angular/angular-ui-router.js"></script>
   <script src="common/angular/angular-resource.min.js"></script>
   <script src="common/angular/angular-animate.js"></script>
+  <script src="common/angular/angular-cookies.min.js"></script>
   <script src="js/packages/states/packages-state-add-controller.js"></script>
   <script src="js/packages/states/packages-state-update-controller.js"></script>
   <script src="js/packages/states/packages-state-detail-controller.js"></script>
@@ -44,11 +45,11 @@
   <script src="js/login/logon-service.js"></script>
   <script src="js/login/logon.js"></script>
   <script src="js/home/home.js"></script>
-  <script src="js/index.js"></script>
+  <script src="js/app.js"></script>
 
   <![endif]-->
 </head>
-<body ng-app="Index">
+<body ng-app="majorApp">
     <div class="container">
         <div ui-view></div>
     </div>

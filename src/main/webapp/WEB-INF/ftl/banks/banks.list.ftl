@@ -1,3 +1,5 @@
+<button id="createBtn" class="btn btn-small btn-success"
+        data-target="#myModal" ng-click="createBank()">新建题库</button>
 <div class="row" ng-init="load()">
     <div class="span7">
            <table class="table table-striped table-condensed">
@@ -30,7 +32,6 @@
                </tbody>
            </table>
     </div>
-    <button id="createBtn" class="btn btn-small btn-success"
-            data-target="#myModal" ng-click="createBank()">新建题库</button>
+
 </div>
 <div ui-view="detail"></div>

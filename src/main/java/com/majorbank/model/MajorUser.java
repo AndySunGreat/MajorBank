@@ -10,24 +10,33 @@ public class MajorUser implements Serializable {
     private long id;
     private String username;
     private String password;
-    private String bankrole;
+    private String industryTypeRole;
+    private String qbCategoryRole;
+    private String qbTypeRole;
+    private String bankRole;
     private Date changeDate;
 
     public MajorUser() {
     }
 
-    public MajorUser(long id, String username, String password, String bankrole) {
+    public MajorUser(long id, String username, String password,
+                     String industryTypeRole, String qbCategoryRole,
+                     String qbTypeRole, String bankRole, Date changeDate) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.bankrole = bankrole;
+        this.industryTypeRole = industryTypeRole;
+        this.qbCategoryRole = qbCategoryRole;
+        this.qbTypeRole = qbTypeRole;
+        this.bankRole = bankRole;
+        this.changeDate = changeDate;
     }
 
-    public MajorUser(long id, String username, String password, String bankrole, Date changeDate) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.bankrole = bankrole;
+    public Date getChangeDate() {
+        return changeDate;
+    }
+
+    public void setChangeDate(Date changeDate) {
         this.changeDate = changeDate;
     }
 
@@ -55,19 +64,35 @@ public class MajorUser implements Serializable {
         this.password = password;
     }
 
-    public String getBankrole() {
-        return bankrole;
+    public String getIndustryTypeRole() {
+        return industryTypeRole;
     }
 
-    public void setBankrole(String bankrole) {
-        this.bankrole = bankrole;
+    public void setIndustryTypeRole(String industryTypeRole) {
+        this.industryTypeRole = industryTypeRole;
     }
 
-    public Date getChangeDate() {
-        return changeDate;
+    public String getQbCategoryRole() {
+        return qbCategoryRole;
     }
 
-    public void setChangeDate(Date changeDate) {
-        this.changeDate = changeDate;
+    public void setQbCategoryRole(String qbCategoryRole) {
+        this.qbCategoryRole = qbCategoryRole;
+    }
+
+    public String getQbTypeRole() {
+        return qbTypeRole;
+    }
+
+    public void setQbTypeRole(String qbTypeRole) {
+        this.qbTypeRole = qbTypeRole;
+    }
+
+    public String getBankRole() {
+        return bankRole;
+    }
+
+    public void setBankRole(String bankRole) {
+        this.bankRole = bankRole;
     }
 }

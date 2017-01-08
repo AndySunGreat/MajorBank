@@ -64,10 +64,6 @@
                     class="btn btn-small btn-primary"
                     ng-click="resetForm()">重置</button>
             </div>
-            <div class="col-sm-1">
-                <button id="createBtn" class="btn btn-small btn-success"
-                        data-target="#myModal" ng-click="createBank()">新建题库</button>
-            </div>
         </div>
     </form>
 </div>

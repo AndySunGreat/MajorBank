@@ -1,9 +1,12 @@
-angular.module('bms-banks-state-add-controller',[ 'ui.bootstrap'])
-    .controller('bmsBanksStateAddController',function($scope,$state,$uibModalInstance,bmsBanksService,bankDetail,industryTypeOptions){
+angular.module('bms-banks-state-add-controller',[ 'ui.bootstrap','ngCookies'])
+    .controller('bmsBanksStateAddController',function($scope,$state,$uibModalInstance,
+                                                      bmsBanksService,bankDetail,industryTypeOptions,$cookieStore){
 
         $scope.bankDetail = bankDetail;
         $scope.industryTypeOptions = industryTypeOptions;
-
+        var globals = $cookieStore.get("globals");
+        //console.log("cookies:" + globals.currentUser.bankrole);
+        //$scope.option.value = $cookieStore.get("")
 
 
         $scope.submitModal = function() {

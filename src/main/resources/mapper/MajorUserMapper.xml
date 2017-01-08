@@ -9,8 +9,11 @@
         <result column="ID" property="id" />
         <result column="USERNAME" property="username" />
         <result column="PASSWORD" property="password" />
-        <result column="BANKROLE" property="bankrole" />
-        <result column="CHANGE_DATE" property="changeDate" />
+        <result column="industryTypeRole" property="industryTypeRole" />
+        <result column="qbCategoryRole" property="qbCategoryRole" />
+        <result column="qbTypeRole" property="qbTypeRole" />
+        <result column="bankRole" property="bankRole" />
+        <result column="changeDate" property="changeDate" />
     </resultMap>
 
     <!-- get all users record -->
@@ -19,8 +22,11 @@
         ID,
         USERNAME,
         PASSWORD,
+        INDUSTRYTYPEROLE,
+        QBCATEGORYROLE,
+        QBTYPEROLE,
         BANKROLE,
-        CHANGE_DATE
+        CHANGEDATE
         FROM MAJOR_USER
     </sql>
     <sql id="userFilterWhereClause">
@@ -38,9 +44,17 @@
                 <if test="password != null">
                     and PASSWORD = #{password}
                 </if>
-
-                <if test="bankrole != null">
-                    and BANKROLE = #{bankrole}
+                <if test="industryTypeRole != null">
+                    and industryTypeRole = #{industryTypeRole}
+                </if>
+                <if test="qbCategoryRole != null">
+                    and qbCategoryRole = #{qbCategoryRole}
+                </if>
+                <if test="qbTypeRole != null">
+                    and qbTypeRole = #{qbTypeRole}
+                </if>
+                <if test="bankRole != null">
+                    and bankRole = #{bankRole}
                 </if>
             </if>
         </where>
@@ -57,8 +71,11 @@
         ID,
         USERNAME,
         PASSWORD,
+        INDUSTRYTYPEROLE,
+        QBCATEGORYROLE,
+        QBTYPEROLE,
         BANKROLE,
-        CHANGE_DATE
+        CHANGEDATE
         FROM MAJOR_USER
         WHERE id=#{userId}
     </select>
@@ -71,14 +88,20 @@
         ID,
         USERNAME,
         PASSWORD,
+        INDUSTRYTYPEROLE,
+        QBCATEGORYROLE,
+        QBTYPEROLE,
         BANKROLE,
-        CHANGE_DATE
+        CHANGEDATE
         )
         VALUES(
         #{id,jdbcType=NUMERIC},
         #{username,jdbcType=VARCHAR},
         #{password,jdbcType=VARCHAR},
-        #{bankrole,jdbcType=VARCHAR},
+        #{industryTypeRole,jdbcType=VARCHAR},
+        #{qbCategoryRole,jdbcType=VARCHAR},
+        #{qbTypeRole,jdbcType=VARCHAR},
+        #{bankRole,jdbcType=VARCHAR},
         NOW()
         )
     </insert>
@@ -94,8 +117,17 @@
         <if test="password !=null">
         ,password = #{password,jdbcType=VARCHAR}
         </if>
-        <if test="bankrole !=null">
-        ,bankrole = #{bankrole,jdbcType=VARCHAR}
+        <if test="industryTypeRole != null">
+        ,industryTypeRole = #{industryTypeRole,jdbcType=VARCHAR}
+        </if>
+        <if test="qbCategoryRole != null">
+        ,qbCategoryRole = #{qbCategoryRole,jdbcType=VARCHAR}
+        </if>
+        <if test="qbTypeRole != null">
+        ,qbTypeRole = #{qbTypeRole,jdbcType=VARCHAR}
+        </if>
+        <if test="bankRole !=null">
+        ,bankRole = #{bankRole,jdbcType=VARCHAR}
         </if>
         WHERE id= #{id,jdbcType=NUMERIC}
     </update>

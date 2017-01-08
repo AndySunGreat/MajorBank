@@ -31,6 +31,9 @@ public class MajorUserController {
     public List<MajorUser> getAllMajorUsers(@RequestParam(required = false) String majorId,
                                             @RequestParam(required = false) String userName,
                                             @RequestParam(required = false) String passWord,
+                                            @RequestParam(required = false) String industryTypeRole,
+                                            @RequestParam(required = false) String qbCategoryRole,
+                                            @RequestParam(required = false) String qbTypeRole,
                                             @RequestParam(required = false) String bankRole){
         MajorUser majorUser = new MajorUser();
         if(majorId!=null){
@@ -42,8 +45,17 @@ public class MajorUserController {
         if(passWord!=null){
             majorUser.setPassword(passWord);
         }
+        if(industryTypeRole!=null){
+            majorUser.setIndustryTypeRole(industryTypeRole);
+        }
+        if(qbCategoryRole!=null){
+            majorUser.setQbCategoryRole(qbCategoryRole);
+        }
+        if(qbTypeRole!=null){
+            majorUser.setQbTypeRole(qbTypeRole);
+        }
         if(bankRole!=null){
-            majorUser.setBankrole(bankRole);
+            majorUser.setBankRole(bankRole);
         }
         List<MajorUser> majorUserList = majorUserService.getAllMajorUsers(majorUser);
         return majorUserList;

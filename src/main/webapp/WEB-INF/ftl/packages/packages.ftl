@@ -5,7 +5,7 @@
             <div class="col-sm-3">
                 <input type="text" class="form-control"
                        id="pkgInputPackageId"
-                       placeholder="Enter package ID"
+                       placeholder="请输入套餐编号"
                        ng-model="searchFilter.packageId"
                 >
             </div>
@@ -15,7 +15,7 @@
             <div class="col-sm-3">
                 <input type="text" class="form-control"
                        id="pkgInputPackageName"
-                       placeholder="Enter package Name"
+                       placeholder="请输入套餐名称"
                          ng-model="searchFilter.packageName"
                 >
             </div>
@@ -25,7 +25,7 @@
             <div class="col-sm-3">
                 <input type="text" class="form-control"
                        id="pkgInputJobId"
-                       placeholder="Enter Job Id"
+                       placeholder="请输入职业编号"
                         ng-model="searchFilter.jobId"
                 >
             </div>
@@ -35,7 +35,7 @@
             <div class="col-sm-3">
                 <input type="text" class="form-control"
                        id="pkgInputBankIds"
-                       placeholder="Enter Bank Ids"
+                       placeholder="请输入题库编号"
                         ng-model="searchFilter.bankIdsJson"
                 >
             </div>

@@ -2,7 +2,7 @@
  * Created by AndySun on 2016/10/20.
  */
 angular.module('bms-packages',['bms-packages-service','bms-packages-states'])
-    .controller('bmsPackages',function($scope,$http,$q,$state,bmsPackagesService,industryTypeOptions){
+    .controller('bmsPackages',function($scope,$http,$q,$state,bmsPackagesService,industryTypeOptions,roleFilterService){
         var emptyFilterForm = {
             packageId: null,
             packageName:null,
@@ -10,6 +10,12 @@ angular.module('bms-packages',['bms-packages-service','bms-packages-states'])
             bankIdsJson:null
         };
         $scope.industryTypeOptions = industryTypeOptions;
+        var entry = roleFilterService.dropdownListFilter($scope.industryTypeOptions, function(response) {
+            console.log(response);
+            $scope.option = response.option;
+            $scope.categories = response.categories;
+            $scope.types = response.types;
+        });
         $scope.queryForm = function(searchFilter){
             if(searchFilter!=undefined){
                 $state.go("home.packages.list",{searchParams:searchFilter},{reload:true});

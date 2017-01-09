@@ -1,6 +1,52 @@
 var bmsLogon = angular.module('bms-logon',
     ['ui.router','ngResource','ngCookies','bms-logon-service','bms-logon-states']);
 
+bmsLogon.factory('roleFilterService',['$cookieStore',
+    function($cookieStore) {
+        var roleFilter = {};
+        roleFilter.dropdownListFilter = function (industryTypeOptions, callback) {
+            var globals = $cookieStore.get("globals");
+            console.log(globals);
+            var userIndustryTypeRole = $cookieStore.get("globals").currentUser.industryTypeRole;
+            var userQBCategoryRole = $cookieStore.get("globals").currentUser.qbCategoryRole;
+            console.log("userQBCategoryRole" + userQBCategoryRole);
+            var userQBTypeRole = $cookieStore.get("globals").currentUser.qbTypeRole;
+            var responseData = {};
+
+
+            for (var i = 0; i < industryTypeOptions.length; i++) {
+                if (userIndustryTypeRole == industryTypeOptions[i].value) {
+                    responseData.option = industryTypeOptions[i];
+                    console.log(industryTypeOptions);
+                    for (var j = 0; j < industryTypeOptions[i].categories.length; j++) {
+                        if (userQBCategoryRole == industryTypeOptions[i].categories[j].value) {
+                            console.log("userQBCategoryRole");
+                            responseData.categories = industryTypeOptions[i].categories[j];
+                            for (var m = 0; m < industryTypeOptions[i].categories[j].types.length; m++) {
+                                if (userQBTypeRole == industryTypeOptions[i].categories[j].types[m].value) {
+                                    console.log("userQBTypeRole");
+                                    responseData.types = industryTypeOptions[i].categories[j].types[m];
+                                    break;
+                                } else {
+                                    continue;
+                                }
+                            }
+                            break;
+                        } else {
+                            continue
+                        }
+                        break;
+                    }
+                } else {
+                    continue;
+                }
+            }
+            callback(responseData);
+        }
+
+        return roleFilter;
+    } ]);
+
 bmsLogon.factory('AuthenticationService',
     ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout','bmsLogonService',
         function (Base64, $http, $cookieStore,$rootScope, $timeout,bmsLogonService) {
@@ -156,6 +202,8 @@ bmsLogon.factory('Base64', function () {
 
         /* jshint ignore:end */
     });
+
+
 
 bmsLogon.controller('bmsLogon',
     function($scope,$http,$q,$state,AuthenticationService,

@@ -1,15 +1,16 @@
 angular.module('bms-banks-state-add-controller',[ 'ui.bootstrap','ngCookies'])
     .controller('bmsBanksStateAddController',function($scope,$state,$uibModalInstance,
-                                                      bmsBanksService,bankDetail,industryTypeOptions,$cookieStore){
+                                                      bmsBanksService,bankDetail,
+                                                      industryTypeOptions,$cookieStore,roleFilterService){
 
         $scope.bankDetail = bankDetail;
         $scope.industryTypeOptions = industryTypeOptions;
-        var globals = $cookieStore.get("globals");
-        //console.log("cookies:" + globals.currentUser.bankrole);
-        $scope.option = globals.currentUser.industryTypeRole;
-        $scope.option.label = "IT";
-        console.log("$scope.option.value:"+$scope.option);
-        $scope.categories = globals.currentUser.qbCategoryRole;
+        var entry = roleFilterService.dropdownListFilter($scope.industryTypeOptions, function(response) {
+            console.log(response);
+            $scope.option = response.option;
+            $scope.categories = response.categories;
+            $scope.types = response.types;
+        });
 
         $scope.submitModal = function() {
             console.log("submit前数据提交：");

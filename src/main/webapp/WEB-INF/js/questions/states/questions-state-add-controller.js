@@ -1,9 +1,17 @@
 angular.module('bms-questions-state-add-controller',[ 'ui.bootstrap'])
     .controller('bmsQuestionsStateAddController',
-        function($scope,$state,$uibModalInstance,bmsQuestionsService,questionDetail,industryTypeOptions){
+        function($scope,$state,$uibModalInstance,bmsQuestionsService,questionDetail,industryTypeOptions,roleFilterService){
 
         $scope.questionDetail = questionDetail;
         $scope.industryTypeOptions = industryTypeOptions;
+        var entry = roleFilterService.dropdownListFilter($scope.industryTypeOptions, function(response) {
+                console.log(response);
+                $scope.option = response.option;
+                $scope.categories = response.categories;
+                $scope.types = response.types;
+        });
+
+
         $scope.addiDynamicParamList = [{optSeq:"",optContent:""}];
         $scope.bankOptions = [{bankId:"",bankName:"",qbType:""}];
 

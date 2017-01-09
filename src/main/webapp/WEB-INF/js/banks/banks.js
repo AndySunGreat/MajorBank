@@ -1,8 +1,8 @@
 /**
  * Created by AndySun on 2016/10/20.
  */
-angular.module('bms-banks',['bms-banks-service','bms-banks-states','ngCookies'])
-    .controller('bmsBanks',function($scope,$http,$q,$state,bmsBanksService,industryTypeOptions,$cookieStore){
+angular.module('bms-banks',['bms-banks-service','bms-banks-states'])
+    .controller('bmsBanks',function($scope,$http,$q,$state,bmsBanksService,industryTypeOptions,roleFilterService){
         var emptyFilterForm = {
             bankId: null,
             bankName:null,
@@ -11,10 +11,13 @@ angular.module('bms-banks',['bms-banks-service','bms-banks-states','ngCookies'])
             qbType:null,
             qbVersion:null
         };
-        var globals = $cookieStore.get("globals");
-        console.log("cookies:" + globals.currentUser.bankrole);
         $scope.industryTypeOptions = industryTypeOptions;
-
+        var entry = roleFilterService.dropdownListFilter($scope.industryTypeOptions, function(response) {
+            console.log(response);
+            $scope.option = response.option;
+            $scope.categories = response.categories;
+            $scope.types = response.types;
+        });
 
         $scope.queryForm = function(searchFilter){
             //console.log($scope.searchFilter);

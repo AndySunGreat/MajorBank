@@ -1,5 +1,6 @@
 angular.module('bms-banks-state-update-controller',[ 'ui.bootstrap'])
-    .controller('bmsBanksStateUpdateController',function($scope,$state,$uibModalInstance,bmsBanksService,bankDetail,industryTypeOptions){
+    .controller('bmsBanksStateUpdateController',
+        function($scope,$state,$uibModalInstance,bmsBanksService,bankDetail,industryTypeOptions){
 
         $scope.industryTypeOptions = industryTypeOptions;
         $scope.bankDetail = bankDetail;
@@ -13,21 +14,19 @@ angular.module('bms-banks-state-update-controller',[ 'ui.bootstrap'])
                         for(var m=0;m<$scope.industryTypeOptions[i].categories[j].types.length;m++){
                             if(bankDetail.qbType == $scope.industryTypeOptions[i].categories[j].types[m].value){
                                 $scope.types = $scope.industryTypeOptions[i].categories[j].types[m];
-                                /*for(var n=0;n<$scope.industryTypeOptions[i].categories[j].types[m].banks.length;n++){
-                                    var bankIdTmp = $scope.industryTypeOptions[i].categories[j].types[m].banks[n].bankId;
-                                    var bankNameTmp = $scope.industryTypeOptions[i].categories[j].types[m].banks[n].bankName;
-                                    if(bankDetail.bankIdsJson.indexOf(bankIdTmp)!=-1){
-                                        var obj = {bankId:bankIdTmp,bankName:bankNameTmp};
-                                        $scope.bankOptions.push(obj);
-                                    }
-                                }*/
                                 break;
+                            }else{
+                                continue;
                             }
                         }
                         break;
+                    }else{
+                        continue;
                     }
                     break;
                 }
+            }else{
+                continue;
             }
         }
 

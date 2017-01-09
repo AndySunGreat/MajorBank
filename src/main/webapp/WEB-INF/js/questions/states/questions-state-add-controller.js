@@ -4,14 +4,16 @@ angular.module('bms-questions-state-add-controller',[ 'ui.bootstrap'])
 
         $scope.questionDetail = questionDetail;
         $scope.industryTypeOptions = industryTypeOptions;
-        var entry = roleFilterService.dropdownListFilter($scope.industryTypeOptions, function(response) {
+        var entry = roleFilterService.banksRoleFilter($scope.industryTypeOptions, function(response) {
                 console.log(response);
                 $scope.option = response.option;
                 $scope.categories = response.categories;
                 $scope.types = response.types;
+                $scope.banks = response.banks;
+
         });
 
-
+        console.log("$scope.banks.bankId",$scope.banks);
         $scope.addiDynamicParamList = [{optSeq:"",optContent:""}];
         $scope.bankOptions = [{bankId:"",bankName:"",qbType:""}];
 
@@ -55,6 +57,10 @@ angular.module('bms-questions-state-add-controller',[ 'ui.bootstrap'])
                 convertTmpCE[tmpCE["key"]] = tmpCE["value"];
             }
             console.log(convertTmpCE);*/
+            //$scope.questionDetail.bankId = $scope.banks.bankId;
+            console.log("submit before $scope.banks.bankId",$scope.banks.bankId);
+            var bankIdTmp = $scope.banks.bankId;
+            $scope.questionDetail.bankId =bankIdTmp;
             $scope.questionDetail.questOptionsJson = angular.toJson($scope.concatListCE);
             var questionId = $scope.questionDetail.questionId;
             bmsQuestionsService.Questions.createQuestion($scope.questionDetail).$promise.then(

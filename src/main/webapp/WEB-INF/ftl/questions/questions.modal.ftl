@@ -37,6 +37,16 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="pkgInputBank">题库选择:</label>
+                                <div class="col-sm-3">
+                                    <select id="pkgInputBank" class="form-control"
+                                            ng-model="banks"
+                                            ng-options="banks.bankName for banks in types.banks track by banks.bankId">
+                                        <option value="">-- 请选择 --</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="form-group" ng-show="questionDetail.questionId">
                                     <label class="control-label col-sm-2" for="questionId">问题编号:</label>
                                     <div class="col-sm-3">

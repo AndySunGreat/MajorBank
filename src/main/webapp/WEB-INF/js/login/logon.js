@@ -42,7 +42,57 @@ bmsLogon.factory('roleFilterService',['$cookieStore',
                 }
             }
             callback(responseData);
-        }
+        };
+
+        roleFilter.banksRoleFilter = function (industryTypeOptions, callback) {
+            var globals = $cookieStore.get("globals");
+            console.log(globals);
+            var userIndustryTypeRole = $cookieStore.get("globals").currentUser.industryTypeRole;
+            var userQBCategoryRole = $cookieStore.get("globals").currentUser.qbCategoryRole;
+            console.log("userQBCategoryRole" + userQBCategoryRole);
+            var userQBTypeRole = $cookieStore.get("globals").currentUser.qbTypeRole;
+            var userBankRole = $cookieStore.get("globals").currentUser.bankRole;
+            var responseData = {};
+
+
+            for (var i = 0; i < industryTypeOptions.length; i++) {
+                if (userIndustryTypeRole == industryTypeOptions[i].value) {
+                    responseData.option = industryTypeOptions[i];
+                    console.log(industryTypeOptions);
+                    for (var j = 0; j < industryTypeOptions[i].categories.length; j++) {
+                        if (userQBCategoryRole == industryTypeOptions[i].categories[j].value) {
+                            responseData.categories = industryTypeOptions[i].categories[j];
+                            for (var m = 0; m < industryTypeOptions[i].categories[j].types.length; m++) {
+                                if (userQBTypeRole == industryTypeOptions[i].categories[j].types[m].value) {
+                                    responseData.types = industryTypeOptions[i].categories[j].types[m];
+                                    for(var n = 0; n < industryTypeOptions[i].categories[j].types[m].banks[n];n++){
+                                        console.log(userBankRole);
+                                        console.log(industryTypeOptions[i].categories[j].types[m].banks[n].bankName);
+                                        if (userBankRole == industryTypeOptions[i].categories[j].types[m].banks[n].bankName) {
+                                            responseData.banks = industryTypeOptions[i].categories[j].types[m].banks[n].bankName;
+                                            break;
+                                        }else{
+                                            continue;
+                                        }
+                                    }
+                                    break;
+                                } else {
+                                    continue;
+                                }
+                            }
+                            break;
+                        } else {
+                            continue
+                        }
+                        break;
+                    }
+                } else {
+                    continue;
+                }
+            }
+            callback(responseData);
+        };
+
 
         return roleFilter;
     } ]);
@@ -225,7 +275,7 @@ bmsLogon.controller('bmsLogon',
                         response[0].industryTypeRole,
                         response[0].qbCategoryRole,
                         response[0].qbTypeRole,
-                        response[0].bankrole);
+                        response[0].bankRole);
                     //$location.path('/');
                     $state.go("home",{test:"123"});
                 } else {

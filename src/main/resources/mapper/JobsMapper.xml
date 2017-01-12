@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.majorbank.mapper.JobsMapper">
+
+
+    <!-- private long packageId; // 套餐ID
+    private String packageName; // 套餐名称
+    private long jobId; // 岗位的ID
+    private String bankIdsJson;// 存放该套餐配置的一组bankID
+    private Date createDate; // 创建时间
+    private Date changeDate; // 套餐修改时间
+    -->
+    <resultMap id="jobsRstMap"
+        type="com.majorbank.model.Jobs">
+        <result column="JOB_ID" property="jobId" />
+        <result column="JOB_NAME" property="jobName" />
+        <result column="JOB_CATEGORY" property="jobCategory" />
+        <result column="INDUSTRY_TYPE" property="industryType" />
+        <result column="JOB_GROUP" property="jobGroup" />
+        <result column="JOB_LEVEL" property="jobLevel" />
+    </resultMap>
+
+<!--    <resultMap id="jobsIndustryTypeMap"
+               type="com.majorbank.model.JobIndustryTypeOptions">
+        <result column="INDUSTRY_TYPE_VALUE" property="industryTypeValue" />
+    </resultMap>
+
+    <resultMap id="jobsGroupOptionsMap"
+               type="com.majorbank.model.JobGroupOptions">
+        <result column="JOB_GROUP" property="jobGroup" />
+    </resultMap>-->
+
+    <!-- get all users record -->
+    <sql id="selectJobs">
+        SELECT
+        JOB_ID,
+        JOB_NAME,
+        JOB_CATEGORY,
+        INDUSTRY_TYPE,
+        JOB_GROUP,
+        JOB_LEVEL
+        FROM JOBS
+    </sql>
+    <sql id="jobsFilterWhereClause">
+        <where>
+            <if test="_parameter !=null ">
+                JOB_ID IN
+                    <foreach item="item" index="index" collection="list"
+                             open="(" separator="," close=")">
+                        #{item}
+                 </foreach>
+            </if>
+        </where>
+    </sql>
+
+    <sql id="orderByJobs">
+        ORDER BY INDUSTRY_TYPE,JOB_GROUP
+    </sql>
+
+    <select id="getJobNames" parameterType="com.majorbank.model.Jobs"
+            resultMap="jobsRstMap">
+        <include refid="selectJobs" />
+        <include refid="jobsFilterWhereClause" />
+
+    </select>
+
+
+
+    <select id="getAllJobs" parameterType="com.majorbank.model.Jobs"
+            resultMap="jobsRstMap">
+        <include refid="selectJobs" />
+        <include refid="jobsFilterWhereClause" />
+        <include refid="orderByJobs" />
+    </select>
+
+<!--
+    <select id="getJobIndustryType" parameterType="string"
+            resultMap="jobsIndustryTypeMap">
+        SELECT
+        INDUSTRY_TYPE
+        FROM JOBS
+        GROUP BY INDUSTRY_TYPE
+    </select>
+
+    <select id="getJobGroupOptionList" parameterType="string"
+            resultMap="jobsGroupOptionsMap">
+        SELECT
+        JOB_GROUP
+        FROM JOBS
+        WHERE INDUSTRY_TYPE =#{industryType}
+        GROUP BY JOB_GROUP
+    </select>
+    <select id="getJobIndustryType" parameterType="string"
+            resultMap="jobsRstMap">
+        SELECT
+        JOB_ID,
+        JOB_NAME,
+        JOB_CATEGORY,
+        INDUSTRY_TYPE,
+        JOB_GROUP,
+        JOB_LEVEL
+        FROM JOBS
+        WHERE JOB_GROUP =#{jobGroup}
+    </select>-->
+
+</mapper>

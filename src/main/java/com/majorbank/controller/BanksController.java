@@ -2,6 +2,7 @@ package com.majorbank.controller;
 
 import com.majorbank.model.*;
 import com.majorbank.service.BanksService;
+import com.majorbank.service.JobsService;
 import com.majorbank.service.OptionsService;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
@@ -28,6 +29,108 @@ public class BanksController {
 
     @Autowired
     private OptionsService optionsService;
+
+    @Autowired
+    private JobsService jobsService;
+
+    @ResponseBody
+    @RequestMapping(value={"options/jobsOptions"},method = {RequestMethod.GET})
+    public List<JobIndustryTypeOptions> getJobsLinkage(){
+        List<Jobs> allJobsList = jobsService.getAllJobs(null);
+        List<JobIndustryTypeOptions> jobIndustryTypeOptionsList = new ArrayList<JobIndustryTypeOptions>();
+        List<JobGroupOptions> jobGroupOptionsList = new ArrayList<JobGroupOptions>();
+        List<Jobs> jobsList = new ArrayList<Jobs>();
+        Jobs jobs = new Jobs();
+        Jobs josEntity = new Jobs();
+        JobIndustryTypeOptions jobIndustryTypeOptions = new JobIndustryTypeOptions();
+        JobGroupOptions jobGroupOptions = new JobGroupOptions();
+        String previousIndustryType = "";
+        String previousJobsGroup = "";
+        Boolean newJobList = false;
+        Boolean newJobGroupList = false;
+        Boolean newIndustryType = false;
+        Boolean newJobGroup = false;
+        Boolean newJob = false;
+
+
+        for(int i=0;i<allJobsList.size();i++){
+            jobs = (Jobs)allJobsList.get(i);
+            newJobList = false;
+            newJobGroupList = false;
+            newIndustryType = false;
+            newJobGroup = false;
+            newJob = false;
+            // New Industry Type
+            if(!previousIndustryType.equals(jobs.getIndustryType())){
+                newIndustryType = true;
+                jobIndustryTypeOptions = new JobIndustryTypeOptions();
+                jobIndustryTypeOptions.setIndustryTypeValue(jobs.getIndustryType());
+            }
+
+            // New JobGroup
+            if(   (!previousJobsGroup.equals(jobs.getJobGroup())
+                    && previousIndustryType.equals(jobs.getIndustryType()))
+                    || previousIndustryType==""){
+                newJobGroup = true;
+                if(previousIndustryType!="") {
+                    jobGroupOptions.setJobsList(jobsList);
+                    jobsList = new ArrayList<Jobs>();
+                    jobGroupOptionsList.add(jobGroupOptions);
+                }
+                jobGroupOptions = new JobGroupOptions();
+                jobGroupOptions.setJobGroup(jobs.getJobGroup());
+            }
+
+            // New Job
+            if( (previousJobsGroup.equals(jobs.getJobGroup()) && previousIndustryType.equals(jobs.getIndustryType()))
+                    || (previousIndustryType=="" && previousJobsGroup=="")){
+                newJob = true;
+                jobsList.add(jobs);
+            }
+
+            if(previousIndustryType!="") {
+                if(newIndustryType || i==allJobsList.size()-1) {
+                    jobGroupOptions = new JobGroupOptions();
+                    jobGroupOptions.setJobGroup(jobs.getJobGroup());
+                    jobGroupOptions.setJobsList(jobsList);
+                    jobGroupOptionsList.add(jobGroupOptions);
+                    jobIndustryTypeOptions.setJobGroupOptionsList(jobGroupOptionsList);
+                    jobGroupOptionsList =  new ArrayList<JobGroupOptions>();
+                    jobIndustryTypeOptionsList.add(jobIndustryTypeOptions);
+                }
+            }
+            previousIndustryType = jobs.getIndustryType();
+            previousJobsGroup = jobs.getJobGroup();
+        }
+        return jobIndustryTypeOptionsList;
+
+
+
+/*        List<JobIndustryTypeOptions> jobIndustryTypeOptionsList = new ArrayList<JobIndustryTypeOptions>();
+        JobIndustryTypeOptions jobIndustryTypeOptions = new JobIndustryTypeOptions();
+        jobIndustryTypeOptions.setIndustryTypeValue("IT");
+        jobIndustryTypeOptionsList.add(jobIndustryTypeOptions);
+
+        List<Jobs> jobsList = new ArrayList<Jobs>();
+
+        Jobs jobs = new Jobs();
+
+
+        for(int i=0;i<jobIndustryTypeOptionsList.size();i++){
+            jobIndustryTypeOptions = (JobIndustryTypeOptions)jobIndustryTypeOptionsList.get(i);
+            // IT -> GlobalDev,GlobalTest
+            jobGroupOptionsList = jobsService.getJobGroupOptionList(jobIndustryTypeOptions.getIndustryTypeValue());
+            for(int j=0;j<jobGroupOptionsList.size();j++){
+                jobGroupOptions = (JobGroupOptions)jobGroupOptionsList.get(j);
+                // GlobalDev
+                jobsList = jobsService.getJobsList(jobGroupOptions.getJobGroup());
+                ((JobGroupOptions)jobGroupOptionsList.get(j)).setJobsList(jobsList);
+            }
+            ((JobIndustryTypeOptions)jobIndustryTypeOptionsList.get(i)).setJobGroupOptionsList(jobGroupOptionsList);
+        }
+        return jobIndustryTypeOptionsList;*/
+    }
+
 
     @ResponseBody
     @RequestMapping(value={"options/industryOptions"},method = {RequestMethod.GET})

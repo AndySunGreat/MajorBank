@@ -24,6 +24,36 @@
         <result column="CHANGE_DATE" property="changeDate"/>
     </resultMap>
 
+    <sql id="selectBankNames">
+        SELECT
+        BANK_ID,
+        BANK_NAME,
+        QB_CATEGORY,
+        INDUSTRY_TYPE,
+        QB_TYPE,
+        QB_VERSION,
+        CHANGE_DATE
+        FROM BANKS
+    </sql>
+    <sql id="banksFilterWhereClause">
+        <where>
+            <if test="_parameter !=null ">
+                BANK_ID IN
+                <foreach item="item" index="index" collection="list"
+                         open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </sql>
+
+    <select id="getBankNames" parameterType="com.majorbank.model.Banks"
+            resultMap="questBankRstMap">
+        <include refid="selectBankNames" />
+        <include refid="banksFilterWhereClause" />
+    </select>
+
+
     <!-- get all users record -->
     <sql id="selectBank">
         SELECT

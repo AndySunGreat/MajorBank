@@ -26,12 +26,7 @@
                                                 ng-model="packageDetail.packageDesc" rows="3" />
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="jobId">职业编号:</label>
-                                <div class="col-sm-3" >
-                                    <input type="text" class="form-control" id="jobId" ng-model="packageDetail.jobId" />
-                                </div>
-                            </div>
+
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="pkgInputIndustryType">行业类型</label>
                                 <div class="col-sm-3">
@@ -100,6 +95,16 @@
                                     </tbody>
                                 </table>
                                     </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="pkgJobslist">职业关联</label>
+                                <div class="col-sm-3">
+                                    <select id="pkgJobslist" class="form-control"
+                                            ng-model="option"
+                                            ng-options="option.value for option in industryTypeOptions">
+                                        <option value="">-- 请选择 --</option>
+                                    </select>
+                                </div>
                             </div>
                         </form>
                     </div>

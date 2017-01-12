@@ -16,7 +16,7 @@
         type="com.majorbank.model.Package">
         <result column="PACKAGE_ID" property="packageId" />
         <result column="PACKAGE_NAME" property="packageName" />
-        <result column="JOB_ID" property="jobId" />
+        <result column="JOB_IDS" property="jobIds" />
         <result column="BANK_IDS_JSON" property="bankIdsJson" />
         <result column="CREATE_DATE" property="createDate" />
         <result column="CHANGE_DATE" property="changeDate" />
@@ -28,7 +28,7 @@
         SELECT
         PACKAGE_ID,
         PACKAGE_NAME,
-        JOB_ID,
+        JOB_IDS,
         BANK_IDS_JSON,
         CREATE_DATE,
         CHANGE_DATE,
@@ -46,8 +46,8 @@
                 <if test="packageName != null">
                     and PACKAGE_NAME = #{packageName}
                 </if>
-                <if test="jobId != 0 and jobId !=null">
-                    and JOB_ID = #{jobId}
+                <if test="jobIds != 0 and jobIds !=null">
+                    and JOB_IDS = #{jobIds}
                 </if>
             </if>
         </where>
@@ -63,7 +63,7 @@
         SELECT
         PACKAGE_ID,
         PACKAGE_NAME,
-        JOB_ID,
+        JOB_IDS,
         BANK_IDS_JSON,
         CREATE_DATE,
         CHANGE_DATE,
@@ -79,20 +79,20 @@
         SELECT
         PACKAGE_ID,
         PACKAGE_NAME,
-        JOB_ID,
+        JOB_IDS,
         BANK_IDS_JSON,
         CREATE_DATE,
         CHANGE_DATE,
         PACKAGE_DESC
         FROM PACKAGES
-        WHERE JOB_ID=#{jobId,jdbcType=NUMERIC}
+        WHERE JOB_IDS=#{jobIds,jdbcType=VARCHAR}
     </select>
 
     <insert id="insertPackage" parameterType="com.majorbank.model.Package">
         INSERT INTO PACKAGES(
         PACKAGE_ID,
         PACKAGE_NAME,
-        JOB_ID,
+        JOB_IDS,
         BANK_IDS_JSON,
         CREATE_DATE,
         CHANGE_DATE,
@@ -101,7 +101,7 @@
         VALUES(
         #{packageId,jdbcType=NUMERIC},
         #{packageName,jdbcType=VARCHAR},
-        #{jobId,jdbcType=NUMERIC},
+        #{jobIds,jdbcType=VARCHAR},
         #{bankIdsJson,jdbcType=VARCHAR},
         NOW(),
         NOW(),
@@ -120,8 +120,8 @@
         <if test="packageName !=null">
         ,PACKAGE_NAME = #{packageName,jdbcType=VARCHAR}
         </if>
-        <if test="jobId !=null">
-        ,JOB_ID = #{jobId,jdbcType=NUMERIC}
+        <if test="jobIds !=null">
+        ,JOB_IDS = #{jobIds,jdbcType=VARCHAR}
         </if>
         <if test="bankIdsJson !=null">
         ,BANK_IDS_JSON = #{bankIdsJson,jdbcType=VARCHAR}

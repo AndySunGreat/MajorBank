@@ -3,6 +3,7 @@ package com.majorbank.controller;
 import com.majorbank.model.Banks;
 import com.majorbank.model.Package;
 import com.majorbank.service.BanksService;
+import com.majorbank.service.JobsService;
 import com.majorbank.service.PackageService;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
@@ -35,6 +36,9 @@ public class PackageController {
     @Autowired
     private BanksService banksService;
 
+    @Autowired
+    private JobsService jobsService;
+
     /**
      * list all Package[tested]
      * @return
@@ -43,7 +47,7 @@ public class PackageController {
     @RequestMapping(value={"/package"},method = {RequestMethod.GET})
     public List<Package> getAllPackages(@RequestParam(required = false) String packageId,
                                         @RequestParam(required = false) String packageName,
-                                        @RequestParam(required = false) String jobId,
+                                        @RequestParam(required = false) String jobIds,
                                         @RequestParam(required = false) String bankIdsJson){
         Package package1 = new Package();
         if(packageId!=null) {
@@ -52,13 +56,24 @@ public class PackageController {
         if(packageName!=null) {
             package1.setPackageName(packageName);
         }
-        if(jobId!=null){
-            package1.setJobId(Long.valueOf(jobId));
+        if(jobIds!=null){
+            package1.setJobIds(jobIds);
         }
         if(bankIdsJson!=null){
             package1.setBankIdsJson(bankIdsJson);
         }
         List<Package> packageList2 = packageService.getAllPackages(package1);
+        // jobNames
+        Package packageTmp = new Package();
+        for(int i=0;i<packageList2.size();i++){
+            String jobNames = jobsService.getJobNames(packageList2.get(i).getJobIds());
+            String bankNames = banksService.getBankNames(packageList2.get(i).getBankIdsJson());
+            packageList2.get(i).setJobNames(jobNames);
+            packageList2.get(i).setBankNames(bankNames);
+        }
+        // bankNames
+
+
         String startdate = "2016-11-1";
         Date date = null;
         try {

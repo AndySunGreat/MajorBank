@@ -11,8 +11,10 @@ import java.sql.Date;
 public class Package implements Serializable {
     private long packageId; // 套餐ID
     private String packageName; // 套餐名称
-    private long jobId; // 岗位的ID
+    private String jobIds; // 岗位的ID
+    private String jobNames;
     private String bankIdsJson;// 存放该套餐配置的一组bankID
+    private String bankNames;
     private Date createDate; // 创建时间
     private Date changeDate; // 套餐修改时间
     private String packageDesc;
@@ -20,35 +22,26 @@ public class Package implements Serializable {
     public Package() {
     }
 
-    public Package(long packageId, String packageName,
-                   long jobId, String bankIdsJson,
-                   Date createDate, Date changeDate) {
+    public Package(long packageId, String packageName, String jobIds,
+                   String jobNames, String bankIdsJson,
+                   Date createDate, Date changeDate, String packageDesc,String bankNames) {
         this.packageId = packageId;
         this.packageName = packageName;
-        this.jobId = jobId;
-        this.bankIdsJson = bankIdsJson;
-        this.createDate = createDate;
-        this.changeDate = changeDate;
-    }
-
-    public Package(long packageId, String packageName,
-                   long jobId, String bankIdsJson,
-                   Date createDate, Date changeDate, String packageDesc) {
-        this.packageId = packageId;
-        this.packageName = packageName;
-        this.jobId = jobId;
+        this.jobIds = jobIds;
+        this.jobNames = jobNames;
         this.bankIdsJson = bankIdsJson;
         this.createDate = createDate;
         this.changeDate = changeDate;
         this.packageDesc = packageDesc;
+        this.bankNames = bankNames;
     }
 
-    public String getPackageDesc() {
-        return packageDesc;
+    public String getBankNames() {
+        return bankNames;
     }
 
-    public void setPackageDesc(String packageDesc) {
-        this.packageDesc = packageDesc;
+    public void setBankNames(String bankNames) {
+        this.bankNames = bankNames;
     }
 
     public long getPackageId() {
@@ -67,12 +60,20 @@ public class Package implements Serializable {
         this.packageName = packageName;
     }
 
-    public long getJobId() {
-        return jobId;
+    public String getJobIds() {
+        return jobIds;
     }
 
-    public void setJobId(long jobId) {
-        this.jobId = jobId;
+    public void setJobIds(String jobIds) {
+        this.jobIds = jobIds;
+    }
+
+    public String getJobNames() {
+        return jobNames;
+    }
+
+    public void setJobNames(String jobNames) {
+        this.jobNames = jobNames;
     }
 
     public String getBankIdsJson() {
@@ -97,5 +98,13 @@ public class Package implements Serializable {
 
     public void setChangeDate(Date changeDate) {
         this.changeDate = changeDate;
+    }
+
+    public String getPackageDesc() {
+        return packageDesc;
+    }
+
+    public void setPackageDesc(String packageDesc) {
+        this.packageDesc = packageDesc;
     }
 }

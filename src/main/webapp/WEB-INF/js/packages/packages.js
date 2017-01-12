@@ -6,7 +6,7 @@ angular.module('bms-packages',['bms-packages-service','bms-packages-states'])
         var emptyFilterForm = {
             packageId: null,
             packageName:null,
-            jobId:null,
+            jobIds:null,
             bankIdsJson:null
         };
         $scope.industryTypeOptions = industryTypeOptions;

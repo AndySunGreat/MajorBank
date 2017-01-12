@@ -22,6 +22,7 @@ public class IndustryTypeOptions implements Serializable {
         this.categories = categories;
     }
 
+
     public String getId() {
         return id;
     }
@@ -53,4 +54,6 @@ public class IndustryTypeOptions implements Serializable {
     public void setCategories(List<BankCategoryOptions> categories) {
         this.categories = categories;
     }
+
+
 }

@@ -9,7 +9,7 @@ angular.module('bms-packages-state-controller',['ui.bootstrap'])
         var emptyFilterForm = {
             packageId: null,
             packageName:null,
-            jobId:null,
+            jobIds:null,
             bankIdsJson:null
         };
         var deferred = $q.defer();

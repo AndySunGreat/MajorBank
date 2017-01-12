@@ -13,4 +13,6 @@ public interface BanksService {
     Banks getBankById(long bankId);
     int updateBank(Banks banks);
     int deleteBank(long bankId);
+
+    String getBankNames(String bankIds);
 }

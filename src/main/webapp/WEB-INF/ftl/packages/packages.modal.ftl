@@ -100,8 +100,8 @@
                                 <label class="control-label col-sm-2" for="pkgJobsIndustryType">职业所属行业</label>
                                 <div class="col-sm-3">
                                     <select id="pkgJobsIndustryType" class="form-control"
-                                            ng-model="option"
-                                            ng-options="option.industryTypeValue for option in JobsOptions">
+                                            ng-model="jobOption"
+                                            ng-options="jobOption.industryTypeValue for jobOption in jobsOptions">
                                         <option value="">-- 请选择 --</option>
                                     </select>
                                 </div>
@@ -111,7 +111,7 @@
                                 <div class="col-sm-3">
                                     <select id="pkgInputJobGroup" class="form-control"
                                             ng-model="jobGroupOptionsList"
-                                            ng-options="jobGroupOptionsList.jobGroup for jobGroupOptionsList in option.jobGroupOptionsList">
+                                            ng-options="jobGroupOptionsList.jobGroup for jobGroupOptionsList in jobOption.jobGroupOptionsList">
                                         <option value="">-- 请选择 --</option>
                                     </select>
                                 </div>
@@ -124,6 +124,30 @@
                                             ng-options="jobsList.jobName for jobsList in jobGroupOptionsList.jobsList">
                                         <option value="">-- 请选择 --</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="pkgInputQbType">(已选列表)</label>
+                                <div class="col-sm-5">
+                                    <table class="table table-hover" ng-show="bankOptions">
+                                        <thead>
+                                        <tr>
+                                            <th width="30%">职业编号</th>
+                                            <th>所属行业</th>
+                                            <th>所属组</th>
+                                            <th>职业名称</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="bankOption in bankOptions">
+                                            <td>{{bankOption.bankId}}</td>
+                                            <td>{{bankOption.bankName}}</td>
+                                            <td>{{bankOption.qbType}}</td>
+                                            <td> <button ng-show="$index!=-1" class="btn btn-default btn-primary"
+                                                         ng-click="delBankOptions($index)">Del</button></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </form>

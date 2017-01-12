@@ -32,14 +32,14 @@ angular.module('bms-packages-state-controller',['ui.bootstrap'])
                 templateUrl: 'ftl/packages/packages.modal.ftl',
                 resolve: {
                     packageDetail: angular.copy(emptyFilterForm),
-                    industryTypeOptions:['bmsBanksService',
+                    industryTypeOptions:['bmsPackagesService',
                         function(bmsPackagesService){
                             var test =   bmsPackagesService.OptionsList.queryByParentValue().$promise;
                             console.log(test);
                             return test;
                         }
                     ],
-                    JobsOptions:['bmsBanksService',
+                    jobsOptions:['bmsPackagesService',
                         function(bmsPackagesService){
                             var jobsOption =   bmsPackagesService.JobOptionsList.getJobsLinkage().$promise;
                             console.log(jobsOption);
@@ -89,6 +89,13 @@ angular.module('bms-packages-state-controller',['ui.bootstrap'])
                             var test =   bmsPackagesService.OptionsList.queryByParentValue().$promise;
                             console.log(test);
                             return test;
+                        }
+                    ],
+                    jobsOptions:['bmsBanksService',
+                        function(bmsPackagesService){
+                            var jobsOption1 =   bmsPackagesService.JobOptionsList.getJobsLinkage().$promise;
+                            console.log(jobsOption1);
+                            return jobsOption1;
                         }
                     ]
                 },

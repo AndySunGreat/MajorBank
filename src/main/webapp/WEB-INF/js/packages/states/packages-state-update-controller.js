@@ -1,6 +1,6 @@
 angular.module('bms-packages-state-update-controller',[ 'ui.bootstrap'])
     .controller('bmsPackagesStateUpdateController',
-        function($scope,$state,$uibModalInstance,bmsPackagesService,packageDetail,banksDetailForPkgId, industryTypeOptions,JobsOptions){
+        function($scope,$state,$uibModalInstance,bmsPackagesService,packageDetail,banksDetailForPkgId, industryTypeOptions,jobsOptions){
             console.log("bmsPackagesStateUpdateController");
             console.log($uibModalInstance);
             console.log(packageDetail);
@@ -10,7 +10,7 @@ angular.module('bms-packages-state-update-controller',[ 'ui.bootstrap'])
 
             $scope.industryTypeOptions = industryTypeOptions;
 
-            $scope.JobsOptions = JobsOptions;
+            $scope.jobsOptions = jobsOptions;
 
             $scope.bankOptions = [];
             //var obj = {bankId:"",bankName:""};

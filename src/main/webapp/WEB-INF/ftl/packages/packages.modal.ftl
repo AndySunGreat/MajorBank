@@ -97,11 +97,31 @@
                                     </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="pkgJobslist">职业关联</label>
+                                <label class="control-label col-sm-2" for="pkgJobsIndustryType">职业所属行业</label>
                                 <div class="col-sm-3">
-                                    <select id="pkgJobslist" class="form-control"
+                                    <select id="pkgJobsIndustryType" class="form-control"
                                             ng-model="option"
-                                            ng-options="option.value for option in industryTypeOptions">
+                                            ng-options="option.industryTypeValue for option in JobsOptions">
+                                        <option value="">-- 请选择 --</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="pkgInputJobGroup">职业所属组</label>
+                                <div class="col-sm-3">
+                                    <select id="pkgInputJobGroup" class="form-control"
+                                            ng-model="jobGroupOptionsList"
+                                            ng-options="jobGroupOptionsList.jobGroup for jobGroupOptionsList in option.jobGroupOptionsList">
+                                        <option value="">-- 请选择 --</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="pkgInputJob">职业关联</label>
+                                <div class="col-sm-3">
+                                    <select id="pkgInputJob" class="form-control"
+                                            ng-model="jobsList"
+                                            ng-options="jobsList.jobName for jobsList in jobGroupOptionsList.jobsList">
                                         <option value="">-- 请选择 --</option>
                                     </select>
                                 </div>

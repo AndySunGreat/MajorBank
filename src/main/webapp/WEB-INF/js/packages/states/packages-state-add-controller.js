@@ -1,11 +1,13 @@
 angular.module('bms-packages-state-add-controller',[ 'ui.bootstrap'])
     .controller('bmsPackagesStateAddController',
-        function($scope,$state,$uibModalInstance,bmsPackagesService,packageDetail,industryTypeOptions,roleFilterService){
+        function($scope,$state,$uibModalInstance,bmsPackagesService,
+                 JobsOptions,packageDetail,industryTypeOptions,roleFilterService){
             //console.log("bmsPackagesStateAddController");
             //console.log($uibModalInstance);
             //console.log(packageDetail);
             $scope.packageDetail = packageDetail;
             $scope.industryTypeOptions = industryTypeOptions;
+            $scope.JobsOptions = JobsOptions;
 
             var entry = roleFilterService.dropdownListFilter($scope.industryTypeOptions, function(response) {
                 console.log(response);

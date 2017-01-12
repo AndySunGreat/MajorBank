@@ -38,6 +38,13 @@ angular.module('bms-packages-state-controller',['ui.bootstrap'])
                             console.log(test);
                             return test;
                         }
+                    ],
+                    JobsOptions:['bmsBanksService',
+                        function(bmsPackagesService){
+                            var jobsOption =   bmsPackagesService.JobOptionsList.getJobsLinkage().$promise;
+                            console.log(jobsOption);
+                            return jobsOption;
+                        }
                     ]
                 },
                 controller: 'bmsPackagesStateAddController'

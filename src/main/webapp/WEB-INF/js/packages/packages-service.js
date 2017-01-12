@@ -5,6 +5,15 @@ angular.module('bms-packages-service',['ngResource'])
         // $get来返回provider实例
         this.$get =["$resource",function($resource){
             return {
+                JobOptionsList:$resource(baseUrl + "options/jobsOptions",{},
+                    {
+                        getJobsLinkage:{
+                            url: baseUrl + "options/jobsOptions",
+                            method: 'GET',
+                            isArray: true
+                        }
+                    })
+                ,
                 OptionsList:$resource(baseUrl + "options/industryOptions",{},
                     {
                         queryByParentValue:{

@@ -8,6 +8,8 @@ angular.module('bms-packages-state-add-controller',[ 'ui.bootstrap'])
             $scope.packageDetail = packageDetail;
             $scope.industryTypeOptions = industryTypeOptions;
             $scope.jobsOptions = jobsOptions;
+            console.log(jobsOptions);
+            //console.log($scope.jobsOptions[0].industryTypeValue);
 
             var entry = roleFilterService.dropdownListFilter($scope.industryTypeOptions, function(response) {
                 console.log(response);
@@ -42,7 +44,35 @@ angular.module('bms-packages-state-add-controller',[ 'ui.bootstrap'])
             $scope.addBank = function(){
                 var obj = {bankId:$scope.banks.bankId,bankName:$scope.banks.bankName,qbType:$scope.banks.qbType};
                 $scope.bankOptions.push(obj);
-
+            }
+            //console.log($scope.jobOption.industryType);
+            $scope.jobDropdownOptions = [{industryType:"",jobGroup:"",jobName:""}];
+            // $scope.bankOptions=[];
+            // $scope.modelBID = {};
+            // $scope.modelBName = {};
+            $scope.$watch('jobsList',function(newVal,oldVal){
+                if($scope.jobsList){
+                    if($scope.jobDropdownOptions.length==1
+                        && $scope.jobDropdownOptions[0].industryType==""){
+                        $scope.jobDropdownOptions[0].industryType = $scope.jobsOptions[0].industryTypeValue;
+                        $scope.jobDropdownOptions[0].jobGroup = $scope.jobGroupOptionsList.jobGroup;
+                        $scope.jobDropdownOptions[0].jobName = $scope.jobsList.jobName;
+                    }else{
+                        var obj = {industryType:$scope.jobOptions.industryType,
+                            jobGroup:$scope.jobGroupOptionsList.jobGroup,
+                            jobName:$scope.jobsList.jobName};
+                        $scope.jobDropdownOptions.push(obj);
+                    }
+                }
+            });
+            $scope.delJobOptions=function(idx){
+                $scope.jobDropdownOptions.splice(idx,1);
+            };
+            $scope.addJobOptions = function(){
+                var obj = {industryType:$scope.jobOption.industryType,
+                    jobGroup:$scope.jobGroupOptionsList.jobGroup,
+                    jobName:$scope.jobsList.jobName};
+                $scope.jobDropdownOptions.push(obj);
             }
 
             $scope.submitModal = function() {

@@ -125,26 +125,29 @@
                                         <option value="">-- 请选择 --</option>
                                     </select>
                                 </div>
+                                <div class="col-xs-1">
+                                    <button ng-click="addJobOptions()"
+                                            class="btn btn-default btn-success">Add</button>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="pkgInputQbType">(已选列表)</label>
+                                <label class="control-label col-sm-2" for="pkgInputJobOptions">(已选列表)</label>
                                 <div class="col-sm-5">
-                                    <table class="table table-hover" ng-show="bankOptions">
+                                    <table class="table table-hover" ng-show="jobDropdownOptions">
                                         <thead>
                                         <tr>
-                                            <th width="30%">职业编号</th>
                                             <th>所属行业</th>
                                             <th>所属组</th>
                                             <th>职业名称</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr ng-repeat="bankOption in bankOptions">
-                                            <td>{{bankOption.bankId}}</td>
-                                            <td>{{bankOption.bankName}}</td>
-                                            <td>{{bankOption.qbType}}</td>
+                                        <tr ng-repeat="jobArrOption in jobDropdownOptions">
+                                            <td>{{jobArrOption.industryType}}</td>
+                                            <td>{{jobArrOption.jobGroup}}</td>
+                                            <td>{{jobArrOption.jobName}}</td>
                                             <td> <button ng-show="$index!=-1" class="btn btn-default btn-primary"
-                                                         ng-click="delBankOptions($index)">Del</button></td>
+                                                         ng-click="delJobOptions($index)">Del</button></td>
                                         </tr>
                                         </tbody>
                                     </table>

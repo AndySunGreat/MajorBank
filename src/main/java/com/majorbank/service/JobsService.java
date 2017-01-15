@@ -16,6 +16,8 @@ public interface JobsService {
 
     List<Jobs> getAllJobs(Jobs jobs);
 
+    List<Jobs> getJobDetailForIDS(String jobIds);
+
 /*    List<JobIndustryTypeOptions> getJobIndustryType(String aaa);
 
     List<JobGroupOptions> getJobGroupOptionList(String industryType);

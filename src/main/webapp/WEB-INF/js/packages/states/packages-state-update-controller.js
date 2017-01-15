@@ -1,6 +1,7 @@
 angular.module('bms-packages-state-update-controller',[ 'ui.bootstrap'])
     .controller('bmsPackagesStateUpdateController',
-        function($scope,$state,$uibModalInstance,bmsPackagesService,packageDetail,banksDetailForPkgId, industryTypeOptions,jobsOptions){
+        function($scope,$state,$uibModalInstance,bmsPackagesService,packageDetail,
+                 banksDetailForPkgId, industryTypeOptions,jobsOptions,jobsDropdownData){
             console.log("bmsPackagesStateUpdateController");
             console.log($uibModalInstance);
             console.log(packageDetail);
@@ -11,6 +12,9 @@ angular.module('bms-packages-state-update-controller',[ 'ui.bootstrap'])
             $scope.industryTypeOptions = industryTypeOptions;
 
             $scope.jobsOptions = jobsOptions;
+            $scope.jobsDropdownData = jobsDropdownData;
+            console.log("jobsDropdownData");
+            console.log(jobsDropdownData);
 
             $scope.bankOptions = [];
             //var obj = {bankId:"",bankName:""};
@@ -49,6 +53,53 @@ angular.module('bms-packages-state-update-controller',[ 'ui.bootstrap'])
                 $scope.bankOptions.push(obj);
 
             }
+
+            //console.log($scope.jobOption.industryType);
+            //$scope.jobDropdownOptions = [{industryType:"",jobGroup:"",jobId:"",jobName:""}];
+            $scope.jobDropdownOptions = [];
+            for(var i=0;i<$scope.jobsDropdownData.length;i++){
+                var obj = {industryType:$scope.jobsDropdownData[i].industryType,
+                    jobGroup:$scope.jobsDropdownData[i].jobGroup,
+                    jobId:$scope.jobsDropdownData[i].jobId,
+                    jobName:$scope.jobsDropdownData[i].jobName};
+                $scope.jobDropdownOptions.push(obj);
+            }
+
+            // $scope.bankOptions=[];
+            // $scope.modelBID = {};
+            // $scope.modelBName = {};
+            $scope.$watch('jobsList',function(newVal,oldVal){
+                console.log("watch start...");
+                console.log( $scope.jobsOptions);
+                console.log( $scope.jobsList);
+                if($scope.jobsList){
+                    if($scope.jobDropdownOptions.length==1
+                        && $scope.jobDropdownOptions[0].industryType==""){
+                        $scope.jobDropdownOptions[0].industryType = $scope.jobsOptions[0].industryTypeValue;
+                        $scope.jobDropdownOptions[0].jobGroup = $scope.jobGroupOptionsList.jobGroup;
+                        $scope.jobDropdownOptions[0].jobId = $scope.jobsList.jobId;
+                        $scope.jobDropdownOptions[0].jobName = $scope.jobsList.jobName;
+                    }else{
+                        var obj = {industryType:$scope.jobsOptions[0].industryTypeValue,
+                            jobGroup:$scope.jobGroupOptionsList.jobGroup,
+                            jobId:$scope.jobsList.jobId,
+                            jobName:$scope.jobsList.jobName};
+                        $scope.jobDropdownOptions.push(obj);
+                    }
+                }
+            });
+            $scope.delJobOptions=function(idx){
+                $scope.jobDropdownOptions.splice(idx,1);
+            };
+            $scope.addJobOptions = function(){
+                var obj = {industryType:$scope.jobsOptions[0].industryTypeValue,
+                    jobGroup:$scope.jobGroupOptionsList.jobGroup,
+                    jobId:$scope.jobsList.jobId,
+                    jobName:$scope.jobsList.jobName};
+                $scope.jobDropdownOptions.push(obj);
+            }
+
+
             $scope.submitModal = function() {
                 console.log("submit前数据提交：");
                 console.log($scope.packageDetail);
@@ -61,6 +112,19 @@ angular.module('bms-packages-state-update-controller',[ 'ui.bootstrap'])
                 }
                 var packageId = $scope.packageDetail.packageId;
                 $scope.packageDetail.bankIdsJson = strBankIdsJson;
+
+                //  获得Job IDS
+                var strJobIds = "";
+                console.log("start getting job IDS...");
+                console.log($scope.jobDropdownOptions);
+                for(var i=0;i<$scope.jobDropdownOptions.length;i++){
+                    strJobIds = strJobIds + $scope.jobDropdownOptions[i].jobId;
+                    if(i<$scope.jobDropdownOptions.length-1){
+                        strJobIds = strJobIds + ",";
+                    }
+                }
+                $scope.packageDetail.jobIds = strJobIds;
+
                 bmsPackagesService.Packages.updatePackage({packageId:packageId},$scope.packageDetail).$promise.then(
                     function(data){
                         console.log('update package successfully');

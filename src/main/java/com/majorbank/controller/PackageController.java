@@ -1,6 +1,7 @@
 package com.majorbank.controller;
 
 import com.majorbank.model.Banks;
+import com.majorbank.model.Jobs;
 import com.majorbank.model.Package;
 import com.majorbank.service.BanksService;
 import com.majorbank.service.JobsService;
@@ -38,6 +39,13 @@ public class PackageController {
 
     @Autowired
     private JobsService jobsService;
+
+    @ResponseBody
+    @RequestMapping(value={"/options/jobsDropdownData"},method = {RequestMethod.GET})
+    public List<Jobs> getJobDetailForIDS(@RequestParam(required = false) String jobIds){
+        List<Jobs> jobsList = jobsService.getJobDetailForIDS(jobIds);
+        return  jobsList;
+    }
 
     /**
      * list all Package[tested]

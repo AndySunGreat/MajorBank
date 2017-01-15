@@ -45,6 +45,16 @@ public class JobsServiceImpl implements JobsService {
         return jobNames;
     }
 
+    @Override
+    public List<Jobs> getJobDetailForIDS(String jobIds) {
+        Jobs jobsParam = new Jobs();
+        String[] strJobIdsArr = jobIds.split(",");
+        List list = new ArrayList(Arrays.asList(strJobIdsArr));
+        List<Jobs> jobsList = jobsMapper.getJobNames(list);
+        return jobsList;
+    }
+
+
  /*   @Override
     public List<JobIndustryTypeOptions> getJobIndustryType(String tmp) {
         return jobsMapper.getJobIndustryType(tmp);

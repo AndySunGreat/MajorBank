@@ -138,6 +138,7 @@
                                         <tr>
                                             <th>所属行业</th>
                                             <th>所属组</th>
+                                            <th>职业编号</th>
                                             <th>职业名称</th>
                                         </tr>
                                         </thead>
@@ -145,6 +146,7 @@
                                         <tr ng-repeat="jobArrOption in jobDropdownOptions">
                                             <td>{{jobArrOption.industryType}}</td>
                                             <td>{{jobArrOption.jobGroup}}</td>
+                                            <td>{{jobArrOption.jobId}}</td>
                                             <td>{{jobArrOption.jobName}}</td>
                                             <td> <button ng-show="$index!=-1" class="btn btn-default btn-primary"
                                                          ng-click="delJobOptions($index)">Del</button></td>

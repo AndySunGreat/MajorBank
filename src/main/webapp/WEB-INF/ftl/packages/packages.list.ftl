@@ -21,7 +21,7 @@
                         <td style="width:150px;padding:5px;" ng-click="retrieveDetail($event,package.packageId)">{{package.createDate}}</td>
                         <td style="width:150px;padding:5px;" ng-click="retrieveDetail($event,package.packageId)">{{package.changeDate}}</td>
                         <td style="width:150px;padding:5px;">
-                            <button id="editBtn" class="btn btn-small btn-primary" data-target="#myModal" ng-click="editPackage(package.packageId)">编辑</button>
+                            <button id="editBtn" class="btn btn-small btn-primary" data-target="#myModal" ng-click="editPackage(package)">编辑</button>
                             <button id="deleteBtn" class="btn btn-small btn-danger" ng-click="deletePackage(package.packageId)">删除</button>
                         </td>
 

@@ -8,14 +8,17 @@
                 <li class="active"><a ui-sref="home.questions">试题管理</a></li>
                 <li><a ui-sref="home.banks">题库管理</a></li>
                 <li><a ui-sref="home.packages">套餐管理</a></li>
-                <li><a href="#">订单管理</a>
+                <li>
+                    <a ui-sref="home.orders" data-toggle="dropdown">订单管理
+                        <b class="caret"></b>
+                    </a>
                     <ul class="dropdown-menu">
                         <li><a href="#">查询所有订单</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a ui-sref="BanksMgt" class="dropdown-toggle" data-toggle="dropdown">
-                        菜单管理
+                        用户管理
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">

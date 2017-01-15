@@ -16,6 +16,7 @@ public interface JobsMapper {
 
     List<Jobs> getJobNames(List jobIds);
 
+
     List<Jobs> getAllJobs(Jobs jobs);
 
  /*   List<JobIndustryTypeOptions> getJobIndustryType(String tmp);

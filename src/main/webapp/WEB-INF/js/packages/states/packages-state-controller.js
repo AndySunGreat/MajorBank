@@ -60,8 +60,11 @@ angular.module('bms-packages-state-controller',['ui.bootstrap'])
             });
         };
 
-        $scope.editPackage = function(packageId){
-            console.log("packageId:"+packageId);
+        $scope.editPackage = function(package){
+            console.log("packageId:"+package);
+            console.log(package);
+            var packageId = package.packageId;
+            var jobIds = package.jobIds;
             var modalInstance;
             modalInstance = $uibModal.open({
                 size:'lg',
@@ -91,11 +94,19 @@ angular.module('bms-packages-state-controller',['ui.bootstrap'])
                             return test;
                         }
                     ],
-                    jobsOptions:['bmsBanksService',
+                    jobsOptions:['bmsPackagesService',
                         function(bmsPackagesService){
                             var jobsOption1 =   bmsPackagesService.JobOptionsList.getJobsLinkage().$promise;
                             console.log(jobsOption1);
                             return jobsOption1;
+                        }
+                    ],
+                    jobsDropdownData:['bmsPackagesService',
+                        function(bmsPackagesService){
+                            var entry =   bmsPackagesService.jobsDropdownData.getJobsDropdownData({jobIds:jobIds}).$promise;
+                            console.log("package-state-controller--$scope.editPackage--jobsDropdownData");
+                            console.log(entry);
+                            return entry;
                         }
                     ]
                 },
